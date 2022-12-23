@@ -11,6 +11,8 @@
     <modules>
         <module>eureka-server</module>
         <module>customer-service</module>
+        <module>oauth2-service</module>
+        <module>core-comm</module>
     </modules>
 
     <properties>

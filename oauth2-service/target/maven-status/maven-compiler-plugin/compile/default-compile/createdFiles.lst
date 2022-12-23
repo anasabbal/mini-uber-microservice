@@ -1,0 +1,10 @@
+com/nas/auth/model/BaseEntity.class
+com/nas/auth/model/User.class
+com/nas/auth/repository/UserRepository.class
+com/nas/auth/repository/RoleRepository.class
+com/nas/auth/service/UserService.class
+com/nas/auth/enums/RoleType.class
+com/nas/auth/service/UserServiceImpl.class
+com/nas/auth/OAuth2AuthenticationServiceApplication.class
+com/nas/auth/model/Role.class
+com/nas/auth/command/UserCommand.class

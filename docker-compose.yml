@@ -1,0 +1,6 @@
+services:
+  eureka-server:
+    build: ./eureka-server
+    image: eureka-server:latest
+    ports:
+      - "8761:8761"

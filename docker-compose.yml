@@ -1,6 +1,56 @@
 services:
+  postgres:
+    container_name: postgres
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: anas
+  #  healthcheck:
+  #    test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+  #    interval: 10s
+  #    timeout: 5s
+  #    retries: 5
+  #  volumes:
+  #    - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+  #  networks:
+  #    - postgres
+  #  restart: unless-stopped
+  #pgadmin:
+  #  container_name: pgadmin
+  #  image: dpage/pgadmin4
+  #  environment:
+  #    PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+  #    PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+  #    PGADMIN_CONFIG_SERVER_MODE: 'False'
+  #  volumes:
+  #    - pgadmin:/var/lib/pgadmin
+  #  ports:
+  #    - "5050:80"
+  #  networks:
+  #    - postgres
+  #  restart: unless-stopped
   eureka-server:
     build: ./eureka-server
     image: eureka-server:latest
     ports:
       - "8761:8761"
+  customer-service:
+    container_name: customer-service
+    build: ./
+    image: customer-service:latest
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+
+networks:
+  postgres:
+    driver: bridge
+  spring:
+    driver: bridge
+
+volumes:
+  postgres:

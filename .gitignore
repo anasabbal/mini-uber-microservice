@@ -1,5 +1,5 @@
 # Project exclude paths
 /eureka-server/target/
 /customer-service/target
-/oauth2-service/target
-/core-comm/target
+/core-comm/target/
+/oauth2-service/target/

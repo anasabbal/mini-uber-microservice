@@ -1,0 +1,16 @@
+Service Discorvery
+
+- The service discovery pattern has the following problem, solution, and solution requirements
+
+Problem ?
+
+- How can clients find microservices and their instances?
+- Microservices instances are typically assigned dynamically allocated IP addresses when they start up, for example, when running in containers. This makes it difficult for a client to make a request to a microservice tha
+
+Solution
+
+- Add a new component – a service discovery service – to the system landscape, which keeps track of currently available microservices and the IP addresses of its instances
+- Automatically register/unregister microservices and their instances as they come and go
+- The client must be able to make a request to a logical endpoint for the microservice. The request will be routed to one of the available microservice instances
+- Requests to a microservice must be load-balanced over the available instances
+- We must be able to detect instances that currently are unhealthy, so that requests will not be routed to them

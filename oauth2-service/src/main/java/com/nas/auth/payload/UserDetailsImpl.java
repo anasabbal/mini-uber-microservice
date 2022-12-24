@@ -19,13 +19,11 @@ public class UserDetailsImpl implements UserDetails {
     private String email;
     private String password;
     private Set<GrantedAuthority> authorities;
-    private String status;
-    public UserDetailsImpl(String userId, String email, String password, Set<GrantedAuthority> authorities, String status) {
+    public UserDetailsImpl(String userId, String email, String password, Set<GrantedAuthority> authorities) {
         this.userId = userId;
         this.email = email;
         this.password = password;
         this.authorities = authorities;
-        this.status = status;
     }
     public static UserDetailsImpl build(User user){
         SimpleGrantedAuthority authority = new SimpleGrantedAuthority("ROLES_" + user.getRoles());
@@ -33,13 +31,12 @@ public class UserDetailsImpl implements UserDetails {
                 user.getId(),
                 user.getEmail(),
                 user.getPassword(),
-                authority,
-                null);
+                Collections.singleton(authority));
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singletonList(authorities);
+        return authorities;
     }
     @Override
     public String getPassword() {

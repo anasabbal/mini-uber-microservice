@@ -14,7 +14,8 @@ public enum ExceptionPayloadFactory {
     INVALID_PAYLOAD(1, HttpStatus.BAD_REQUEST, "invalid.request.payload"),
     MISSING_REQUEST_BODY_ERROR_CODE(2, HttpStatus.BAD_REQUEST, "request.missing.body"),
     EMAIL_ALREADY_EXIST(3, HttpStatus.BAD_REQUEST, "email.already.exist"),
-    USER_NAME_ALREADY_EXIST(3, HttpStatus.BAD_REQUEST, "username.already.exist");
+    USER_NAME_ALREADY_EXIST(3, HttpStatus.BAD_REQUEST, "username.already.exist"),
+    USER_NAME_NOT_FOUND(4, HttpStatus.NOT_FOUND, "username.not.found");
 
     private final Integer code;
     private final HttpStatus status;

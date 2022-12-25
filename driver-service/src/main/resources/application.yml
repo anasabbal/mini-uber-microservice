@@ -7,12 +7,12 @@ spring:
       ddl-auto: create
     show-sql: true
   application:
-    name: customer
+    name: drvier
   profiles:
     active: default
   datasource:
     driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/customers
+    url: jdbc:postgresql://localhost:5432/driver
     username: postgres
     password: postgres
   devtools:
@@ -23,4 +23,4 @@ eureka:
     service-url:
       defaultZone: http://localhost:8761/eureka
 server:
-  port: 8080
+  port: 8081

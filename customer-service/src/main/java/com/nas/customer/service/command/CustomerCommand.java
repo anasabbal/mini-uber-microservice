@@ -3,6 +3,9 @@ package com.nas.customer.service.command;
 import lombok.Getter;
 import lombok.Setter;
 
+import static com.nas.core.RegexExpressions.ALPHABETIC_MIN_2_CHARS;
+import static com.nas.core.RegexExpressions.EMAIL;
+import static com.nas.customer.service.util.Assert.assertRegex;
 
 
 @Getter
@@ -12,4 +15,10 @@ public class CustomerCommand {
     private String lastName;
     private String email;
     private String password;
+
+    public void validate(){
+        assertRegex(firstName, ALPHABETIC_MIN_2_CHARS);
+        assertRegex(lastName, ALPHABETIC_MIN_2_CHARS);
+        assertRegex(email, EMAIL);
+    }
 }

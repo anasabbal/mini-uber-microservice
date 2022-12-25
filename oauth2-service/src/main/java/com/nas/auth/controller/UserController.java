@@ -24,7 +24,6 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<User> signUp(@RequestBody final UserCommand userCommand){
-
-        return null;
+        return ResponseEntity.ok(userService.create(userCommand));
     }
 }

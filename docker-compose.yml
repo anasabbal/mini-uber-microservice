@@ -5,7 +5,6 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: anas
   #  healthcheck:
   #    test: [ "CMD-SHELL", "pg_isready -U postgres" ]
   #    interval: 10s
@@ -46,11 +45,11 @@ services:
     depends_on:
       - postgres
 
-networks:
-  postgres:
-    driver: bridge
-  spring:
-    driver: bridge
+#networks:
+#  postgres:
+#    driver: bridge
+#  spring:
+#    driver: bridge
 
-volumes:
-  postgres:
+#volumes:
+#  postgres:

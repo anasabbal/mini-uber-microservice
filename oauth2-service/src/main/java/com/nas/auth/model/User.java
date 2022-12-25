@@ -34,6 +34,8 @@ public class User extends BaseEntity{
     )
     private Set<Role> roles = new HashSet<>();
 
+    private String customerId;
+
     public static User create(final UserCommand userCommand){
         final User user = new User();
 

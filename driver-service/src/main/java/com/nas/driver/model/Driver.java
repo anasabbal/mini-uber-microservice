@@ -2,6 +2,7 @@ package com.nas.driver.model;
 
 
 import com.nas.driver.command.DriverCommand;
+import com.nas.driver.command.DriverUpdateStatus;
 import com.nas.driver.enums.DriverStatus;
 import lombok.*;
 import org.springframework.data.annotation.Id;
@@ -38,5 +39,11 @@ public class Driver{
         driver.updatedAt = LocalDateTime.now();
         driver.driverStatus = DriverStatus.AVAILABLE;
         return driver;
+    }
+    public void updateInfo(final DriverCommand driverCommand){
+        this.firstName = driverCommand.getFirstName();
+        this.lastName = driverCommand.getLastName();
+        this.updatedAt = LocalDateTime.now();
+        this.updatedBy = this.firstName;
     }
 }

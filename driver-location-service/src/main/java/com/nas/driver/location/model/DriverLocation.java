@@ -2,13 +2,12 @@ package com.nas.driver.location.model;
 
 
 import com.nas.driver.location.command.DriverLocationCommand;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
+import com.vividsolutions.jts.geom.Geometry;
 import java.time.LocalDateTime;
 
 @Document("DRIVER_LOCATION")
@@ -16,9 +15,6 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 public class DriverLocation {
-
-
-
     @Id
     private String id;
     private String driverId;
@@ -27,6 +23,7 @@ public class DriverLocation {
     private String carId;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private String locationId;
 
     public static DriverLocation create(final DriverLocationCommand driverLocationCommand){
         final DriverLocation driverLocation = new DriverLocation();

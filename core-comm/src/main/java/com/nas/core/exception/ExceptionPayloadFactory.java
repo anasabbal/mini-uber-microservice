@@ -16,7 +16,8 @@ public enum ExceptionPayloadFactory {
     EMAIL_ALREADY_EXIST(3, HttpStatus.BAD_REQUEST, "email.already.exist"),
     USER_NAME_ALREADY_EXIST(3, HttpStatus.BAD_REQUEST, "username.already.exist"),
     USER_NAME_NOT_FOUND(4, HttpStatus.NOT_FOUND, "username.not.found"),
-    CUSTOMER_NOT_FOUND(5, HttpStatus.NOT_FOUND, "customer.not.found");
+    CUSTOMER_NOT_FOUND(5, HttpStatus.NOT_FOUND, "customer.not.found"),
+    DRIVER_NOT_FOUND(6, HttpStatus.NOT_FOUND, "driver.not.found");
 
     private final Integer code;
     private final HttpStatus status;

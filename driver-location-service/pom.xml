@@ -36,11 +36,30 @@
             <artifactId>hibernate-ogm-mongodb</artifactId>
             <version>5.4.0.Final</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.github.mastinno/geojson-jackson-java -->
+        <dependency>
+            <groupId>com.github.mastinno</groupId>
+            <artifactId>geojson-jackson-java</artifactId>
+            <version>1.0.2</version>
+        </dependency>
         <dependency>
             <groupId>org.jboss.narayana.jta</groupId>
             <artifactId>narayana-jta</artifactId>
             <version>5.9.2.Final</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.vividsolutions/jts -->
+        <dependency>
+            <groupId>com.vividsolutions</groupId>
+            <artifactId>jts</artifactId>
+            <version>1.13</version>
+        </dependency>
+        <dependency>
+            <groupId>org.wololo</groupId>
+            <artifactId>jts2geojson</artifactId>
+            <version>0.7.0</version>
+        </dependency>
+        <!-- Thanks for using https://jar-download.com -->
+
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>

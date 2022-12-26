@@ -5,10 +5,7 @@ import com.nas.driver.command.DriverCommand;
 import com.nas.driver.model.Driver;
 import com.nas.driver.service.DriverService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 
@@ -26,6 +23,12 @@ public record DriverController(DriverService driverService) {
         final Driver driver = driverService.create(driverCommand);
         final URI uri = fromCurrentRequest().path("/{id}").buildAndExpand(driver.getId()).toUri();
         return ResponseEntity.created(uri).body(driver);
-
+    }
+    @PutMapping("/{driverId}")
+    public ResponseEntity<Void> updateInfo(
+            @PathVariable("driverId") final String driverId,
+            @RequestBody final DriverCommand driverCommand){
+        driverService.update(driverId, driverCommand);
+        return ResponseEntity.noContent().build();
     }
 }

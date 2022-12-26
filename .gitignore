@@ -4,6 +4,6 @@
 /oauth2-service/target/
 /customer-service/target
 /driver-service/target
-core-comm.iml
-customer-service.iml
+/core-comm.iml
+/customer-service.iml
 /.idea

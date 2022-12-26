@@ -1,28 +1,47 @@
 package com.nas.driver.model;
 
 
+import com.nas.driver.command.DriverCommand;
 import com.nas.driver.enums.DriverStatus;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.data.annotation.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.*;
+import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "DRIVERS")
-@Getter
-@Setter
+@Document(collection = "DRIVERS")
 @NoArgsConstructor
+@Setter
 @AllArgsConstructor
-public class Driver extends BaseEntity{
+public class Driver{
 
-    @Column(name = "FIRST_NAME")
+    @Id
+    protected String id;
+
+    private Integer version;
+
+    private LocalDateTime createdAt;
+    private String createdBy ="NAS SYSTEM";
+    private LocalDateTime updatedAt;
+    private String updatedBy;
+    protected Boolean deleted = false;
+
+    protected Boolean active = true;
     private String firstName;
-    @Column(name = "LAST_NAME")
     private String lastName;
-
-    @Column(name = "DRIVER_STATUS")
-    @Enumerated(EnumType.STRING)
     private DriverStatus driverStatus;
+
+    public static Driver create(final DriverCommand driverCommand){
+        final Driver driver = new Driver();
+
+        driver.firstName = driverCommand.getFirstName();;
+        driver.lastName = driverCommand.getLastName();
+        driver.createdBy = "NAS SYSTEM";
+        driver.updatedBy = driver.firstName;
+        driver.createdAt = LocalDateTime.now();
+        driver.updatedAt = LocalDateTime.now();
+        driver.driverStatus = DriverStatus.USER;
+        return driver;
+    }
 }

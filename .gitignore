@@ -1,5 +1,9 @@
 # Project exclude paths
 /eureka-server/target/
-/customer-service/target
 /core-comm/target/
 /oauth2-service/target/
+/customer-service/target
+/driver-service/target
+core-comm.iml
+customer-service.iml
+/.idea

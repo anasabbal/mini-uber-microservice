@@ -5,6 +5,7 @@ import com.nas.core.JSONUtil;
 import com.nas.driver.command.DriverCommand;
 import com.nas.driver.model.Customer;
 import com.nas.driver.model.Driver;
+import com.nas.driver.model.DriverLocationRequest;
 import com.nas.driver.repository.DriverRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,9 +22,9 @@ public record DriverServiceImpl(DriverRepository driverRepository, RestTemplate 
         log.info("Begin creating driver with payload {}", JSONUtil.toJSON(driverCommand));
 
         final Driver driver = Driver.create(driverCommand);
-        driverRepository.save(driver);
 
-        restTemplate.getForObject("http://localhost:8080/v1/customers/driver/{driverId}", Customer.class, driver.getId());
+        driverRepository.save(driver);
+        restTemplate.getForObject("http://localhost:8082/v1/driver-location/{driverLocationId}", DriverLocationRequest.class, driver.getId());
 
         return driver;
     }

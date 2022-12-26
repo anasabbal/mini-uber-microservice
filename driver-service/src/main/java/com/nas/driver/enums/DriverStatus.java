@@ -1,5 +1,5 @@
 package com.nas.driver.enums;
 
 public enum DriverStatus {
-    USER, ADMIN
+    AVAILABLE, FULL, NOT_AVAILABLE
 }

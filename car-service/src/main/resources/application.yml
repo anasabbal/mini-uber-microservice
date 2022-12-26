@@ -1,12 +1,11 @@
 spring:
-
   data:
     mongodb:
-      uri: mongodb+srv://mongodb:mongodb@cluster0.lppaw8l.mongodb.net/driver-service
+      uri: mongodb+srv://mongodb:mongodb@car-service.ysjcpal.mongodb.net/car-service
       auto-index-creation: true
 
   application:
-    name: driver
+    name: car
   profiles:
     active: default
   devtools:
@@ -19,4 +18,4 @@ eureka:
       defaultZone: http://localhost:8761/eureka
 
 server:
-  port: 8081
+  port: 8082

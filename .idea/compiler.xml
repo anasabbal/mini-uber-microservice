@@ -17,8 +17,10 @@
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.24/lombok-1.18.24.jar" />
         </processorPath>
-        <module name="core-comm" />
         <module name="customer-service" />
+        <module name="core-comm" />
+        <module name="car-service" />
+        <module name="driver-location-service" />
         <module name="eureka-server" />
         <module name="driver-service" />
         <module name="oauth2-service" />
@@ -30,8 +32,10 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="car-service" options="-XDcompilePolicy=simple" />
       <module name="core-comm" options="-XDcompilePolicy=simple" />
       <module name="customer-service" options="-XDcompilePolicy=simple" />
+      <module name="driver-location-service" options="-XDcompilePolicy=simple" />
       <module name="driver-service" options="-XDcompilePolicy=simple" />
       <module name="eureka-server" options="-XDcompilePolicy=simple" />
       <module name="oauth2-service" options="-XDcompilePolicy=simple" />

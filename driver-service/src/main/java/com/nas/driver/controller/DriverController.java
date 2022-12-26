@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
 
+import static com.nas.core.ResourcePath.DRIVERS;
+import static com.nas.core.ResourcePath.V1;
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
 @RestController
-@RequestMapping
+@RequestMapping(V1 + DRIVERS)
 public record DriverController(DriverService driverService) {
 
 

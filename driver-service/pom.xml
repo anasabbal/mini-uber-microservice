@@ -43,6 +43,10 @@
             <version>5.9.2.Final</version>
         </dependency>
         <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.nas</groupId>
             <artifactId>core-comm</artifactId>
             <version>1.0-SNAPSHOT</version>

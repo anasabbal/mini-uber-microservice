@@ -11,4 +11,5 @@ public interface CustomerService {
     Customer create(final CustomerCommand customerCommand);
     Page<Customer> findAllByDeletedFalse(Pageable pageable);
     Customer findById(String customerId);
+    Customer get(final String driverId);
 }

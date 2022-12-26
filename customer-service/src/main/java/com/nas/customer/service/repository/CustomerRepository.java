@@ -12,4 +12,5 @@ import java.util.List;
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, String> {
     Page<Customer> findCustomersByDeletedFalse(Pageable pageable);
+    Customer findByDriverId(String driverId);
 }

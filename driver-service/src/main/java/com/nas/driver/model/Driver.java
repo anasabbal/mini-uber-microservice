@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @Document(collection = "DRIVERS")
 @NoArgsConstructor
 @Setter
+@Getter
 @AllArgsConstructor
 public class Driver{
 

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import java.time.LocalDateTime;
@@ -16,18 +17,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootApplication
+@EnableEurekaClient
 @EnableMongoRepositories(value = "com.nas.driver.repository")
-public class DriverServiceApplication implements CommandLineRunner {
-
-    @Autowired
-    private DriverRepository driverRepository;
+public class DriverServiceApplication {
 
 
     public static void main(String[] args) {
         SpringApplication.run(DriverServiceApplication.class, args);
     }
 
-    @Override
+    /*@Override
     public void run(String... args) throws Exception {
 
         Driver driver = new Driver();
@@ -45,6 +44,6 @@ public class DriverServiceApplication implements CommandLineRunner {
         List<Driver> list = new ArrayList<>();
         list.add(driver);
         list.add(driver1);
-        driverRepository.saveAll(list);
-    }
+        driverRepository.saveAll(list);*/
+    //}
 }

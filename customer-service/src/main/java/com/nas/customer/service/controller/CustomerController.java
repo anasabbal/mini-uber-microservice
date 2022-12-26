@@ -28,6 +28,11 @@ public class CustomerController {
         final URI uri = fromCurrentRequest().path("/{id}").buildAndExpand(customer.getId()).toUri();
         return ResponseEntity.created(uri).body(customer);
     }
+    @GetMapping("/driver/{driverId}")
+    public ResponseEntity<Customer> get(@PathVariable final String driverId){
+        return ResponseEntity.ok(customerService.get(driverId));
+    }
+
     @GetMapping
     public ResponseEntity<Page<Customer>> getAll(Pageable pageable){
         final Page<Customer> customers = customerService.findAllByDeletedFalse(pageable);

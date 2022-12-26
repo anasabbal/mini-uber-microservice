@@ -15,17 +15,12 @@ public class DriverCommand {
 
     private String firstName;
     private String lastName;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-
     public DriverCommand(String firstName, String lastName, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
     }
 
-    void validate(){
+    public void validate(){
 
     }
 }

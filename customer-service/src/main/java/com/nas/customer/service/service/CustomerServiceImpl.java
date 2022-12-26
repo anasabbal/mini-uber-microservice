@@ -13,6 +13,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.sql.Driver;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -31,6 +33,11 @@ public class CustomerServiceImpl implements CustomerService{
     @Override
     public Page<Customer> findAllByDeletedFalse(Pageable pageable) {
         return customerRepository.findCustomersByDeletedFalse(pageable);
+    }
+
+    @Override
+    public Customer get(final String driverId){
+        return customerRepository.save(Customer.builder().email("ras lbayda").driverId(driverId).build());
     }
 
     @Override

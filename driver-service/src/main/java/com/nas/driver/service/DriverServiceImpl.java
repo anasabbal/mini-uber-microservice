@@ -24,7 +24,7 @@ public record DriverServiceImpl(DriverRepository driverRepository, RestTemplate 
         driverRepository.save(driver);
         log.info("Driver with id {} created successfully", driver.getId());
         restTemplate.getForObject(
-                "http://localhost:8082/v1/driver-location/{driverLocationId}",
+                "http://localhost:8082/v1/driver-location/{driverId}",
                 DriverLocationRequest.class,
                 driver.getId());
         return driver;

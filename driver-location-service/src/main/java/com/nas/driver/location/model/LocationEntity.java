@@ -1,14 +1,25 @@
 package com.nas.driver.location.model;
 
 
-import com.vividsolutions.jts.geom.Geometry;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import mil.nga.sf.geojson.Feature;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document("LOCATION_ENTITY")
-@Data
+import org.springframework.data.annotation.Id;
+
+@Document
+@Getter
+@Setter
+@NoArgsConstructor
 public class LocationEntity {
 
+    @Id
     private String id;
-    private Geometry geometry;
+    private Feature feature;
+
+    public LocationEntity(LocationEntity locationEntity) {
+        locationEntity = new LocationEntity();
+    }
 }

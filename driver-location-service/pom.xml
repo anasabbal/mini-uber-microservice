@@ -61,6 +61,11 @@
         <!-- Thanks for using https://jar-download.com -->
 
         <dependency>
+            <groupId>mil.nga.sf</groupId>
+            <artifactId>sf-geojson</artifactId>
+            <version>3.3.1</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
         </dependency>

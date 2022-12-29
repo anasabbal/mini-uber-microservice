@@ -39,7 +39,6 @@ public class CustomerServiceImpl implements CustomerService{
     public Customer get(final String driverId){
         return customerRepository.save(Customer.builder().email("ras lbayda").driverId(driverId).build());
     }
-
     @Override
     public Customer findById(String customerId) {
         log.info("Begin fetching customer by id {}", customerId);

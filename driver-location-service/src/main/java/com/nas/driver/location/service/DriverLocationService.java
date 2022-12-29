@@ -7,8 +7,6 @@ import com.vividsolutions.jts.geom.Geometry;
 import org.wololo.geojson.Feature;
 
 public interface DriverLocationService {
-    DriverLocation getOne(String driverLocationId, Feature feature);
-    DriverLocation create(final DriverLocationCommand driverLocationCommand);
-    LocationEntity convertFeatureToEntity(Feature feature);
-    Geometry convertGeoJsonToJtsGeometry(org.wololo.geojson.Geometry geoJson);
+    DriverLocation getOne(String driverLocationId);
+    DriverLocation getById(String driverLocationId);
 }

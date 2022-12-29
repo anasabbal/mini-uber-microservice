@@ -5,12 +5,19 @@ import com.nas.driver.location.command.DriverLocationCommand;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import mil.nga.sf.geojson.Feature;
+import mil.nga.sf.geojson.Geometry;
+import mil.nga.sf.geojson.GeometryType;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import com.vividsolutions.jts.geom.Geometry;
-import java.time.LocalDateTime;
 
-@Document("DRIVER_LOCATION")
+import javax.persistence.OneToMany;
+import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+@Document
 @Getter
 @Setter
 @NoArgsConstructor
@@ -23,7 +30,9 @@ public class DriverLocation {
     private String carId;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private String locationId;
+
+    @OneToMany
+    private Set<LocationEntity> locationEntities = new HashSet<>();
 
     public static DriverLocation create(final DriverLocationCommand driverLocationCommand){
         final DriverLocation driverLocation = new DriverLocation();
@@ -31,7 +40,6 @@ public class DriverLocation {
         driverLocation.name = driverLocationCommand.getName();
         driverLocation.createdAt = LocalDateTime.now();
         driverLocation.updatedAt = LocalDateTime.now();
-
         return driverLocation;
     }
 }

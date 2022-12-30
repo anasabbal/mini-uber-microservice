@@ -2,6 +2,9 @@ package com.nas.customer.service.controller;
 
 
 import com.nas.customer.service.command.CustomerCommand;
+import com.nas.customer.service.command.CustomerInfoUpdateCmd;
+import com.nas.customer.service.dto.CustomerDto;
+import com.nas.customer.service.mapper.CustomerMapper;
 import com.nas.customer.service.model.Customer;
 import com.nas.customer.service.service.CustomerService;
 import lombok.RequiredArgsConstructor;
@@ -22,26 +25,28 @@ import static org.springframework.web.servlet.support.ServletUriComponentsBuilde
 public class CustomerController {
 
     private final CustomerService customerService;
+    private final CustomerMapper customerMapper;
 
     @PostMapping
-    public ResponseEntity<Customer> create(@RequestBody final CustomerCommand customerCommand){
+    public ResponseEntity<CustomerDto> create(@RequestBody final CustomerCommand customerCommand){
         final Customer customer = customerService.create(customerCommand);
         final URI uri = fromCurrentRequest().path("/{id}").buildAndExpand(customer.getId()).toUri();
-        return ResponseEntity.created(uri).body(customer);
+        return ResponseEntity.created(uri).body(customerMapper.toDto(customer));
     }
-    @GetMapping("/driver/{driverId}")
-    public ResponseEntity<Customer> get(@PathVariable final String driverId){
-        return ResponseEntity.ok(customerService.get(driverId));
-    }
-
     @GetMapping
-    public ResponseEntity<Page<Customer>> getAll(Pageable pageable){
+    public ResponseEntity<Page<CustomerDto>> getAll(Pageable pageable){
         final Page<Customer> customers = customerService.findAllByDeletedFalse(pageable);
-        return ResponseEntity.ok(customers);
+        return ResponseEntity.ok(customers.map(customerMapper::toDto));
     }
     @GetMapping("/{customerId}")
-    public ResponseEntity<Customer> getOne(@PathVariable("customerId") final String customerId){
+    public ResponseEntity<CustomerDto> getOne(@PathVariable("customerId") final String customerId){
         final Customer customer = customerService.findById(customerId);
-        return ResponseEntity.ok(customer);
+        return ResponseEntity.ok(customerMapper.toDto(customer));
+    }
+    @PutMapping("/{customerId}")
+    public ResponseEntity<Void> update(@PathVariable("customerId") final String customerId,
+                                       @RequestBody final CustomerInfoUpdateCmd command){
+        customerService.updateInfo(command, customerId);
+        return ResponseEntity.noContent().build();
     }
 }

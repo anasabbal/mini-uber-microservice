@@ -2,8 +2,11 @@ package com.nas.driver.controller;
 
 
 import com.nas.driver.command.DriverCommand;
+import com.nas.driver.dto.DriverDto;
+import com.nas.driver.mapper.DriverMapper;
 import com.nas.driver.model.Driver;
 import com.nas.driver.service.DriverService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,14 +18,18 @@ import static org.springframework.web.servlet.support.ServletUriComponentsBuilde
 
 @RestController
 @RequestMapping(V1 + DRIVERS)
-public record DriverController(DriverService driverService) {
+@RequiredArgsConstructor
+public class DriverController {
 
+
+    private final DriverService driverService;
+    private final DriverMapper driverMapper;
 
     @PostMapping
-    public ResponseEntity<Driver> create(@RequestBody final DriverCommand driverCommand){
+    public ResponseEntity<DriverDto> create(@RequestBody final DriverCommand driverCommand){
         final Driver driver = driverService.create(driverCommand);
         final URI uri = fromCurrentRequest().path("/{id}").buildAndExpand(driver.getId()).toUri();
-        return ResponseEntity.created(uri).body(driver);
+        return ResponseEntity.created(uri).body(driverMapper.toDto(driver));
     }
     @PutMapping("/{driverId}")
     public ResponseEntity<Void> updateInfo(

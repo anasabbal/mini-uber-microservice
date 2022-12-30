@@ -5,6 +5,7 @@ import com.nas.core.JSONUtil;
 import com.nas.core.exception.BusinessException;
 import com.nas.core.exception.ExceptionPayloadFactory;
 import com.nas.customer.service.command.CustomerCommand;
+import com.nas.customer.service.command.CustomerInfoUpdateCmd;
 import com.nas.customer.service.model.Customer;
 import com.nas.customer.service.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
@@ -31,11 +32,6 @@ public class CustomerServiceImpl implements CustomerService{
     public Page<Customer> findAllByDeletedFalse(Pageable pageable) {
         return customerRepository.findCustomersByDeletedFalse(pageable);
     }
-
-    @Override
-    public Customer get(final String driverId){
-        return customerRepository.save(Customer.builder().email("ras lbayda").driverId(driverId).build());
-    }
     @Override
     public Customer findById(String customerId) {
         log.info("Begin fetching customer by id {}", customerId);
@@ -44,5 +40,13 @@ public class CustomerServiceImpl implements CustomerService{
         );
         log.info("Customer with id {} fetched successfully", customer.getId());
         return customer;
+    }
+
+    @Override
+    public void updateInfo(CustomerInfoUpdateCmd customerCommand, String customerId) {
+        customerCommand.validate();
+        final Customer customer = findById(customerId);
+        customer.updateInfo(customerCommand);
+        customerRepository.save(customer);
     }
 }

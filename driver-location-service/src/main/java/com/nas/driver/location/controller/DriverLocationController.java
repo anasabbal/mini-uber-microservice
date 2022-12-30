@@ -4,6 +4,8 @@ package com.nas.driver.location.controller;
 import com.maxmind.geoip2.exception.GeoIp2Exception;
 import com.nas.driver.location.model.DriverLocation;
 import com.nas.driver.location.service.DriverLocationService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,5 +24,9 @@ public record DriverLocationController(DriverLocationService driverLocationServi
     @GetMapping("/{driverId}")
     public ResponseEntity<DriverLocation> get(@PathVariable("driverId") final String driverId) throws IOException, GeoIp2Exception {
         return ResponseEntity.ok(driverLocationService.getOne(driverId));
+    }
+    @GetMapping
+    public ResponseEntity<Page<DriverLocation>> getAll(Pageable pageable){
+        return ResponseEntity.ok(driverLocationService.getAll(pageable));
     }
 }

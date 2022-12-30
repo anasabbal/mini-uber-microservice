@@ -7,6 +7,8 @@ import com.nas.driver.mapper.DriverMapper;
 import com.nas.driver.model.Driver;
 import com.nas.driver.service.DriverService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +30,10 @@ public class DriverController {
         final Driver driver = driverService.create(driverCommand);
         final URI uri = fromCurrentRequest().path("/{id}").buildAndExpand(driver.getId()).toUri();
         return ResponseEntity.created(uri).body(driverMapper.toDto(driver));
+    }
+    @GetMapping
+    public ResponseEntity<Page<DriverDto>> getAll(Pageable pageable){
+        return ResponseEntity.ok(driverService.getAll(pageable).map(driverMapper::toDto));
     }
     @PutMapping("/{driverId}")
     public ResponseEntity<Void> updateInfo(

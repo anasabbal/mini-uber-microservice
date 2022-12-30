@@ -1,4 +1,4 @@
-package com.nas.driver.config;
+package com.nas.customer.service.config;
 
 
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -7,8 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
 @Configuration
-public class JavaConfig {
-
+public class CustomerConfig {
 
 
     @Bean

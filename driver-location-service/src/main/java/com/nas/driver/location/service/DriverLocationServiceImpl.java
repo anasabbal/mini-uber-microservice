@@ -9,6 +9,8 @@ import com.nas.driver.location.model.DriverLocation;
 import com.nas.driver.location.model.LocationEntity;
 import com.nas.driver.location.repository.DriverLocationRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -31,6 +33,11 @@ public record DriverLocationServiceImpl(
         driverLocation.setDriverId(driverLocationId);
         driverLocation.getLocationEntities().add(location);
         return driverLocationRepository.save(driverLocation);
+    }
+
+    @Override
+    public Page<DriverLocation> getAll(Pageable pageable) {
+        return driverLocationRepository.findAll(pageable);
     }
 
     @Override

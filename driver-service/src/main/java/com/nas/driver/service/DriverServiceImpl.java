@@ -5,16 +5,21 @@ import com.nas.core.JSONUtil;
 import com.nas.core.exception.BusinessException;
 import com.nas.core.exception.ExceptionPayloadFactory;
 import com.nas.driver.command.DriverCommand;
+import com.nas.driver.mapper.DriverMapper;
 import com.nas.driver.model.Driver;
 import com.nas.driver.model.DriverLocationRequest;
 import com.nas.driver.repository.DriverRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
 @Slf4j
-public record DriverServiceImpl(DriverRepository driverRepository, RestTemplate restTemplate) implements DriverService{
+public record DriverServiceImpl(DriverRepository driverRepository,
+                                RestTemplate restTemplate,
+                                DriverMapper driverMapper) implements DriverService{
 
     @Override
     public Driver create(DriverCommand driverCommand) {
@@ -24,10 +29,15 @@ public record DriverServiceImpl(DriverRepository driverRepository, RestTemplate 
         driverRepository.save(driver);
         log.info("Driver with id {} created successfully", driver.getId());
         restTemplate.getForObject(
-                "http://localhost:8082/v1/driver-location/{driverId}",
+                "http://DRIVER-LOCATION:8082/v1/driver-location/{driverId}",
                 DriverLocationRequest.class,
                 driver.getId());
         return driver;
+    }
+
+    @Override
+    public Page<Driver> getAll(Pageable pageable) {
+        return driverRepository.findAll(pageable);
     }
 
     @Override

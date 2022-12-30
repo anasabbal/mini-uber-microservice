@@ -20,8 +20,6 @@ import static org.springframework.web.servlet.support.ServletUriComponentsBuilde
 @RequestMapping(V1 + DRIVERS)
 @RequiredArgsConstructor
 public class DriverController {
-
-
     private final DriverService driverService;
     private final DriverMapper driverMapper;
 

@@ -1,0 +1,25 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://mongodb:mongodb@driver-location.01ks23m.mongodb.net/driver-location
+      auto-index-creation: true
+
+  application:
+    name: driver-location
+  profiles:
+    active: default
+  devtools:
+    restart:
+      enabled: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+server:
+  port: 8082
+
+maxmind:
+  geoip:
+    geolite2-country-mmdb: classpath:GeoLite2-Country_20170801/GeoLite2-Country.mmdb

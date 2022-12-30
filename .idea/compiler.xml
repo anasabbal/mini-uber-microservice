@@ -17,7 +17,9 @@
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.24/lombok-1.18.24.jar" />
         </processorPath>
+        <module name="config-server" />
         <module name="core-comm" />
+        <module name="circuit-breaker" />
         <module name="car-service" />
         <module name="driver-location-service" />
         <module name="eureka-server" />
@@ -53,6 +55,8 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="car-service" options="-XDcompilePolicy=simple" />
+      <module name="circuit-breaker" options="-XDcompilePolicy=simple" />
+      <module name="config-server" options="-XDcompilePolicy=simple" />
       <module name="core-comm" options="-XDcompilePolicy=simple" />
       <module name="customer-service" options="-XDcompilePolicy=simple" />
       <module name="driver-location-service" options="-XDcompilePolicy=simple" />

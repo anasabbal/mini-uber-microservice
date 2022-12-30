@@ -16,6 +16,8 @@
         <module>driver-service</module>
         <module>driver-location-service</module>
         <module>car-service</module>
+        <module>config-server</module>
+        <module>circuit-breaker</module>
     </modules>
 
     <properties>

@@ -2,12 +2,13 @@ package com.nas.auth.model;
 
 
 import com.nas.auth.command.UserCommand;
-import com.nas.auth.enums.RoleType;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity

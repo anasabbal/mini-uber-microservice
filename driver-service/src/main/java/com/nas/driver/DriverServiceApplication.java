@@ -1,20 +1,10 @@
 package com.nas.driver;
 
 
-import com.nas.driver.command.DriverCommand;
-import com.nas.driver.enums.DriverStatus;
-import com.nas.driver.model.Driver;
-import com.nas.driver.repository.DriverRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @SpringBootApplication
 @EnableEurekaClient

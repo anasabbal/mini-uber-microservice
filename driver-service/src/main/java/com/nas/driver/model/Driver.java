@@ -2,9 +2,11 @@ package com.nas.driver.model;
 
 
 import com.nas.driver.command.DriverCommand;
-import com.nas.driver.command.DriverUpdateStatus;
 import com.nas.driver.enums.DriverStatus;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 

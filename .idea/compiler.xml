@@ -22,8 +22,8 @@
         <module name="car-service" />
         <module name="driver-location-service" />
         <module name="eureka-server" />
-        <module name="driver-service" />
         <module name="oauth2-service" />
+        <module name="driver-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

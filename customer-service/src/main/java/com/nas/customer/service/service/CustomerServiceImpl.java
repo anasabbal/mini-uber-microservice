@@ -13,14 +13,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.sql.Driver;
-
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class CustomerServiceImpl implements CustomerService{
-
-
+    
     private final CustomerRepository customerRepository;
 
     @Override

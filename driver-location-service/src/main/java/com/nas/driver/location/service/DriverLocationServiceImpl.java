@@ -1,44 +1,35 @@
 package com.nas.driver.location.service;
 
 
-import com.nas.core.JSONUtil;
+import com.maxmind.geoip2.exception.GeoIp2Exception;
 import com.nas.core.exception.BusinessException;
 import com.nas.core.exception.ExceptionPayloadFactory;
-import com.nas.driver.location.command.DriverCommandUpdate;
 import com.nas.driver.location.command.DriverLocationCommand;
 import com.nas.driver.location.model.DriverLocation;
 import com.nas.driver.location.model.LocationEntity;
 import com.nas.driver.location.repository.DriverLocationRepository;
-import com.nas.driver.location.repository.LocationEntityRepository;
 import lombok.extern.slf4j.Slf4j;
-import mil.nga.sf.geojson.Feature;
-import mil.nga.sf.geojson.Geometry;
-import mil.nga.sf.geojson.GeometryType;
 import org.springframework.stereotype.Service;
-import org.wololo.jts2geojson.GeoJSONWriter;
-import org.wololo.jts2geojson.GeoJSONReader;
-import java.lang.reflect.Field;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+
+import java.io.IOException;
 
 @Service
 @Slf4j
 public record DriverLocationServiceImpl(
         DriverLocationRepository driverLocationRepository,
-        LocationEntityRepository locationEntityRepository) implements DriverLocationService{
+        LocationService locationService) implements DriverLocationService{
 
     @Override
-    public DriverLocation getOne(String driverLocationId){
+    public DriverLocation getOne(String driverLocationId) throws IOException, GeoIp2Exception {
 
         final DriverLocationCommand driverLocationCommand = new DriverLocationCommand();
-        driverLocationCommand.setName("driverLocation 1");
-        final LocationEntity location = createLocationEntity();
+        driverLocationCommand.setName("Driver");
+
+        final LocationEntity location = locationService.create();
+
         final DriverLocation driverLocation = DriverLocation.create(driverLocationCommand);
         driverLocation.setDriverId(driverLocationId);
-        Set<LocationEntity> locationEntitySet = driverLocation.getLocationEntities();
-        locationEntitySet.add(location);
+        driverLocation.getLocationEntities().add(location);
         return driverLocationRepository.save(driverLocation);
     }
 
@@ -49,27 +40,6 @@ public record DriverLocationServiceImpl(
                 () -> new BusinessException(ExceptionPayloadFactory.DRIVER_LOCATION_NOT_FOUND.get())
         );
     }
-
-    private LocationEntity createLocationEntity(){
-        final LocationEntity location = new LocationEntity();
-        final mil.nga.sf.geojson.Geometry geometry = new Geometry() {
-            @Override
-            public GeometryType getGeometryType() {
-                return GeometryType.POINT;
-            }
-
-            @Override
-            public mil.nga.sf.Geometry getGeometry() {
-                return this.getGeometry();
-            }
-        };
-        mil.nga.sf.geojson.Feature feature1 = new Feature();
-        feature1.setGeometry(geometry);
-        locationEntityRepository.save(location);
-        return location;
-
-    }
-
     /*@Override
     public LocationEntity convertFeatureToEntity(Feature feature) {
         LocationEntity entity = new LocationEntity();

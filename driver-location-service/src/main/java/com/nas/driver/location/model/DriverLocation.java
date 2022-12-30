@@ -5,9 +5,6 @@ import com.nas.driver.location.command.DriverLocationCommand;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import mil.nga.sf.geojson.Feature;
-import mil.nga.sf.geojson.Geometry;
-import mil.nga.sf.geojson.GeometryType;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -15,7 +12,6 @@ import javax.persistence.OneToMany;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Document
 @Getter
@@ -30,7 +26,6 @@ public class DriverLocation {
     private String carId;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-
     @OneToMany
     private Set<LocationEntity> locationEntities = new HashSet<>();
 

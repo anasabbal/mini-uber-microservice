@@ -1,7 +1,6 @@
 package com.nas.driver.location;
 
 
-import com.nas.driver.location.model.LocationEntity;
 import com.nas.driver.location.repository.DriverLocationRepository;
 import com.nas.driver.location.repository.LocationEntityRepository;
 import com.nas.driver.location.service.DriverLocationService;
@@ -32,7 +31,5 @@ public class DriverLocationServiceApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        LocationEntity location = new LocationEntity();
-        locationEntityRepository.save(location);
     }
 }

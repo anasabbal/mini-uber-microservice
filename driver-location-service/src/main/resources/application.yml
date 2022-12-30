@@ -19,3 +19,7 @@ eureka:
 
 server:
   port: 8082
+
+maxmind:
+  geoip:
+    geolite2-country-mmdb: classpath:GeoLite2-Country_20170801/GeoLite2-Country.mmdb

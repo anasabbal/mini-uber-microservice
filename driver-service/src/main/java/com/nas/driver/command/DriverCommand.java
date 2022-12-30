@@ -1,7 +1,6 @@
 package com.nas.driver.command;
 
 
-import com.nas.driver.enums.DriverStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

@@ -10,10 +10,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
+
 import static com.nas.core.ResourcePath.CUSTOMERS;
 import static com.nas.core.ResourcePath.V1;
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
-import java.net.URI;
 
 @RestController
 @RequestMapping(V1 + CUSTOMERS)

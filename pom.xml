@@ -27,6 +27,7 @@
         <spring.boot.maven.plugin.version>2.6.12</spring.boot.maven.plugin.version>
         <spring.boot.dependencies.version>2.6.12</spring.boot.dependencies.version>
         <spring.cloud-version>2021.0.2</spring.cloud-version>
+        <mockito.version>3.8.0</mockito.version>
     </properties>
 
     <dependencyManagement>
@@ -49,6 +50,17 @@
     </dependencyManagement>
 
     <dependencies>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-inline</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

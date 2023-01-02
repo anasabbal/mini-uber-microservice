@@ -9,4 +9,5 @@ public interface DriverService {
     Driver create(final DriverCommand driverCommand);
     void update(String driverId, DriverCommand driverCommand);
     Page<Driver> getAll(Pageable pageable);
+    Driver findById(String driverId);
 }

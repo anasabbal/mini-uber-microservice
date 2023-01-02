@@ -44,11 +44,20 @@ public record DriverServiceImpl(DriverRepository driverRepository,
     public void update(String driverId, DriverCommand driverCommand) {
         driverCommand.validate();
         log.info("Begin updating driver with id {}", driverId);
-        final Driver driver = driverRepository.findById(driverId).orElseThrow(
-                () -> new BusinessException(ExceptionPayloadFactory.DRIVER_NOT_FOUND.get())
-        );
+        final Driver driver =findById(driverId); 
         log.info("Begin updating driver with payload {}", JSONUtil.toJSON(driverCommand));
         driver.updateInfo(driverCommand);
         log.info("Driver with id {} updated successfully", driver.getId());
+    }
+    @Override
+    public Driver findById(String driverId){
+
+      log.info("Begin fetching driver with id {}", driverId);
+      final Driver driver = driverRepository.findById(driverId).orElseThrow(
+
+          () -> new BusinessException(ExceptionPayloadFactory.DRIVER_NOT_FOUND.get())
+          );
+      log.info("Driver with id {} fetched successfully", driverId);
+      return driver;
     }
 }

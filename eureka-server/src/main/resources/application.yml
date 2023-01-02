@@ -3,7 +3,7 @@ server:
 
 spring:
   devtools:
-    restart:
+    livereload:
       enabled: true
 
 eureka:

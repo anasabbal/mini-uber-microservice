@@ -16,7 +16,7 @@ spring:
     username: postgres
     password: postgres
   devtools:
-    restart:
+    livereload:
       enabled: true
 eureka:
   client:

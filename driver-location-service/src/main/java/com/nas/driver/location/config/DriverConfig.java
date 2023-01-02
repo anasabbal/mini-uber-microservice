@@ -2,10 +2,8 @@ package com.nas.driver.location.config;
 
 
 import com.maxmind.geoip2.DatabaseReader;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.client.RestTemplate;
 
 import java.io.File;
 

@@ -18,6 +18,7 @@
         <module>car-service</module>
         <module>config-server</module>
         <module>circuit-breaker</module>
+        <module>circuit-breaker-example</module>
     </modules>
 
     <properties>
@@ -50,6 +51,11 @@
     </dependencyManagement>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-inline</artifactId>

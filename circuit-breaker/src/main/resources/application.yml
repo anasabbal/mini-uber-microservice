@@ -1,4 +1,7 @@
 spring:
+  devtools:
+    livereload:
+      enabled: true
   main:
     allow-bean-definition-overriding: true
 
@@ -13,4 +16,4 @@ resilience4j.circuitbreaker:
       waitDurationInOpenState: 50s
       permittedNumberOfCallsInHalfOpenState: 3
 server:
-  port: 9999
+  port: 8600

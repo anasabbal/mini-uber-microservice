@@ -1,5 +1,7 @@
 spring:
-
+  devtools:
+    livereload:
+      enabled: true
   data:
     mongodb:
       uri: mongodb+srv://mongodb:mongodb@cluster0.lppaw8l.mongodb.net/driver-service
@@ -9,9 +11,6 @@ spring:
     name: driver
   profiles:
     active: default
-  devtools:
-    restart:
-      enabled: true
 
 eureka:
   client:

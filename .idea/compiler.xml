@@ -18,10 +18,11 @@
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.24/lombok-1.18.24.jar" />
         </processorPath>
         <module name="config-server" />
+        <module name="rabbitmq-example" />
         <module name="circuit-breaker-example" />
         <module name="circuit-breaker" />
-        <module name="driver-location-service" />
         <module name="car-service" />
+        <module name="driver-location-service" />
         <module name="eureka-server" />
         <module name="oauth2-service" />
       </profile>
@@ -75,6 +76,7 @@
       <module name="driver-service" options="-XDcompilePolicy=simple" />
       <module name="eureka-server" options="-XDcompilePolicy=simple" />
       <module name="oauth2-service" options="-XDcompilePolicy=simple" />
+      <module name="rabbitmq-example" options="-XDcompilePolicy=simple" />
       <module name="sport-micro" options="-XDcompilePolicy=simple" />
     </option>
   </component>

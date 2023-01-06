@@ -1,4 +1,4 @@
-package com.nas.core;
+package com.nas.core.dto;
 
 import lombok.SneakyThrows;
 

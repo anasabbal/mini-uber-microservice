@@ -4,7 +4,7 @@ package com.nas.driver.location.service;
 import com.maxmind.geoip2.DatabaseReader;
 import com.maxmind.geoip2.exception.GeoIp2Exception;
 import com.maxmind.geoip2.model.CityResponse;
-import com.nas.core.JSONUtil;
+import com.nas.core.util.JSONUtil;
 import com.nas.driver.location.model.GeoIp;
 import com.nas.driver.location.model.LocationEntity;
 import com.nas.driver.location.repository.LocationEntityRepository;

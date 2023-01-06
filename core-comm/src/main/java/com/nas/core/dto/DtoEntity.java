@@ -1,4 +1,4 @@
-package com.nas.core;
+package com.nas.core.dto;
 
 public class DtoEntity {
     private String id;

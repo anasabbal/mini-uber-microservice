@@ -1,4 +1,4 @@
-package com.nas.core;
+package com.nas.core.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;

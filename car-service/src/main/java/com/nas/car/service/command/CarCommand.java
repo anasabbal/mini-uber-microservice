@@ -10,4 +10,11 @@ import lombok.Setter;
 public class CarCommand {
 
     private CarType carType;
+    private Integer max_cars;
+
+
+
+    public void validate(){
+
+    }
 }

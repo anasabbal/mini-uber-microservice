@@ -1,7 +1,7 @@
 package com.nas.customer.service.service;
 
 
-import com.nas.core.JSONUtil;
+import com.nas.core.util.JSONUtil;
 import com.nas.core.exception.BusinessException;
 import com.nas.core.exception.ExceptionPayloadFactory;
 import com.nas.customer.service.command.CustomerCommand;

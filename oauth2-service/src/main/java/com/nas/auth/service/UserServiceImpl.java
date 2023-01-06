@@ -4,7 +4,7 @@ package com.nas.auth.service;
 import com.nas.auth.command.UserCommand;
 import com.nas.auth.model.User;
 import com.nas.auth.repository.UserRepository;
-import com.nas.core.JSONUtil;
+import com.nas.core.util.JSONUtil;
 import com.nas.core.exception.BusinessException;
 import com.nas.core.exception.ExceptionPayloadFactory;
 import lombok.RequiredArgsConstructor;

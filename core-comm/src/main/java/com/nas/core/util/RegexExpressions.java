@@ -1,4 +1,4 @@
-package com.nas.core;
+package com.nas.core.util;
 
 public class RegexExpressions {
     public static final String ALPHABETIC_MIN_2_CHARS = "^([A-Za-z_ ]){2,}$";

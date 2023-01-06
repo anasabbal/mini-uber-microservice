@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 
-import static com.nas.core.ResourcePath.DRIVER_LOCATION;
-import static com.nas.core.ResourcePath.V1;
+import static com.nas.core.constants.ResourcePath.DRIVER_LOCATION;
+import static com.nas.core.constants.ResourcePath.V1;
 
 @RestController
 @RequestMapping(V1 + DRIVER_LOCATION)

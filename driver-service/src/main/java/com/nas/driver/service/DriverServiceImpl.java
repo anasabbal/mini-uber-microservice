@@ -1,7 +1,7 @@
 package com.nas.driver.service;
 
 
-import com.nas.core.JSONUtil;
+import com.nas.core.util.JSONUtil;
 import com.nas.core.exception.BusinessException;
 import com.nas.core.exception.ExceptionPayloadFactory;
 import com.nas.driver.command.DriverCommand;
@@ -29,7 +29,7 @@ public record DriverServiceImpl(DriverRepository driverRepository,
         driverRepository.save(driver);
         log.info("Driver with id {} created successfully", driver.getId());
         restTemplate.getForObject(
-                "http://DRIVER-LOCATION:8082/v1/driver-location/{driverId}",
+                "http://DRIVER-LOCATION:8082/v1/ndriver-locatio/{driverId}",
                 DriverLocationRequest.class,
                 driver.getId());
         return driver;

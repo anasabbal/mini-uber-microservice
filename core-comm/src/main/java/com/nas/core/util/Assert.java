@@ -1,4 +1,4 @@
-package com.nas.customer.service.util;
+package com.nas.core.util;
 
 import com.nas.core.exception.BusinessException;
 import com.nas.core.exception.ExceptionPayload;

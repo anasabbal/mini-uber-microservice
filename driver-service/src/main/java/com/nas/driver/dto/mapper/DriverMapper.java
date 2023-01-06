@@ -1,4 +1,4 @@
-package com.nas.driver.mapper;
+package com.nas.driver.dto.mapper;
 
 
 import com.nas.driver.dto.DriverDto;

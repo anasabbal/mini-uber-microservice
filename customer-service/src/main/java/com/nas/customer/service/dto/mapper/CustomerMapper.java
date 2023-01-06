@@ -1,4 +1,4 @@
-package com.nas.customer.service.mapper;
+package com.nas.customer.service.dto.mapper;
 
 
 import com.nas.customer.service.dto.CustomerDto;

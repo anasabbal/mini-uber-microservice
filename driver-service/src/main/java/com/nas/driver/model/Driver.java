@@ -26,6 +26,7 @@ public class Driver{
     private LocalDateTime updatedAt;
     private String updatedBy;
     protected Boolean deleted = false;
+    private String carId;
     private String firstName;
     private String lastName;
     private DriverStatus driverStatus;

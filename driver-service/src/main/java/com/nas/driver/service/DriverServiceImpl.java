@@ -5,7 +5,7 @@ import com.nas.core.util.JSONUtil;
 import com.nas.core.exception.BusinessException;
 import com.nas.core.exception.ExceptionPayloadFactory;
 import com.nas.driver.command.DriverCommand;
-import com.nas.driver.mapper.DriverMapper;
+import com.nas.driver.dto.mapper.DriverMapper;
 import com.nas.driver.model.Driver;
 import com.nas.driver.model.DriverLocationRequest;
 import com.nas.driver.repository.DriverRepository;
@@ -36,11 +36,6 @@ public record DriverServiceImpl(DriverRepository driverRepository,
     }
 
     @Override
-    public Page<Driver> getAll(Pageable pageable) {
-        return driverRepository.findAll(pageable);
-    }
-
-    @Override
     public void update(String driverId, DriverCommand driverCommand) {
         driverCommand.validate();
         log.info("Begin updating driver with id {}", driverId);
@@ -59,5 +54,9 @@ public record DriverServiceImpl(DriverRepository driverRepository,
           );
       log.info("Driver with id {} fetched successfully", driverId);
       return driver;
+    }
+    @Override
+    public Page<Driver> getAll(Pageable pageable) {
+        return driverRepository.findAll(pageable);
     }
 }

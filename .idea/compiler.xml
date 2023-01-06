@@ -20,6 +20,7 @@
         <module name="config-server" />
         <module name="rabbitmq-example" />
         <module name="circuit-breaker-example" />
+        <module name="core-comm" />
         <module name="circuit-breaker" />
         <module name="car-service" />
         <module name="driver-location-service" />
@@ -47,17 +48,6 @@
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.24/lombok-1.18.24.jar" />
         </processorPath>
         <module name="driver-service" />
-      </profile>
-      <profile name="Annotation profile for core-comm" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.5.3.Final/mapstruct-processor-1.5.3.Final.jar" />
-          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct/1.5.3.Final/mapstruct-1.5.3.Final.jar" />
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.24/lombok-1.18.24.jar" />
-        </processorPath>
-        <module name="core-comm" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

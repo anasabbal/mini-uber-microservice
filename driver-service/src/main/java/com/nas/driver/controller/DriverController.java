@@ -3,7 +3,7 @@ package com.nas.driver.controller;
 
 import com.nas.driver.command.DriverCommand;
 import com.nas.driver.dto.DriverDto;
-import com.nas.driver.mapper.DriverMapper;
+import com.nas.driver.dto.mapper.DriverMapper;
 import com.nas.driver.model.Driver;
 import com.nas.driver.service.DriverService;
 import lombok.RequiredArgsConstructor;

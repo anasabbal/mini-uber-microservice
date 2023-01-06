@@ -5,12 +5,12 @@ import com.nas.car.service.command.CarCommand;
 import com.nas.car.service.enums.CarType;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.redis.core.RedisHash;
 
 
-@Document("CARS")
 @Getter
 @Setter
+@RedisHash("CARS")
 public class Car {
 
     private String id;

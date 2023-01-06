@@ -20,8 +20,8 @@
         <module name="config-server" />
         <module name="circuit-breaker-example" />
         <module name="circuit-breaker" />
-        <module name="car-service" />
         <module name="driver-location-service" />
+        <module name="car-service" />
         <module name="eureka-server" />
         <module name="oauth2-service" />
       </profile>

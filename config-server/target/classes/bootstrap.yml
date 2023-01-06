@@ -1,0 +1,12 @@
+server:
+  port: 8888
+
+spring:
+  devtools:
+    livereload:
+      enabled: true
+  application:
+    name: config-server
+  cloud:
+    config:
+      uri: http://localhost:8888

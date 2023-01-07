@@ -21,6 +21,7 @@
         <module name="circuit-breaker" />
         <module name="car-service" />
         <module name="driver-location-service" />
+        <module name="zull-proxy" />
         <module name="eureka-server" />
         <module name="consumer-service" />
         <module name="oauth2-service" />
@@ -86,6 +87,7 @@
       <module name="producer-service" options="-XDcompilePolicy=simple" />
       <module name="rabbitmq-example" options="-XDcompilePolicy=simple" />
       <module name="sport-micro" options="-XDcompilePolicy=simple" />
+      <module name="zull-proxy" options="-XDcompilePolicy=simple" />
     </option>
   </component>
 </project>

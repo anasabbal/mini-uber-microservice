@@ -1,0 +1,11 @@
+zuul:
+  routes:
+    customer:
+      url: http://localhost:8080/v1/customers/**
+      serviceId: customer-service
+    driver:
+      url: http://localhost:8081/v1/drivers/**
+      serviceId: driver-service
+    driver-location:
+      url: http://localhost:8082/v1/driver-location/**
+      serviceId: driver-location

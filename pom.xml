@@ -24,6 +24,7 @@
         <module>apache-kafka-example/consumer-service</module>
         <module>apache-kafka-example/producer-service</module>
         <module>notification-service</module>
+        <module>zull-proxy</module>
     </modules>
 
     <properties>

@@ -17,18 +17,18 @@
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.24/lombok-1.18.24.jar" />
         </processorPath>
-        <module name="config-server" />
         <module name="rabbitmq-example" />
-        <module name="apache-kafka-example" />
-        <module name="circuit-breaker-example" />
-        <module name="producer-service" />
-        <module name="core-comm" />
         <module name="circuit-breaker" />
         <module name="car-service" />
         <module name="driver-location-service" />
         <module name="eureka-server" />
-        <module name="oauth2-service" />
         <module name="consumer-service" />
+        <module name="oauth2-service" />
+        <module name="config-server" />
+        <module name="apache-kafka-example" />
+        <module name="producer-service" />
+        <module name="circuit-breaker-example" />
+        <module name="core-comm" />
       </profile>
       <profile name="Annotation profile for customer-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -52,6 +52,17 @@
         </processorPath>
         <module name="driver-service" />
       </profile>
+      <profile name="Annotation profile for notification-service" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.5.3.Final/mapstruct-processor-1.5.3.Final.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct/1.5.3.Final/mapstruct-1.5.3.Final.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.24/lombok-1.18.24.jar" />
+        </processorPath>
+        <module name="notification-service" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="core-exception" target="17" />
@@ -70,6 +81,7 @@
       <module name="driver-location-service" options="-XDcompilePolicy=simple" />
       <module name="driver-service" options="-XDcompilePolicy=simple" />
       <module name="eureka-server" options="-XDcompilePolicy=simple" />
+      <module name="notification-service" options="-XDcompilePolicy=simple" />
       <module name="oauth2-service" options="-XDcompilePolicy=simple" />
       <module name="producer-service" options="-XDcompilePolicy=simple" />
       <module name="rabbitmq-example" options="-XDcompilePolicy=simple" />

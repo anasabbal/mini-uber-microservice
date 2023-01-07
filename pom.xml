@@ -20,6 +20,9 @@
         <module>circuit-breaker</module>
         <module>circuit-breaker-example</module>
         <module>rabbitmq-example</module>
+        <module>apache-kafka-example</module>
+        <module>apache-kafka-example/consumer-service</module>
+        <module>apache-kafka-example/producer-service</module>
     </modules>
 
     <properties>

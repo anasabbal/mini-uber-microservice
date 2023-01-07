@@ -9,3 +9,5 @@
 /.idea
 /car-service/target
 /driver-location-service/target
+/apache-kafka-example/target
+/rabbitmq-example/target

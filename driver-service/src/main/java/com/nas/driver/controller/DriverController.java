@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.Set;
 
 import static com.nas.core.constants.ResourcePath.DRIVERS;
 import static com.nas.core.constants.ResourcePath.V1;
@@ -30,6 +31,10 @@ public class DriverController {
         final Driver driver = driverService.create(driverCommand);
         final URI uri = fromCurrentRequest().path("/{id}").buildAndExpand(driver.getId()).toUri();
         return ResponseEntity.created(uri).body(driverMapper.toDto(driver));
+    }
+    @GetMapping("/available")
+    public ResponseEntity<Set<DriverDto>> getAllAvailable(Pageable pageable){
+        return ResponseEntity.ok(driverService.getDriversAvailable(pageable));
     }
     @GetMapping
     public ResponseEntity<Page<DriverDto>> getAll(Pageable pageable){

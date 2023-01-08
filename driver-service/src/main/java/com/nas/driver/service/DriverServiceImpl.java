@@ -5,7 +5,9 @@ import com.nas.core.util.JSONUtil;
 import com.nas.core.exception.BusinessException;
 import com.nas.core.exception.ExceptionPayloadFactory;
 import com.nas.driver.command.DriverCommand;
+import com.nas.driver.dto.DriverDto;
 import com.nas.driver.dto.mapper.DriverMapper;
+import com.nas.driver.enums.DriverStatus;
 import com.nas.driver.model.Driver;
 import com.nas.driver.model.DriverLocationRequest;
 import com.nas.driver.repository.DriverRepository;
@@ -14,6 +16,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -43,6 +48,16 @@ public record DriverServiceImpl(DriverRepository driverRepository,
         driver.updateInfo(driverCommand);
         log.info("Driver with id {} updated successfully", driver.getId());
     }
+
+    @Override
+    public Set<DriverDto> getDriversAvailable(Pageable pageable) {
+        final Page<Driver> drivers = getAll(pageable);
+        final Set<Driver> driverDto = drivers.stream().filter(
+                dv -> dv.getDriverStatus() == DriverStatus.AVAILABLE)
+                .collect(Collectors.toSet());
+        return driverDto.stream().map(driverMapper::toDto).collect(Collectors.toSet());
+    }
+
     @Override
     public Driver findById(String driverId){
 

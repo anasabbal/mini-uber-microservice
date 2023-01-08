@@ -6,6 +6,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Customer {
+public class Driver {
     private String id;
 }

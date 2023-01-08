@@ -7,20 +7,21 @@ spring:
       ddl-auto: create
     show-sql: true
   application:
-    name: customer
+    name: notification
   profiles:
     active: default
   datasource:
     driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/customers
+    url: jdbc:postgresql://localhost:5432/notifications
     username: postgres
     password: postgres
   devtools:
     livereload:
       enabled: true
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:8761/eureka
+
 server:
-  port: 8080
+  port: 2022

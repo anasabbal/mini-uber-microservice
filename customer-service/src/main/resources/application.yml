@@ -3,7 +3,7 @@ spring:
     producer:
       bootstrap-servers: localhost:9092
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      #value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
   jpa:
     properties:
       hibernate:
@@ -31,5 +31,4 @@ server:
   port: 9091
 
 topic:
-  name:
-    producer: customer
+  name: customer

@@ -1,7 +1,6 @@
 package com.nas.driver.service;
 
 import com.nas.driver.command.DriverCommand;
-import com.nas.driver.dto.DriverDto;
 import com.nas.driver.model.Driver;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,5 +12,5 @@ public interface DriverService {
     void update(String driverId, DriverCommand driverCommand);
     Page<Driver> getAll(Pageable pageable);
     Driver findById(String driverId);
-    Set<DriverDto> getDriversAvailable(Pageable pageable);
+    Set<Driver> getDriversAvailable(Pageable pageable);
 }

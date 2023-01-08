@@ -33,7 +33,7 @@ public class DriverController {
         return ResponseEntity.created(uri).body(driverMapper.toDto(driver));
     }
     @GetMapping("/available")
-    public ResponseEntity<Set<DriverDto>> getAllAvailable(Pageable pageable){
+    public ResponseEntity<Set<Driver>> getAllAvailable(Pageable pageable){
         return ResponseEntity.ok(driverService.getDriversAvailable(pageable));
     }
     @GetMapping

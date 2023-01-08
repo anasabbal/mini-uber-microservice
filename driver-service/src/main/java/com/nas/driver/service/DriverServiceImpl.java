@@ -50,12 +50,12 @@ public record DriverServiceImpl(DriverRepository driverRepository,
     }
 
     @Override
-    public Set<DriverDto> getDriversAvailable(Pageable pageable) {
+    public Set<Driver> getDriversAvailable(Pageable pageable) {
         final Page<Driver> drivers = getAll(pageable);
         final Set<Driver> driverDto = drivers.stream().filter(
                 dv -> dv.getDriverStatus() == DriverStatus.AVAILABLE)
                 .collect(Collectors.toSet());
-        return driverDto.stream().map(driverMapper::toDto).collect(Collectors.toSet());
+        return driverDto;
     }
 
     @Override

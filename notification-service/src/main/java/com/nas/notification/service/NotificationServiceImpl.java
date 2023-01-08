@@ -36,6 +36,6 @@ public class NotificationServiceImpl implements NotificationService{
     public void sendNotifcationId(Pageable pageable){
         final Page<NotificationDto> notificationDtos1 = getAllNotifications(pageable);
         log.info("Begin sending payload {}", JSONUtil.toJSON(notificationDtos1));
-        kafkaTemplate.send(topicName, notificationDtos1);
+        //kafkaTemplate.send(topicName, notificationDtos1);
     }
 }

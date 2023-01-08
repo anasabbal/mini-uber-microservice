@@ -3,6 +3,7 @@ package com.nas.customer.service.controller;
 
 import com.nas.customer.service.command.CustomerCommand;
 import com.nas.customer.service.command.CustomerInfoUpdateCmd;
+import com.nas.customer.service.command.CustomerRequestDriver;
 import com.nas.customer.service.dto.CustomerDto;
 import com.nas.customer.service.dto.mapper.CustomerMapper;
 import com.nas.customer.service.model.Customer;
@@ -41,9 +42,13 @@ public class CustomerController {
         final Page<Customer> customers = customerService.findAllByDeletedFalse(pageable);
         return ResponseEntity.ok(customers.map(customerMapper::toDto));
     }
+    @PostMapping("/driver/request")
+    public String sendRequestDriver(@RequestBody final CustomerRequestDriver requestDriver){
+        return customerService.sendRequestDriver(requestDriver);
+    }
     @GetMapping("/driver/available")
-    public ResponseEntity<Set<Driver>> getAllDriversAvailable(Pageable pageable){
-        return ResponseEntity.ok(customerService.getDriversAvailable(pageable));
+    public ResponseEntity<Set<Driver>> getAllDriversAvailable(){
+        return ResponseEntity.ok(customerService.getDriversAvailable());
     }
     @GetMapping("/{customerId}")
     public ResponseEntity<CustomerDto> getOne(@PathVariable("customerId") final String customerId){

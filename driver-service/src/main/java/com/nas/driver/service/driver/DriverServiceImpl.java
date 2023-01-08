@@ -49,8 +49,7 @@ public record DriverServiceImpl(DriverRepository driverRepository,
 
     @Override
     public Set<Driver> getDriversAvailable(Pageable pageable) {
-        final Page<Driver> drivers = getAll(pageable);
-        return drivers.stream().filter(
+        return getAll(pageable).stream().filter(
                 dv -> dv.getDriverStatus() == DriverStatus.AVAILABLE)
                 .collect(Collectors.toSet());
     }

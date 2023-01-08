@@ -2,6 +2,7 @@ package com.nas.driver.model;
 
 
 import com.nas.driver.command.DriverCommand;
+import com.nas.driver.command.NotificationDriverRequest;
 import com.nas.driver.enums.DriverStatus;
 import lombok.*;
 import org.springframework.data.annotation.Id;
@@ -10,6 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Document(collection = "DRIVERS")
 @Data
@@ -46,5 +48,11 @@ public class Driver{
         this.lastName = driverCommand.getLastName();
         this.updatedAt = LocalDateTime.now();
         this.updatedBy = this.firstName;
+    }
+    public static Set<NotificationDriver> createPayload(Set<NotificationDriverRequest> notificationDriverRequests){
+        return notificationDriverRequests
+                .stream().map(
+                        NotificationDriver::create)
+                .collect(Collectors.toSet());
     }
 }

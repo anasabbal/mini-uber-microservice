@@ -24,7 +24,8 @@ public class Customer extends BaseEntity{
     private String email;
     @Column(name = "PASSWORD")
     private String password;
-    private String driverId;
+    @Column(name = "DRIVER_ID")
+    private String driverId = null;
 
 
     public static Customer create(final CustomerCommand command){

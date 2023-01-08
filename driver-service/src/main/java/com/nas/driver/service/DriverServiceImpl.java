@@ -34,7 +34,6 @@ public record DriverServiceImpl(DriverRepository driverRepository,
                 driver.getId());
         return driver;
     }
-
     @Override
     public void update(String driverId, DriverCommand driverCommand) {
         driverCommand.validate();

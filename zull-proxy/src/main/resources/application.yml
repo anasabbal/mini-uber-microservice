@@ -1,11 +1,17 @@
 zuul:
   routes:
     customer:
-      url: http://localhost:8080/v1/customers/**
+      path: v1/customers/**
+      url: http://localhost:8080/
       serviceId: customer-service
     driver:
-      url: http://localhost:8081/v1/drivers/**
+      path: /v1/drivers/**
+      url: http://localhost:8081
       serviceId: driver-service
     driver-location:
-      url: http://localhost:8082/v1/driver-location/**
+      path: /v1/driver-location/**
+      url: http://localhost:8082
       serviceId: driver-location
+
+server:
+  port: 1234

@@ -11,6 +11,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Document(collection = "DRIVERS")
 @NoArgsConstructor
@@ -30,6 +31,7 @@ public class Driver{
     private String firstName;
     private String lastName;
     private DriverStatus driverStatus;
+    private Set<NotificationDriver> notificationsIds;
 
     public static Driver create(final DriverCommand driverCommand){
         final Driver driver = new Driver();

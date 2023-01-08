@@ -1,13 +1,11 @@
 package com.nas.notification.service;
 
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
+import com.nas.notification.dto.NotificationDto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-@Service
-@RequiredArgsConstructor
-@Slf4j
-public class NotificationService {
 
+public interface NotificationService {
+    Page<NotificationDto> getAllNotifications(Pageable pageable);
 }

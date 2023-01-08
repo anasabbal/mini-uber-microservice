@@ -1,30 +1,28 @@
 package com.nas.customer.service.service;
 
 
-import com.nas.core.util.JSONUtil;
 import com.nas.core.exception.BusinessException;
 import com.nas.core.exception.ExceptionPayloadFactory;
+import com.nas.core.util.JSONUtil;
 import com.nas.customer.service.command.CustomerCommand;
 import com.nas.customer.service.command.CustomerInfoUpdateCmd;
 import com.nas.customer.service.command.CustomerRequestDriver;
 import com.nas.customer.service.model.Customer;
 import com.nas.customer.service.model.Driver;
-import com.nas.customer.service.model.DriverSet;
 import com.nas.customer.service.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.*;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -61,20 +59,21 @@ public class CustomerServiceImpl implements CustomerService{
         final ResponseEntity<Set<Driver>> objects = restTemplate.exchange(
                 "http://DRIVER:8081/v1/drivers/available", HttpMethod.GET,
                 null,
-                new ParameterizedTypeReference<Set<Driver>>(){});
+                new ParameterizedTypeReference<>() {
+                });
         log.info("Object with payload {}", JSONUtil.toJSON(objects.getBody()));
         return objects.getBody();
     }
     @Override
-    public String sendRequestDriver(CustomerRequestDriver requestDriver){
+    @Async
+    public void sendRequestDriver(CustomerRequestDriver requestDriver){
         final Driver driver = getDriversAvailable().stream().filter(
                 dv -> dv.getId().equals(requestDriver.getDriverId()))
                 .findAny().orElseThrow(
                 () -> new BusinessException(ExceptionPayloadFactory.DRIVER_LOCATION_NOT_FOUND.get())
         );
         log.info("Driver id {}", driver.getId());
-        kafkaTemplate.send("Kifach a rbk", driver.getId());
-        return "Message send to driver id {} " + driver.getId();
+        kafkaTemplate.send("How a rbk", driver.getId());
     }
 
     @Override

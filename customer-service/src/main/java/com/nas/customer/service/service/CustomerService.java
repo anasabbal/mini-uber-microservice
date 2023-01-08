@@ -16,5 +16,5 @@ public interface CustomerService {
     Customer findById(String customerId);
     void updateInfo(final CustomerInfoUpdateCmd customerCommand, String customerId);
     Set<Driver> getDriversAvailable();
-    String sendRequestDriver(CustomerRequestDriver requestDriver);
+    void sendRequestDriver(CustomerRequestDriver requestDriver);
 }

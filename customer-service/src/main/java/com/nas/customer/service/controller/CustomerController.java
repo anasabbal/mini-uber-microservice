@@ -8,7 +8,6 @@ import com.nas.customer.service.dto.CustomerDto;
 import com.nas.customer.service.dto.mapper.CustomerMapper;
 import com.nas.customer.service.model.Customer;
 import com.nas.customer.service.model.Driver;
-import com.nas.customer.service.model.DriverSet;
 import com.nas.customer.service.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -43,8 +42,9 @@ public class CustomerController {
         return ResponseEntity.ok(customers.map(customerMapper::toDto));
     }
     @PostMapping("/driver/request")
-    public String sendRequestDriver(@RequestBody final CustomerRequestDriver requestDriver){
-        return customerService.sendRequestDriver(requestDriver);
+    public ResponseEntity<Void> sendRequestDriver(@RequestBody final CustomerRequestDriver requestDriver){
+        customerService.sendRequestDriver(requestDriver);
+        return ResponseEntity.notFound().build();
     }
     @GetMapping("/driver/available")
     public ResponseEntity<Set<Driver>> getAllDriversAvailable(){

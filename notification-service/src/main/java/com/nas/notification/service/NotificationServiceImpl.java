@@ -7,7 +7,6 @@ import com.nas.notification.repository.NotificationRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -27,7 +26,6 @@ public class NotificationServiceImpl implements NotificationService{
                 map(notificationMapper::toDto);
         return null;
     }
-
     @KafkaListener(topics = "${topic.name.consumer}" , groupId = "group_id")
     public void listenWhiteHeader(ConsumerRecord<String, String> payload){
         log.info("Topic: {}", "notification");

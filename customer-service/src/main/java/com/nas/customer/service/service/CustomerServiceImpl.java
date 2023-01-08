@@ -34,8 +34,6 @@ public class CustomerServiceImpl implements CustomerService{
     private final CustomerRepository customerRepository;
     private final RestTemplate restTemplate;
     private final KafkaTemplate<String, String> kafkaTemplate;
-    @Value("${topic.name.producer}")
-    private String topicName;
 
     @Override
     public Customer create(CustomerCommand customerCommand) {
@@ -65,8 +63,7 @@ public class CustomerServiceImpl implements CustomerService{
                 null,
                 new ParameterizedTypeReference<Set<Driver>>(){});
         log.info("Object with payload {}", JSONUtil.toJSON(objects.getBody()));
-        final Set<Driver> drivers = objects.getBody();
-        return drivers;
+        return objects.getBody();
     }
     @Override
     public String sendRequestDriver(CustomerRequestDriver requestDriver){
@@ -76,7 +73,7 @@ public class CustomerServiceImpl implements CustomerService{
                 () -> new BusinessException(ExceptionPayloadFactory.DRIVER_LOCATION_NOT_FOUND.get())
         );
         log.info("Driver id {}", driver.getId());
-        kafkaTemplate.send(topicName, driver.getId());
+        kafkaTemplate.send("Kifach a rbk", driver.getId());
         return "Message send to driver id {} " + driver.getId();
     }
 

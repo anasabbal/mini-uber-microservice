@@ -8,8 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.HashMap;
-import java.util.Map;
 
 @Getter
 @Entity
@@ -17,13 +15,22 @@ import java.util.Map;
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class Notification extends BaseEntity{
 
-    private Map<String, String> map = new HashMap<>();
+    @Column(name = "DRIVER_ID")
+    private String driverId;
+
+    @Column(name = "CUSTOMER_ID")
+    private String customerId;
+
+    @Column(name = "IS_NOTIFICATION")
+    private Boolean isNotification;
 
 
     public static Notification create(final NotificationRequest notificationRequest){
         final Notification notification = new Notification();
 
-        notification.map.put(notificationRequest.getCustomerId(), notificationRequest.getDriverId());
+        notification.driverId = notificationRequest.getDriverId();
+        notification.customerId = notificationRequest.getCustomerId();
+
         return notification;
     }
 }

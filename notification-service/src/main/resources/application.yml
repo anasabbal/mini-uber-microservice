@@ -1,4 +1,11 @@
 spring:
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: group_id
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
   jpa:
     properties:
       hibernate:
@@ -18,10 +25,14 @@ spring:
   devtools:
     livereload:
       enabled: true
+topic:
+  name:
+    consumer: notification
+
 #eureka:
 #  client:
 #    service-url:
 #      defaultZone: http://localhost:8761/eureka
 
 server:
-  port: 2022
+  port: 9090

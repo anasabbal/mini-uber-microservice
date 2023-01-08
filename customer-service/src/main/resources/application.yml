@@ -1,4 +1,9 @@
 spring:
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      #value-serializer: org.apache.kafka.common.serialization.StringSerializer
   jpa:
     properties:
       hibernate:
@@ -23,4 +28,8 @@ eureka:
     service-url:
       defaultZone: http://localhost:8761/eureka
 server:
-  port: 8080
+  port: 9091
+
+topic:
+  name:
+    producer: customer

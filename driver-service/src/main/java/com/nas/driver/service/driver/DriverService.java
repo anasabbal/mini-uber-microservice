@@ -1,4 +1,4 @@
-package com.nas.driver.service;
+package com.nas.driver.service.driver;
 
 import com.nas.driver.command.DriverCommand;
 import com.nas.driver.model.Driver;

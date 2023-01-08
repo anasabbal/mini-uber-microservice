@@ -8,6 +8,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Document(collection = "DRIVERS")
@@ -33,6 +34,7 @@ public class Driver{
         driver.firstName = driverCommand.getFirstName();;
         driver.lastName = driverCommand.getLastName();
         driver.createdBy = "NAS SYSTEM";
+        driver.notificationsIds = new HashSet<>();
         driver.updatedBy = driver.firstName;
         driver.createdAt = LocalDateTime.now();
         driver.updatedAt = LocalDateTime.now();

@@ -1,11 +1,10 @@
-package com.nas.driver.service;
+package com.nas.driver.service.driver;
 
 
 import com.nas.core.util.JSONUtil;
 import com.nas.core.exception.BusinessException;
 import com.nas.core.exception.ExceptionPayloadFactory;
 import com.nas.driver.command.DriverCommand;
-import com.nas.driver.dto.DriverDto;
 import com.nas.driver.dto.mapper.DriverMapper;
 import com.nas.driver.enums.DriverStatus;
 import com.nas.driver.model.Driver;
@@ -25,7 +24,6 @@ import java.util.stream.Collectors;
 public record DriverServiceImpl(DriverRepository driverRepository,
                                 RestTemplate restTemplate,
                                 DriverMapper driverMapper) implements DriverService{
-
     @Override
     public Driver create(DriverCommand driverCommand) {
         driverCommand.validate();
@@ -52,20 +50,15 @@ public record DriverServiceImpl(DriverRepository driverRepository,
     @Override
     public Set<Driver> getDriversAvailable(Pageable pageable) {
         final Page<Driver> drivers = getAll(pageable);
-        final Set<Driver> driverDto = drivers.stream().filter(
+        return drivers.stream().filter(
                 dv -> dv.getDriverStatus() == DriverStatus.AVAILABLE)
                 .collect(Collectors.toSet());
-        return driverDto;
     }
-
     @Override
     public Driver findById(String driverId){
-
       log.info("Begin fetching driver with id {}", driverId);
       final Driver driver = driverRepository.findById(driverId).orElseThrow(
-
-          () -> new BusinessException(ExceptionPayloadFactory.DRIVER_NOT_FOUND.get())
-          );
+          () -> new BusinessException(ExceptionPayloadFactory.DRIVER_NOT_FOUND.get()));
       log.info("Driver with id {} fetched successfully", driverId);
       return driver;
     }

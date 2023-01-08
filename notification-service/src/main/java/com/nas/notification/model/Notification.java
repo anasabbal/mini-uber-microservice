@@ -21,8 +21,6 @@ public class Notification extends BaseEntity{
     @Column(name = "CUSTOMER_ID")
     private String customerId;
 
-    @Column(name = "IS_NOTIFICATION")
-    private Boolean isNotification;
 
 
     public static Notification create(final NotificationRequest notificationRequest){

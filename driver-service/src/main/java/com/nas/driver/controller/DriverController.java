@@ -36,9 +36,13 @@ public class DriverController {
     public ResponseEntity<Set<Driver>> getAllAvailable(Pageable pageable){
         return ResponseEntity.ok(driverService.getDriversAvailable(pageable));
     }
+    @GetMapping("/{driverId}")
+    public ResponseEntity<Driver> getDriverById(@PathVariable("driverId") final String driverId){
+        return ResponseEntity.ok(driverService.findById(driverId));
+    }
     @GetMapping
-    public ResponseEntity<Page<DriverDto>> getAll(Pageable pageable){
-        return ResponseEntity.ok(driverService.getAll(pageable).map(driverMapper::toDto));
+    public ResponseEntity<Page<Driver>> getAll(Pageable pageable){
+        return ResponseEntity.ok(driverService.getAll(pageable));
     }
     @PutMapping("/{driverId}")
     public ResponseEntity<Void> updateInfo(

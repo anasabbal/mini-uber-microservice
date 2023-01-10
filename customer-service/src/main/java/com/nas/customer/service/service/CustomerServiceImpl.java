@@ -31,7 +31,7 @@ public class CustomerServiceImpl implements CustomerService{
     
     private final CustomerRepository customerRepository;
     private final RestTemplate restTemplate;
-    private final KafkaTemplate<String, CustomerRequestDriver> kafkaTemplate;
+    private final KafkaTemplate<String, String> kafkaTemplate;
 
     @Override
     public Customer create(CustomerCommand customerCommand) {
@@ -73,7 +73,7 @@ public class CustomerServiceImpl implements CustomerService{
                 () -> new BusinessException(ExceptionPayloadFactory.DRIVER_LOCATION_NOT_FOUND.get())
         );
         log.info("Driver id {}", driver.getId());
-        kafkaTemplate.send("topic1", requestDriver);
+        kafkaTemplate.send("topic1", requestDriver.getDriverId());
     }
 
     @Override

@@ -70,28 +70,4 @@ public record DriverServiceImpl(DriverRepository driverRepository,
     public Page<Driver> getAll(Pageable pageable) {
         return driverRepository.findAll(pageable);
     }
-    @Override
-    @KafkaListener(id = "driver_id", topics = "topic1")
-    public void listenWhiteHeader(ConsumerRecord<String, String> payload){
-
-        final NotificationDriver notificationDriver = NotificationDriver.create(
-                NotificationDriverRequest.create(
-                        payload.value()
-                )
-        );
-        final Driver driver = findById(payload.value());
-        log.info("Begin init notification with id {} to driver with id {}", notificationDriver.getId(), driver.getId());
-        updateNotificationDriver(driver, notificationDriver);
-        log.info("Notification created successfully with payload {}", JSONUtil.toJSON(notificationDriver));
-
-        log.info("Topic: {}", "notification");
-        log.info("key: {}", payload.key());
-        log.info("Headers: {}", payload.headers());
-        log.info("Partion: {}", payload.partition());
-        log.info("Order: {}", payload.value());
-    }
-    private boolean updateNotificationDriver(Driver driver,
-                                             NotificationDriver notificationDriver){
-        return driver.add(notificationDriver);
-    }
 }

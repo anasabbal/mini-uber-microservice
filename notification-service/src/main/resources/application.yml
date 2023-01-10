@@ -1,11 +1,8 @@
 spring:
   kafka:
     consumer:
-      bootstrap-servers: localhost:9092
-      group-id: group_id
-      auto-offset-reset: earliest
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      group-id: notification
+    client-id: notification
   jpa:
     properties:
       hibernate:
@@ -25,10 +22,8 @@ spring:
   devtools:
     livereload:
       enabled: true
-topic:
-  name:
-    consumer: notification
-
+  config:
+    import:
 eureka:
   client:
     service-url:

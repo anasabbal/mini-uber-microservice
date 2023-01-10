@@ -67,6 +67,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="core-exception" target="17" />
+      <module name="shared-configuration" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -86,6 +87,7 @@
       <module name="oauth2-service" options="-XDcompilePolicy=simple" />
       <module name="producer-service" options="-XDcompilePolicy=simple" />
       <module name="rabbitmq-example" options="-XDcompilePolicy=simple" />
+      <module name="shared-configuration" options="-XDcompilePolicy=simple" />
       <module name="sport-micro" options="-XDcompilePolicy=simple" />
       <module name="zull-proxy" options="-XDcompilePolicy=simple" />
     </option>

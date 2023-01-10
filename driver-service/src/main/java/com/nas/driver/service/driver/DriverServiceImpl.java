@@ -5,14 +5,19 @@ import com.nas.core.util.JSONUtil;
 import com.nas.core.exception.BusinessException;
 import com.nas.core.exception.ExceptionPayloadFactory;
 import com.nas.driver.command.DriverCommand;
+import com.nas.driver.command.NotificationDriverRequest;
 import com.nas.driver.dto.mapper.DriverMapper;
 import com.nas.driver.enums.DriverStatus;
 import com.nas.driver.model.Driver;
 import com.nas.driver.model.DriverLocationRequest;
+import com.nas.driver.model.NotificationDriver;
 import com.nas.driver.repository.DriverRepository;
+import com.nas.driver.repository.NotificationDriverRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -23,7 +28,8 @@ import java.util.stream.Collectors;
 @Slf4j
 public record DriverServiceImpl(DriverRepository driverRepository,
                                 RestTemplate restTemplate,
-                                DriverMapper driverMapper) implements DriverService{
+                                DriverMapper driverMapper,
+                                NotificationDriverRepository notificationDriverRepository) implements DriverService{
     @Override
     public Driver create(DriverCommand driverCommand) {
         driverCommand.validate();
@@ -32,7 +38,7 @@ public record DriverServiceImpl(DriverRepository driverRepository,
         driverRepository.save(driver);
         log.info("Driver with id {} created successfully", driver.getId());
         restTemplate.getForObject(
-                "http://DRIVER-LOCATION:8082/v1/ndriver-locatio/{driverId}",
+                "http://DRIVER-LOCATION:8082/v1/driver-location/{driverId}",
                 DriverLocationRequest.class,
                 driver.getId());
         return driver;
@@ -46,7 +52,6 @@ public record DriverServiceImpl(DriverRepository driverRepository,
         driver.updateInfo(driverCommand);
         log.info("Driver with id {} updated successfully", driver.getId());
     }
-
     @Override
     public Set<Driver> getDriversAvailable(Pageable pageable) {
         return getAll(pageable).stream().filter(
@@ -64,5 +69,29 @@ public record DriverServiceImpl(DriverRepository driverRepository,
     @Override
     public Page<Driver> getAll(Pageable pageable) {
         return driverRepository.findAll(pageable);
+    }
+    @Override
+    @KafkaListener(id = "driver_id", topics = "topic1")
+    public void listenWhiteHeader(ConsumerRecord<String, String> payload){
+
+        final NotificationDriver notificationDriver = NotificationDriver.create(
+                NotificationDriverRequest.create(
+                        payload.value()
+                )
+        );
+        final Driver driver = findById(payload.value());
+        log.info("Begin init notification with id {} to driver with id {}", notificationDriver.getId(), driver.getId());
+        updateNotificationDriver(driver, notificationDriver);
+        log.info("Notification created successfully with payload {}", JSONUtil.toJSON(notificationDriver));
+
+        log.info("Topic: {}", "notification");
+        log.info("key: {}", payload.key());
+        log.info("Headers: {}", payload.headers());
+        log.info("Partion: {}", payload.partition());
+        log.info("Order: {}", payload.value());
+    }
+    private boolean updateNotificationDriver(Driver driver,
+                                             NotificationDriver notificationDriver){
+        return driver.add(notificationDriver);
     }
 }

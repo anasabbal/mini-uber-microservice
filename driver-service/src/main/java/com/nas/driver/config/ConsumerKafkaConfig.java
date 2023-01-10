@@ -1,4 +1,4 @@
-package com.nas.notification.config;
+package com.nas.driver.config;
 
 
 import org.apache.kafka.clients.admin.NewTopic;
@@ -7,8 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.TopicBuilder;
 
 @Configuration
-public class ConsumerConfig {
-
+public class ConsumerKafkaConfig {
 
     @Bean
     public NewTopic topic() {

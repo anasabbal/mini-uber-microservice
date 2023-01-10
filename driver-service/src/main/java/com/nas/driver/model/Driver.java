@@ -32,8 +32,7 @@ public class Driver{
     private String firstName;
     private String lastName;
     private DriverStatus driverStatus;
-    @DBRef(lazy = true)
-    private List<NotificationDriver> notificationDrivers;
+    private List<String> notificationDriversId;
 
     public static Driver create(final DriverCommand driverCommand){
         final Driver driver = new Driver();
@@ -41,15 +40,15 @@ public class Driver{
         driver.firstName = driverCommand.getFirstName();
         driver.lastName = driverCommand.getLastName();
         driver.createdBy = "NAS SYSTEM";
-        driver.notificationDrivers = new ArrayList<>();
+        driver.notificationDriversId = new ArrayList<>();
         driver.updatedBy = driver.firstName;
         driver.createdAt = LocalDateTime.now();
         driver.updatedAt = LocalDateTime.now();
         driver.driverStatus = DriverStatus.AVAILABLE;
         return driver;
     }
-    public boolean add(NotificationDriver notificationDriver){
-         return this.notificationDrivers.add(notificationDriver);
+    public boolean add(String notificationDriverId){
+         return this.notificationDriversId.add(notificationDriverId);
     }
     public void updateInfo(final DriverCommand driverCommand){
         this.firstName = driverCommand.getFirstName();

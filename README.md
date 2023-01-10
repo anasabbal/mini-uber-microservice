@@ -1,6 +1,26 @@
 # Mini Uber
 Mini Uber is a ride sharing that hires independent contractors as drivers.
 
+# Setup On Mac
+On your teminal put:
+```
+brew install update
+```
+```
+brew install kafka
+```
+Or Downloads binary source from [Apache Kafka](https://kafka.apache.org/downloads)
+```
+cd Donwloads
+```
+```
+~/kafka_2.13-3.1.0/bin/zookeeper-server-start.sh ~/kafka_2.13-3.1.0/config/zookeeper.properties
+```
+- Setup the $PATH environment variable
+```
+PATH="$PATH:/Users/yourusername/kafka_2.13-3.1.0/bin"
+```
+
 # Apache Kafka Example
 Consumer Config
 ```java
@@ -8,8 +28,8 @@ Consumer Config
 public class ConsumerConfig{
     public ConsumerFactory<String, String> consumerFactory(){
         Map<String, String> map = new HashMap<>();
-        
-        
+
+
     }
 }
 ```

@@ -9,4 +9,9 @@ import lombok.Setter;
 public class NotificationRequest {
     private String customerId;
     private String driverId;
+
+    public NotificationRequest(String driverId, String customerId){
+        this.customerId = customerId;
+        this.driverId = driverId;
+    }
 }

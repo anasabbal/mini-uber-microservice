@@ -12,6 +12,7 @@ import com.nas.customer.service.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,9 +43,9 @@ public class CustomerController {
         return ResponseEntity.ok(customers.map(customerMapper::toDto));
     }
     @PostMapping("/driver/request")
-    public ResponseEntity<Void> sendRequestDriver(@RequestBody final CustomerRequestDriver requestDriver){
+    public ResponseEntity<?> sendRequestDriver(@RequestBody final CustomerRequestDriver requestDriver){
         customerService.sendRequestDriver(requestDriver);
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(HttpStatus.OK);
     }
     @GetMapping("/driver/available")
     public ResponseEntity<Set<Driver>> getAllDriversAvailable(){

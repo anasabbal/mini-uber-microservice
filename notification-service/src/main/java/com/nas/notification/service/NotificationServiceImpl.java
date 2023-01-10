@@ -2,9 +2,11 @@ package com.nas.notification.service;
 
 
 import com.nas.core.util.JSONUtil;
+import com.nas.notification.command.NotificationRequest;
 import com.nas.notification.dto.NotificationDto;
 import com.nas.notification.dto.mapper.NotificationMapper;
 import com.nas.notification.model.CustomerRequest;
+import com.nas.notification.model.Notification;
 import com.nas.notification.repository.NotificationRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,20 +27,23 @@ public class NotificationServiceImpl implements NotificationService{
     private final NotificationMapper notificationMapper;
 
     @Override
-    public Page<NotificationDto> getAllNotifications(Pageable pageable) {
+    public Page<Notification> getAllNotifications(Pageable pageable) {
         final Page<NotificationDto> notifications = notificationRepository.
                 findAll(pageable).
                 map(notificationMapper::toDto);
-        return notifications;
+        return notificationRepository.findAll(pageable);
+    }
+    public Notification create(final NotificationRequest notificationRequest){
+        final Notification notification = Notification.create(notificationRequest);
+        return notificationRepository.save(notification);
     }
     @KafkaListener(id = "notification_id", topics = "topic1")
-    public void listenWhiteHeader(ConsumerRecord<String, CustomerRequest> payload){
-        final CustomerRequest customerRequest = payload.value();
-        log.info("Begin fetching payload with id {}", JSONUtil.toJSON(customerRequest));
+    public void listenWhiteHeader(ConsumerRecord<String, String> payload){
         log.info("Topic: {}", "notification");
         log.info("key: {}", payload.key());
         log.info("Headers: {}", payload.headers());
         log.info("Partion: {}", payload.partition());
         log.info("Order: {}", payload.value());
+        final Notification notification = create(new NotificationRequest(payload.value(), "this"));
     }
 }

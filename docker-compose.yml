@@ -36,15 +36,53 @@ services:
     image: eureka-server:latest
     ports:
       - "8761:8761"
+  notification-service:
+    container_name: notification-service
+    build: ./notification-service
+    image: notification-service:latest
+    depends_on:
+      - eureka-server
+      - postgres
+    port:
+      - "9090:9090"
+  driver-service:
+    container_name: driver-service
+    build: ./driver-service
+    image: driver-service:latest
+    depends_on:
+      - eureka-server
+    port:
+      - "8081:8081"
   customer-service:
     container_name: customer-service
-    build: ./
+    build: ./customer-service
     image: customer-service:latest
     ports:
       - "8080:8080"
     depends_on:
       - postgres
+      - eureka-server
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - 2181:2181
 
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    depends_on:
+      - zookeeper
+    ports:
+      - 9092:9092
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 #networks:
 #  postgres:
 #    driver: bridge

@@ -2,13 +2,9 @@ package com.nas.driver.dto;
 
 
 import com.nas.driver.enums.DriverStatus;
-import com.nas.driver.model.NotificationDriver;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.Set;
 
 @Data
 public class DriverDto {

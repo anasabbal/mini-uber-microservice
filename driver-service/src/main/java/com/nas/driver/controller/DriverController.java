@@ -5,7 +5,6 @@ import com.nas.driver.command.DriverCommand;
 import com.nas.driver.dto.DriverDto;
 import com.nas.driver.dto.mapper.DriverMapper;
 import com.nas.driver.model.Driver;
-import com.nas.driver.model.NotificationDriver;
 import com.nas.driver.service.driver.DriverService;
 import com.nas.driver.service.notification.NotificationDriverService;
 import lombok.RequiredArgsConstructor;

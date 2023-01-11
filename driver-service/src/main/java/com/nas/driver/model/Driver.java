@@ -4,15 +4,12 @@ package com.nas.driver.model;
 import com.nas.driver.command.DriverCommand;
 import com.nas.driver.command.NotificationDriverRequest;
 import com.nas.driver.enums.DriverStatus;
-import lombok.*;
+import lombok.Data;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;

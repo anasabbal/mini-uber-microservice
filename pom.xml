@@ -25,6 +25,7 @@
         <module>apache-kafka-example/producer-service</module>
         <module>zull-proxy</module>
         <module>carrier-service</module>
+        <module>payment-service</module>
     </modules>
 
     <properties>

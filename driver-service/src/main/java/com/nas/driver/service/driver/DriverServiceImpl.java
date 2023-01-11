@@ -1,23 +1,19 @@
 package com.nas.driver.service.driver;
 
 
-import com.nas.core.util.JSONUtil;
 import com.nas.core.exception.BusinessException;
 import com.nas.core.exception.ExceptionPayloadFactory;
+import com.nas.core.util.JSONUtil;
 import com.nas.driver.command.DriverCommand;
-import com.nas.driver.command.NotificationDriverRequest;
 import com.nas.driver.dto.mapper.DriverMapper;
 import com.nas.driver.enums.DriverStatus;
 import com.nas.driver.model.Driver;
 import com.nas.driver.model.DriverLocationRequest;
-import com.nas.driver.model.NotificationDriver;
 import com.nas.driver.repository.DriverRepository;
 import com.nas.driver.repository.NotificationDriverRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 

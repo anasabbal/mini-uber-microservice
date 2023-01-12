@@ -5,8 +5,7 @@ import com.nas.driver.command.DriverCommand;
 import com.nas.driver.dto.DriverDto;
 import com.nas.driver.dto.mapper.DriverMapper;
 import com.nas.driver.model.Driver;
-import com.nas.driver.service.driver.DriverService;
-import com.nas.driver.service.notification.NotificationDriverService;
+import com.nas.driver.service.DriverService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,7 +25,6 @@ import static org.springframework.web.servlet.support.ServletUriComponentsBuilde
 public class DriverController {
     private final DriverService driverService;
     private final DriverMapper driverMapper;
-    private final NotificationDriverService notificationDriverService;
 
     @PostMapping
     public ResponseEntity<DriverDto> create(@RequestBody final DriverCommand driverCommand){

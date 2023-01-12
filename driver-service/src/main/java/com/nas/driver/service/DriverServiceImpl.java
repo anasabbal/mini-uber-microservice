@@ -1,4 +1,4 @@
-package com.nas.driver.service.driver;
+package com.nas.driver.service;
 
 
 import com.nas.core.exception.BusinessException;
@@ -9,11 +9,14 @@ import com.nas.driver.dto.mapper.DriverMapper;
 import com.nas.driver.enums.DriverStatus;
 import com.nas.driver.model.Driver;
 import com.nas.driver.model.DriverLocationRequest;
+import com.nas.driver.model.NotificationDriver;
 import com.nas.driver.repository.DriverRepository;
 import com.nas.driver.repository.NotificationDriverRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -65,5 +68,31 @@ public record DriverServiceImpl(DriverRepository driverRepository,
     @Override
     public Page<Driver> getAll(Pageable pageable) {
         return driverRepository.findAll(pageable);
+    }
+    @Override
+    @KafkaListener(id = "driver_id", topics = "topic1")
+    public void listenWhiteHeader(ConsumerRecord<String, NotificationDriver> payload){
+
+        log.info("Topic: {}", payload.topic());
+        log.info("key: {}", payload.key());
+        log.info("Headers: {}", payload.headers());
+        log.info("Part: {}", payload.partition());
+        log.info("Order: {}", payload.value());
+
+        // Store notificationDriver from payload
+        final NotificationDriver notificationDriver = payload.value();
+        log.info("Notification with payload {} created successfully", JSONUtil.toJSON(notificationDriver));
+
+        // Get driver with id
+        final Driver driver = driverRepository.findById(notificationDriver.getDriverId()).orElseThrow(
+                () -> new BusinessException(
+                        ExceptionPayloadFactory.DRIVER_NOT_FOUND.get()
+                )
+        );
+        log.info("Begin init notification with id {} to driver with id {}", notificationDriver.getId(), driver.getId());
+        driver.addToSet(notificationDriver);
+        log.info("Notification with id {} init ro driver with id {}", notificationDriver.getId(), driver.getId());
+        log.info("Notifications with payload {} for driver id {}", JSONUtil.toJSON(driver.getNotificationDriversId()), driver.getId());
+        log.info("Notification created successfully with payload {}", JSONUtil.toJSON(notificationDriver));
     }
 }

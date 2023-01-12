@@ -1,7 +1,8 @@
 spring:
-  consumer:
-    group-id: driver
-    client-id: driver
+  kafka:
+    consumer:
+      group-id: driver
+      client-id: driver
   devtools:
     livereload:
       enabled: true

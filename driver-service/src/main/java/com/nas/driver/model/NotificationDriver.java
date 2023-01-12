@@ -15,6 +15,7 @@ public class NotificationDriver {
     @Id
     private String id;
     private String customerId;
+    private String driverId;
 
     public static NotificationDriver create(final NotificationDriverRequest notificationDriverRequest){
         final NotificationDriver notificationDriver = new NotificationDriver();

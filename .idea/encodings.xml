@@ -9,6 +9,8 @@
     <file url="file://$PROJECT_DIR$/apache-kafka-example/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/car-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/car-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/carrier-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/carrier-service/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/circuit-breaker-example/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/circuit-breaker-example/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/circuit-breaker/src/main/java" charset="UTF-8" />
@@ -31,6 +33,8 @@
     <file url="file://$PROJECT_DIR$/notification-service/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/oauth2-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/oauth2-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/payment-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/payment-service/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/rabbitmq-example/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/rabbitmq-example/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/shared-configuration/src/main/java" charset="UTF-8" />

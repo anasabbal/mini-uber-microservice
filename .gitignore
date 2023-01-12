@@ -11,3 +11,5 @@
 /driver-location-service/target
 /apache-kafka-example/target
 /rabbitmq-example/target
+/zull-proxy/target
+/.vscode

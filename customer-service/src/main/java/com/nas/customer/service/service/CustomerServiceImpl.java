@@ -26,8 +26,6 @@ import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.ListenableFutureCallback;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 @Service
@@ -37,7 +35,7 @@ public class CustomerServiceImpl implements CustomerService{
     
     private final CustomerRepository customerRepository;
     private final RestTemplate restTemplate;
-    private final KafkaTemplate<String, String> kafkaTemplate;
+    private final KafkaTemplate<String, CustomerRequestDriver> kafkaTemplate;
 
     @Override
     public Customer create(CustomerCommand customerCommand) {
@@ -82,11 +80,11 @@ public class CustomerServiceImpl implements CustomerService{
         );
         final Customer customer = findById(requestDriver.getCustomerId());
 
-        ListenableFuture<SendResult<String, String>> future =
-                kafkaTemplate.send("topic1", customer.getId());
-        future.addCallback(new ListenableFutureCallback<SendResult<String, String>>() {
+        ListenableFuture<SendResult<String, CustomerRequestDriver>> future =
+                kafkaTemplate.send("topic1", requestDriver);
+        future.addCallback(new ListenableFutureCallback<SendResult<String, CustomerRequestDriver>>() {
             @Override
-            public void onSuccess(SendResult<String, String> result) {
+            public void onSuccess(SendResult<String, CustomerRequestDriver> result) {
                 log.info("Message [{}] delivered with offset {}",
                         JSONUtil.toJSON(requestDriver),
                         result.getRecordMetadata().offset());

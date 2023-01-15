@@ -1,8 +1,16 @@
 spring:
-  data:
-    mongodb:
-      uri: mongodb+srv://mongodb:mongodb@driver-location.01ks23m.mongodb.net/driver-location
-      auto-index-creation: true
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/driverLocation
+    username: postgres
+    password: postgres
 
   application:
     name: driver-location

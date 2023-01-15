@@ -8,11 +8,13 @@ import lombok.Setter;
 @Setter
 public class CustomerRequestDriver {
     private String customerId;
+    private String driverId;
 
-    public static CustomerRequestDriver create(final String customerId){
+    public static CustomerRequestDriver create(final String customerId, final String driverId){
         final CustomerRequestDriver customerRequestDriver = new CustomerRequestDriver();
 
         customerRequestDriver.customerId = customerId;
+        customerRequestDriver.driverId = driverId;
 
         return customerRequestDriver;
     }

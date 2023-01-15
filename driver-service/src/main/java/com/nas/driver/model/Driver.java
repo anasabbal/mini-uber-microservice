@@ -6,9 +6,7 @@ import com.nas.driver.command.DriverCommand;
 import com.nas.driver.enums.DriverStatus;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -28,8 +26,8 @@ public class Driver extends BaseEntity{
     private String lastName;
     private DriverStatus driverStatus;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "driver")
-    private Set<NotificationDriver> notificationDriversId;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<NotificationDriver> notificationDrivers;
 
     public static Driver create(final DriverCommand driverCommand){
         final Driver driver = new Driver();
@@ -46,7 +44,7 @@ public class Driver extends BaseEntity{
         this.updatedBy = this.firstName;
     }
     public void addToSet(NotificationDriver notificationDriver){
-        notificationDriver.linkToDriver(this);
+        this.notificationDrivers.add(notificationDriver);
     }
     public static Set<NotificationDriver> createNotificationPayload(Set<CustomerRequestDriver> customerRequestDrivers){
         return customerRequestDrivers

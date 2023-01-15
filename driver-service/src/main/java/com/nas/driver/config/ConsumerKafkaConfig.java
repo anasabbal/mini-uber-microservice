@@ -1,6 +1,7 @@
 package com.nas.driver.config;
 
 
+import com.nas.driver.command.CustomerRequestDriver;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -24,7 +25,7 @@ public class ConsumerKafkaConfig {
                 .build();
     }
     @Bean
-    public ConsumerFactory<String, String> consumerFactory() {
+    public ConsumerFactory<String, ?> consumerFactory() {
         return new DefaultKafkaConsumerFactory<>(consumerProps());
     }
 

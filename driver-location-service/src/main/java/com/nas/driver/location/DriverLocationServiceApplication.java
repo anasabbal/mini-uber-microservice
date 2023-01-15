@@ -3,12 +3,11 @@ package com.nas.driver.location;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
-@EnableMongoRepositories(value = "com.nas.driver.location.repository")
+@EnableJpaAuditing
 public class DriverLocationServiceApplication{
-
 
     public static void main(String[] args) {
         SpringApplication.run(DriverLocationServiceApplication.class, args);

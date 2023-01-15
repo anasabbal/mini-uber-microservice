@@ -2,7 +2,7 @@ package com.nas.auth.controller;
 
 
 import com.nas.auth.command.UserCommand;
-import com.nas.auth.model.User;
+import com.nas.auth.model.Account;
 import com.nas.auth.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +23,7 @@ public class UserController {
 
 
     @PostMapping
-    public ResponseEntity<User> signUp(@RequestBody final UserCommand userCommand){
+    public ResponseEntity<Account> signUp(@RequestBody final UserCommand userCommand){
         return ResponseEntity.ok(userService.create(userCommand));
     }
 }

@@ -1,9 +1,9 @@
 package com.nas.auth.service;
 
 import com.nas.auth.command.UserCommand;
-import com.nas.auth.model.User;
+import com.nas.auth.model.Account;
 
 public interface UserService {
-    User create(final UserCommand userCommand);
+    Account create(final UserCommand userCommand);
 
 }

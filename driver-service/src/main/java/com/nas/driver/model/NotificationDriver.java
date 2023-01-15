@@ -1,26 +1,34 @@
 package com.nas.driver.model;
 
 
-import com.nas.driver.command.NotificationDriverRequest;
-import lombok.Getter;
-import lombok.Setter;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import com.nas.driver.command.CustomerRequestDriver;
+import lombok.*;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+
+
+@Entity
 @Getter
 @Setter
-@Document(collection = "NOTIFICATIONS_DRIVER")
-public class NotificationDriver {
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class NotificationDriver extends BaseEntity{
 
-    @Id
-    private String id;
     private String customerId;
     private String driverId;
 
-    public static NotificationDriver create(final NotificationDriverRequest notificationDriverRequest){
+    @ManyToOne
+    private Driver driver;
+
+    public static NotificationDriver create(final CustomerRequestDriver customerRequestDriver){
         final NotificationDriver notificationDriver = new NotificationDriver();
 
-        notificationDriver.customerId = notificationDriverRequest.getCustomerId();
+        notificationDriver.customerId = customerRequestDriver.getCustomerId();
         return notificationDriver;
+    }
+    public void linkToDriver(Driver driver){
+        this.driver = driver;
     }
 }

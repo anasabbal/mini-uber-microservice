@@ -4,16 +4,18 @@ package com.nas.driver.location.model;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+
 @Getter
 @Setter
 @NoArgsConstructor
-public class LocationEntity {
+@Entity
+public class LocationEntity extends BaseEntity{
 
-    @Id
-    private String id;
-    private GeoIp geoIp;
+
+    @ManyToOne
+    private DriverLocation driverLocation;
+    private String geoIp;
 }

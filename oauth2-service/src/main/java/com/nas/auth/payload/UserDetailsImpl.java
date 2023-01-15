@@ -1,6 +1,6 @@
 package com.nas.auth.payload;
 
-import com.nas.auth.model.User;
+import com.nas.auth.model.Account;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
@@ -25,12 +25,12 @@ public class UserDetailsImpl implements UserDetails {
         this.password = password;
         this.authorities = authorities;
     }
-    public static UserDetailsImpl build(User user){
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority("ROLES_" + user.getRoles());
+    public static UserDetailsImpl build(Account account){
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority("ROLES_" + account.getRoles());
         return new UserDetailsImpl(
-                user.getId(),
-                user.getEmail(),
-                user.getPassword(),
+                account.getId(),
+                account.getEmail(),
+                account.getPassword(),
                 Collections.singleton(authority));
     }
 

@@ -4,6 +4,7 @@ package com.nas.driver.service;
 import com.nas.core.exception.BusinessException;
 import com.nas.core.exception.ExceptionPayloadFactory;
 import com.nas.core.util.JSONUtil;
+import com.nas.driver.command.CustomerRequestDriver;
 import com.nas.driver.command.DriverCommand;
 import com.nas.driver.dto.mapper.DriverMapper;
 import com.nas.driver.enums.DriverStatus;
@@ -71,17 +72,19 @@ public record DriverServiceImpl(DriverRepository driverRepository,
     }
     @Override
     @KafkaListener(id = "driver_id", topics = "topic1")
-    public void listenWhiteHeader(ConsumerRecord<String, NotificationDriver> payload){
+    public void listenWhiteHeader(ConsumerRecord<String, String> payload){
 
         log.info("Topic: {}", payload.topic());
         log.info("key: {}", payload.key());
         log.info("Headers: {}", payload.headers());
         log.info("Part: {}", payload.partition());
-        log.info("Order: {}", payload.value());
+        log.info("Payload: {}", payload.value());
+
+        final CustomerRequestDriver customerRequestDriver = CustomerRequestDriver.create(payload.value());
 
         // Store notificationDriver from payload
-        final NotificationDriver notificationDriver = payload.value();
-        log.info("Notification with payload {} created successfully", JSONUtil.toJSON(notificationDriver));
+        final NotificationDriver notificationDriver = notificationDriverRepository.save(
+                NotificationDriver.create(customerRequestDriver));
 
         // Get driver with id
         final Driver driver = driverRepository.findById(notificationDriver.getDriverId()).orElseThrow(

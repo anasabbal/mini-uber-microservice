@@ -6,4 +6,5 @@ import lombok.Getter;
 @Getter
 public class CustomerRequestDriver {
     private String driverId;
+    private String customerId;
 }

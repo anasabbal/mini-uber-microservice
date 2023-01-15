@@ -1,4 +1,4 @@
-package com.nas.driver.model;
+package com.nas.driver.location.model;
 
 
 import lombok.EqualsAndHashCode;

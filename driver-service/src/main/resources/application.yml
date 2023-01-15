@@ -6,10 +6,18 @@ spring:
   devtools:
     livereload:
       enabled: true
-  data:
-    mongodb:
-      uri: mongodb+srv://mongodb:mongodb@cluster0.lppaw8l.mongodb.net/driver-service
-      auto-index-creation: true
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/driver
+    username: postgres
+    password: postgres
 
   application:
     name: driver

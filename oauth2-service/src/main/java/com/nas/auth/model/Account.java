@@ -20,7 +20,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class User extends BaseEntity{
+public class Account extends BaseEntity{
     @Column(name = "USER_NAME")
     private String userName;
     @Column(name = "EMAIL")
@@ -37,13 +37,13 @@ public class User extends BaseEntity{
 
     private String customerId;
 
-    public static User create(final UserCommand userCommand){
-        final User user = new User();
+    public static Account create(final UserCommand userCommand){
+        final Account account = new Account();
 
-        user.userName = userCommand.getUserName();
-        user.email = userCommand.getEmail();
-        user.password = userCommand.getPassword();
-        return user;
+        account.userName = userCommand.getUserName();
+        account.email = userCommand.getEmail();
+        account.password = userCommand.getPassword();
+        return account;
     }
 
 }

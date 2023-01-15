@@ -2,8 +2,8 @@ package com.nas.auth.service;
 
 import com.nas.auth.command.UserCommand;
 import com.nas.auth.model.Customer;
-import com.nas.auth.model.User;
-import com.nas.auth.repository.UserRepository;
+import com.nas.auth.model.Account;
+import com.nas.auth.repository.AuthRepository;
 import com.nas.core.exception.BusinessException;
 import com.nas.core.exception.ExceptionPayloadFactory;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,18 +14,18 @@ import org.springframework.web.client.RestTemplate;
 
 
 @Service
-public record UserDetailsServiceImpl(UserRepository userRepository, RestTemplate restTemplate) implements UserDetailsService, UserService{
+public record UserDetailsServiceImpl(AuthRepository authRepository, RestTemplate restTemplate) implements UserDetailsService, UserService{
 
     @Override
-    public User create(final UserCommand userCommand){
-        final User user = userRepository.saveAndFlush(User.create(userCommand));
-        final Customer customer = restTemplate.getForObject("localhost:8080/v1/customers", Customer.class, user.getCustomerId());
-        return user;
+    public Account create(final UserCommand userCommand){
+        final Account account = authRepository.saveAndFlush(Account.create(userCommand));
+        final Customer customer = restTemplate.getForObject("localhost:8080/v1/customers", Customer.class, account.getCustomerId());
+        return account;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        final User user = userRepository.findByUserName(username).orElseThrow(
+        final Account account = authRepository.findByUserName(username).orElseThrow(
                 () -> new BusinessException(ExceptionPayloadFactory.USER_NAME_NOT_FOUND.get())
                 );
         return null;

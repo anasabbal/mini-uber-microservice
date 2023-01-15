@@ -26,10 +26,9 @@ public record LocationServiceImpl(
         final LocationEntity location = new LocationEntity();
         String ipAddress = getIpAddress();
         log.info("IP ADDRESS => {}", ipAddress);
-        //final GeoIp geoIp = getLocation(ipAddress);
         final GeoIp geoIp = getLocation("128.101.101.101");
 
-        location.setGeoIp(geoIp);
+        location.setGeoIp(geoIp.getId());
         log.info("Location with payload {} saved successfully", JSONUtil.toJSON(location));
         return locationEntityRepository.save(location);
     }

@@ -1,46 +1,41 @@
 package com.nas.driver.model;
 
 
+import com.nas.driver.command.CustomerRequestDriver;
 import com.nas.driver.command.DriverCommand;
-import com.nas.driver.command.NotificationDriverRequest;
 import com.nas.driver.enums.DriverStatus;
-import lombok.Data;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
+import lombok.*;
 
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@Document(collection = "DRIVERS")
-@Data
-public class Driver{
+@Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Driver extends BaseEntity{
 
-    @Id
-    protected String id;
-    private LocalDateTime createdAt;
-    private String createdBy ="NAS SYSTEM";
     private LocalDateTime updatedAt;
     private String updatedBy;
-    protected Boolean deleted = false;
     private String carId;
     private String firstName;
     private String lastName;
     private DriverStatus driverStatus;
-    @DBRef(db = "NOTIFICATIONS_DRIVER", lazy = true)
-    private Set<NotificationDriver> notificationDriversId = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "driver")
+    private Set<NotificationDriver> notificationDriversId;
 
     public static Driver create(final DriverCommand driverCommand){
         final Driver driver = new Driver();
 
         driver.firstName = driverCommand.getFirstName();
         driver.lastName = driverCommand.getLastName();
-        driver.createdBy = "NAS SYSTEM";
-        driver.updatedBy = driver.firstName;
-        driver.createdAt = LocalDateTime.now();
-        driver.updatedAt = LocalDateTime.now();
         driver.driverStatus = DriverStatus.AVAILABLE;
         return driver;
     }
@@ -51,10 +46,10 @@ public class Driver{
         this.updatedBy = this.firstName;
     }
     public void addToSet(NotificationDriver notificationDriver){
-        this.notificationDriversId.add(notificationDriver);
+        notificationDriver.linkToDriver(this);
     }
-    public static Set<NotificationDriver> createNotificationPayload(Set<NotificationDriverRequest> notificationDriverRequests){
-        return notificationDriverRequests
+    public static Set<NotificationDriver> createNotificationPayload(Set<CustomerRequestDriver> customerRequestDrivers){
+        return customerRequestDrivers
                 .stream().map(
                         NotificationDriver::create)
                 .collect(Collectors.toSet());

@@ -5,7 +5,7 @@ import com.nas.driver.command.DriverCommand;
 import com.nas.driver.dto.DriverDto;
 import com.nas.driver.dto.mapper.DriverMapper;
 import com.nas.driver.model.Driver;
-import com.nas.driver.service.DriverService;
+import com.nas.driver.service.driver.DriverService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

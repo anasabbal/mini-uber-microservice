@@ -4,8 +4,8 @@ package com.nas.driver.model;
 import com.nas.driver.command.CustomerRequestDriver;
 import lombok.*;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 
 
 @Entity
@@ -16,19 +16,18 @@ import javax.persistence.ManyToOne;
 @Builder
 public class NotificationDriver extends BaseEntity{
 
-    private String customerId;
-    private String driverId;
 
-    @ManyToOne
-    private Driver driver;
+    @Column(name = "CUSTOMER_ID")
+    private String customerId;
+
+    @Column(name = "DRIVER_ID")
+    private String driverId;
 
     public static NotificationDriver create(final CustomerRequestDriver customerRequestDriver){
         final NotificationDriver notificationDriver = new NotificationDriver();
 
         notificationDriver.customerId = customerRequestDriver.getCustomerId();
+        notificationDriver.driverId = customerRequestDriver.getDriverId();
         return notificationDriver;
-    }
-    public void linkToDriver(Driver driver){
-        this.driver = driver;
     }
 }

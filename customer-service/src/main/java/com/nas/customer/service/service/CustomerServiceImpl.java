@@ -35,7 +35,7 @@ public class CustomerServiceImpl implements CustomerService{
     
     private final CustomerRepository customerRepository;
     private final RestTemplate restTemplate;
-    private final KafkaTemplate<String, CustomerRequestDriver> kafkaTemplate;
+    private final KafkaTemplate<String, String> kafkaTemplate;
 
     @Override
     public Customer create(CustomerCommand customerCommand) {
@@ -80,11 +80,13 @@ public class CustomerServiceImpl implements CustomerService{
         );
         final Customer customer = findById(requestDriver.getCustomerId());
 
-        ListenableFuture<SendResult<String, CustomerRequestDriver>> future =
-                kafkaTemplate.send("topic1", requestDriver);
-        future.addCallback(new ListenableFutureCallback<SendResult<String, CustomerRequestDriver>>() {
+        final String customerIdAndDriverId = requestDriver.getDriverId() + "$" + customer.getId();
+
+        ListenableFuture<SendResult<String, String>> future =
+                kafkaTemplate.send("topic1", customerIdAndDriverId);
+        future.addCallback(new ListenableFutureCallback<SendResult<String, String>>() {
             @Override
-            public void onSuccess(SendResult<String, CustomerRequestDriver> result) {
+            public void onSuccess(SendResult<String, String> result) {
                 log.info("Message [{}] delivered with offset {}",
                         JSONUtil.toJSON(requestDriver),
                         result.getRecordMetadata().offset());

@@ -21,6 +21,8 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -72,7 +74,7 @@ public record DriverServiceImpl(DriverRepository driverRepository,
     }
     @Override
     @KafkaListener(id = "driver_id", topics = "topic1")
-    public void listenWhiteHeader(ConsumerRecord<String, CustomerRequestDriver> payload){
+    public void listenWhiteHeader(ConsumerRecord<String, String> payload){
 
         log.info("Topic: {}", payload.topic());
         log.info("key: {}", payload.key());
@@ -80,11 +82,25 @@ public record DriverServiceImpl(DriverRepository driverRepository,
         log.info("Part: {}", payload.partition());
         log.info("Payload: {}", payload.value());
 
-        final CustomerRequestDriver customerRequestDriver = payload.value();
+        final String request = payload.value();
+
+        final List<Character> list = new ArrayList<>();
+
+
+        int i = 0;
+        while (i< request.length()) {
+            char arr = request.charAt(i);
+            if(arr != '$'){
+                list.add(arr);
+            }
+            i++;
+            if(arr == '$')
+                int lastIndex = i;
+        }
 
         // Store notificationDriver from payload
-        final NotificationDriver notificationDriver = notificationDriverRepository.save(
-                NotificationDriver.create(customerRequestDriver));
+        //final NotificationDriver notificationDriver = notificationDriverRepository.save(
+         //       NotificationDriver.create(customerRequestDriver));
 
         // Get driver with id
         final Driver driver = findById(notificationDriver.getDriverId());

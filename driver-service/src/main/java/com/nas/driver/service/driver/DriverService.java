@@ -15,5 +15,5 @@ public interface DriverService {
     Page<Driver> getAll(Pageable pageable);
     Driver findById(String driverId);
     Set<Driver> getDriversAvailable(Pageable pageable);
-    void listenWhiteHeader(ConsumerRecord<String, CustomerRequestDriver> payload);
+    void listenWhiteHeader(ConsumerRecord<String, String> payload);
 }

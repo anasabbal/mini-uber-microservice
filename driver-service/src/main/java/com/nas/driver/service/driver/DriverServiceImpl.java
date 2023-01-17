@@ -4,20 +4,17 @@ package com.nas.driver.service.driver;
 import com.nas.core.exception.BusinessException;
 import com.nas.core.exception.ExceptionPayloadFactory;
 import com.nas.core.util.JSONUtil;
-import com.nas.driver.command.CustomerRequestDriver;
 import com.nas.driver.command.DriverCommand;
 import com.nas.driver.dto.mapper.DriverMapper;
 import com.nas.driver.enums.DriverStatus;
 import com.nas.driver.model.Driver;
 import com.nas.driver.model.DriverLocationRequest;
-import com.nas.driver.model.NotificationDriver;
 import com.nas.driver.repository.DriverRepository;
 import com.nas.driver.repository.NotificationDriverRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -57,6 +54,12 @@ public record DriverServiceImpl(DriverRepository driverRepository,
         return getAll(pageable).stream().filter(
                 dv -> dv.getDriverStatus() == DriverStatus.AVAILABLE)
                 .collect(Collectors.toSet());
+
+    }
+
+    @RabbitListener(queues = {"uber-nas"})
+    public void listenToMessage(String message){
+        log.info(String.format("Received message -> %s", message));
     }
     @Override
     public Driver findById(String driverId){
@@ -68,30 +71,6 @@ public record DriverServiceImpl(DriverRepository driverRepository,
     }
     @Override
     public Page<Driver> getAll(Pageable pageable) {
-        return driverRepository.findAll(pageable);
-    }
-    @Override
-    @KafkaListener(id = "driver_id", topics = "topic1")
-    public void listenWhiteHeader(ConsumerRecord<String, CustomerRequestDriver> payload){
-
-        log.info("Topic: {}", payload.topic());
-        log.info("key: {}", payload.key());
-        log.info("Headers: {}", payload.headers());
-        log.info("Part: {}", payload.partition());
-        log.info("Payload: {}", payload.value());
-
-        final CustomerRequestDriver customerRequestDriver = payload.value();
-
-        // Store notificationDriver from payload
-        final NotificationDriver notificationDriver = notificationDriverRepository.save(
-                NotificationDriver.create(customerRequestDriver));
-
-        // Get driver with id
-        final Driver driver = findById(notificationDriver.getDriverId());
-        log.info("Begin init notification with id {} to driver with id {}", notificationDriver.getId(), driver.getId());
-        driver.addToSet(notificationDriver);
-        log.info("Notification with id {} init ro driver with id {}", notificationDriver.getId(), driver.getId());
-        log.info("Notifications with payload {} for driver id {}", JSONUtil.toJSON(driver.getNotificationDrivers()), driver.getId());
-        log.info("Notification created successfully with payload {}", JSONUtil.toJSON(notificationDriver));
+        return driverRepository.findAllByDeletedFalse(pageable);
     }
 }

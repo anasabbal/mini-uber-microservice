@@ -12,7 +12,6 @@ import com.nas.customer.service.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,15 +36,15 @@ public class CustomerController {
         final URI uri = fromCurrentRequest().path("/{id}").buildAndExpand(customer.getId()).toUri();
         return ResponseEntity.created(uri).body(customerMapper.toDto(customer));
     }
+    @PostMapping("/send-request")
+    public ResponseEntity<String> sendRequestToDriver(@RequestBody final CustomerRequestDriver customerRequestDriver){
+        customerService.sendRequestDriver(customerRequestDriver);
+        return ResponseEntity.ok("Message send successfully");
+    }
     @GetMapping
     public ResponseEntity<Page<CustomerDto>> getAll(Pageable pageable){
         final Page<Customer> customers = customerService.findAllByDeletedFalse(pageable);
         return ResponseEntity.ok(customers.map(customerMapper::toDto));
-    }
-    @PostMapping("/driver/request")
-    public ResponseEntity<?> sendRequestDriver(@RequestBody final CustomerRequestDriver requestDriver){
-        customerService.sendRequestDriver(requestDriver);
-        return ResponseEntity.ok(HttpStatus.OK);
     }
     @GetMapping("/driver/available")
     public ResponseEntity<Set<Driver>> getAllDriversAvailable(){

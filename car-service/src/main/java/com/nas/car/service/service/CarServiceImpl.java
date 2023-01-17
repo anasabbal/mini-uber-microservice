@@ -9,6 +9,8 @@ import com.nas.core.exception.ExceptionPayloadFactory;
 import com.nas.core.util.JSONUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,7 +40,7 @@ public class CarServiceImpl implements CarService{
     }
 
     @Override
-    public List<Car> getCars() {
-        return (List<Car>) carRepository.findAll();
+    public Page<Car> findCars(Pageable pageable) {
+        return carRepository.findAllByDeletedFalse(pageable);
     }
 }

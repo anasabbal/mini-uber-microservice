@@ -6,7 +6,10 @@ import com.nas.driver.command.DriverCommand;
 import com.nas.driver.enums.DriverStatus;
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -19,8 +22,6 @@ import java.util.stream.Collectors;
 @Builder
 public class Driver extends BaseEntity{
 
-    private LocalDateTime updatedAt;
-    private String updatedBy;
     private String carId;
     private String firstName;
     private String lastName;
@@ -40,8 +41,6 @@ public class Driver extends BaseEntity{
     public void updateInfo(final DriverCommand driverCommand){
         this.firstName = driverCommand.getFirstName();
         this.lastName = driverCommand.getLastName();
-        this.updatedAt = LocalDateTime.now();
-        this.updatedBy = this.firstName;
     }
     public void addToSet(NotificationDriver notificationDriver){
         this.notificationDrivers.add(notificationDriver);

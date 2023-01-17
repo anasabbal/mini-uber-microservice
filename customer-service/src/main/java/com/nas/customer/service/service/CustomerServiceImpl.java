@@ -9,23 +9,19 @@ import com.nas.customer.service.command.CustomerInfoUpdateCmd;
 import com.nas.customer.service.command.CustomerRequestDriver;
 import com.nas.customer.service.model.Customer;
 import com.nas.customer.service.model.Driver;
-import com.nas.customer.service.payload.ProducerPayload;
 import com.nas.customer.service.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.kafka.support.SendResult;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-import org.springframework.util.concurrent.ListenableFuture;
-import org.springframework.util.concurrent.ListenableFutureCallback;
 import org.springframework.web.client.RestTemplate;
 
+import javax.websocket.SendResult;
 import java.util.Set;
 
 @Service
@@ -35,13 +31,13 @@ public class CustomerServiceImpl implements CustomerService{
     
     private final CustomerRepository customerRepository;
     private final RestTemplate restTemplate;
-    private final KafkaTemplate<String, String> kafkaTemplate;
+    private final RabbitTemplate rabbitTemplate;
 
     @Override
     public Customer create(CustomerCommand customerCommand) {
         customerCommand.validate();
         log.info("Begin creating customer with payload {}", JSONUtil.toJSON(customerCommand));
-        final Customer customer = Customer.create(customerCommand);
+
         return customerRepository.save(Customer.create(customerCommand));
     }
 
@@ -70,7 +66,6 @@ public class CustomerServiceImpl implements CustomerService{
         return objects.getBody();
     }
     @Override
-    @Async
     public void sendRequestDriver(CustomerRequestDriver requestDriver){
 
         final Driver driver = getDriversAvailable().stream().filter(
@@ -80,24 +75,9 @@ public class CustomerServiceImpl implements CustomerService{
         );
         final Customer customer = findById(requestDriver.getCustomerId());
 
-        final String customerIdAndDriverId = requestDriver.getDriverId() + "$" + customer.getId();
-
-        ListenableFuture<SendResult<String, String>> future =
-                kafkaTemplate.send("topic1", customerIdAndDriverId);
-        future.addCallback(new ListenableFutureCallback<SendResult<String, String>>() {
-            @Override
-            public void onSuccess(SendResult<String, String> result) {
-                log.info("Message [{}] delivered with offset {}",
-                        JSONUtil.toJSON(requestDriver),
-                        result.getRecordMetadata().offset());
-            }
-            @Override
-            public void onFailure(Throwable ex) {
-                log.warn("Unable to deliver message [{}]. {}",
-                        JSONUtil.toJSON(requestDriver),
-                        ex.getMessage());
-            }
-        });
+        final String customerIdAndDriverId = driver.getId() + "$" + customer.getId();
+        // convertAndSend(exchange, routingKey, message);
+        rabbitTemplate.convertAndSend("uber-nas", "uber_nas_routing_key", customerIdAndDriverId);
     }
     @Override
     public void updateInfo(CustomerInfoUpdateCmd customerCommand, String customerId) {

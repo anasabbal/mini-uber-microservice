@@ -8,9 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @SpringBootApplication
 @EnableJpaAuditing
 public class DriverLocationServiceApplication{
-
     public static void main(String[] args) {
         SpringApplication.run(DriverLocationServiceApplication.class, args);
     }
-
 }

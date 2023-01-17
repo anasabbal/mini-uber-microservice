@@ -7,13 +7,13 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.redis.core.RedisHash;
 
+import javax.persistence.Entity;
+
 
 @Getter
 @Setter
-@RedisHash("CARS")
-public class Car {
-
-    private String id;
+@Entity
+public class Car extends BaseEntity{
     private CarType carType;
     private Integer max_cars;
 

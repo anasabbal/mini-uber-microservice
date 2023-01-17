@@ -6,6 +6,8 @@ import com.nas.car.service.model.Car;
 import com.nas.car.service.service.CarService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,5 +36,10 @@ public class CarController {
     @ApiOperation(value = "API TO GET CAR BY ID")
     public ResponseEntity<Car> getOne(@PathVariable("carId") final String carId){
         return ResponseEntity.ok().body(carService.findOne(carId));
+    }
+    @GetMapping
+    @ApiOperation(value = "GET ALL CARS BY DELETED FALSE")
+    public ResponseEntity<Page<Car>> getCars(Pageable pageable){
+        return ResponseEntity.ok(carService.findCars(pageable));
     }
 }

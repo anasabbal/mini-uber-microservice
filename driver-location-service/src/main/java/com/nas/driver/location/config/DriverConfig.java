@@ -13,7 +13,7 @@ import java.io.File;
 public class DriverConfig {
     @Bean
     public DatabaseReader databaseReader() throws Exception {
-        File database = new File("/Users/anas/IdeaProjects/sport-micro/driver-location-service/src/main/resources/GeoLite2-City_20221230/GeoLite2-City.mmdb");
+        File database = new File("/Users/anas/Downloads/mini-uber-microservice/driver-location-service/src/main/resources/GeoLite2-City_20221230/GeoLite2-City.mmdb");
         return new DatabaseReader.Builder(database)
                 .build();
     }

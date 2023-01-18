@@ -27,7 +27,7 @@ public class Driver extends BaseEntity{
     private String lastName;
     private DriverStatus driverStatus;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "driver")
     private Set<NotificationDriver> notificationDrivers;
 
     public static Driver create(final DriverCommand driverCommand){
@@ -42,9 +42,9 @@ public class Driver extends BaseEntity{
         this.firstName = driverCommand.getFirstName();
         this.lastName = driverCommand.getLastName();
     }
-    public void addToSet(NotificationDriver notificationDriver){
+    /*public void addToSet(NotificationDriver notificationDriver){
         this.notificationDrivers.add(notificationDriver);
-    }
+    }*/
     public static Set<NotificationDriver> createNotificationPayload(Set<CustomerRequestDriver> customerRequestDrivers){
         return customerRequestDrivers
                 .stream().map(

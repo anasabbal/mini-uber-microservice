@@ -6,6 +6,7 @@ import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 
 @Entity
@@ -13,21 +14,17 @@ import javax.persistence.Entity;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class NotificationDriver extends BaseEntity{
-
-
     @Column(name = "CUSTOMER_ID")
     private String customerId;
-
-    @Column(name = "DRIVER_ID")
-    private String driverId;
+    @ManyToOne
+    private Driver driver;
 
     public static NotificationDriver create(final CustomerRequestDriver customerRequestDriver){
         final NotificationDriver notificationDriver = new NotificationDriver();
 
         notificationDriver.customerId = customerRequestDriver.getCustomerId();
-        notificationDriver.driverId = customerRequestDriver.getDriverId();
+
         return notificationDriver;
     }
 }

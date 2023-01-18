@@ -4,6 +4,8 @@ package com.nas.driver.location.service;
 import com.maxmind.geoip2.DatabaseReader;
 import com.maxmind.geoip2.exception.GeoIp2Exception;
 import com.maxmind.geoip2.model.CityResponse;
+import com.nas.core.exception.BusinessException;
+import com.nas.core.exception.ExceptionPayloadFactory;
 import com.nas.core.util.JSONUtil;
 import com.nas.driver.location.model.GeoIp;
 import com.nas.driver.location.model.LocationEntity;
@@ -40,6 +42,11 @@ public record LocationServiceImpl(
         log.info("Your current host name :{} ", hostName);
 
         return _inetAddress;
+    }
+    public LocationEntity getById(String locationId){
+        return locationEntityRepository.findById(locationId).orElseThrow(
+                () -> new BusinessException(ExceptionPayloadFactory.LOCATION_NOT_FOUND.get())
+        );
     }
     private GeoIp getLocation(String ip) throws IOException, GeoIp2Exception {
         InetAddress inetAddress = InetAddress.getByName(ip);

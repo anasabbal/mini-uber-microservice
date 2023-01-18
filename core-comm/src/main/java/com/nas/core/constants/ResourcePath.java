@@ -8,4 +8,5 @@ public class ResourcePath {
     public static final String DRIVERS = "/drivers";
     public static final String CARS = "/cars";
     public static final String NOTIFICATIONS = "/notifications";
+    public static final String NOTIFICATION_DRIVER = "notifications-driver";
 }

@@ -1,8 +1,13 @@
 spring:
-  kafka:
-    consumer:
-      group-id: driver
-      client-id: driver
+  rabbitmq:
+    host: localhost
+    password: guest
+    port: 5672
+    username: guest
+    queue: customer.queue
+    template:
+      routing-key: customer.routingkey
+      exchange: customer.exchange
   devtools:
     livereload:
       enabled: true

@@ -4,11 +4,13 @@ package com.nas.driver.service.driver;
 import com.nas.core.exception.BusinessException;
 import com.nas.core.exception.ExceptionPayloadFactory;
 import com.nas.core.util.JSONUtil;
+import com.nas.driver.command.CustomerRequestDriver;
 import com.nas.driver.command.DriverCommand;
 import com.nas.driver.dto.mapper.DriverMapper;
 import com.nas.driver.enums.DriverStatus;
 import com.nas.driver.model.Driver;
 import com.nas.driver.model.DriverLocationRequest;
+import com.nas.driver.model.NotificationDriver;
 import com.nas.driver.repository.DriverRepository;
 import com.nas.driver.repository.NotificationDriverRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +20,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -56,10 +59,14 @@ public record DriverServiceImpl(DriverRepository driverRepository,
                 .collect(Collectors.toSet());
 
     }
-
-    @RabbitListener(queues = {"uber-nas"})
-    public void listenToMessage(String message){
-        log.info(String.format("Received message -> %s", message));
+    @Override
+    @RabbitListener(queues = "${spring.rabbitmq.queue}")
+    public void listenToMessage(CustomerRequestDriver payload){
+        log.info(String.format("Received message -> %s", JSONUtil.toJSON(payload)));
+        final Driver driver = findById(payload.getDriverId());
+        final NotificationDriver notificationDriver = NotificationDriver.create(payload);
+        notificationDriver.setDriver(driver);
+        notificationDriverRepository.save(notificationDriver);
     }
     @Override
     public Driver findById(String driverId){
@@ -72,5 +79,17 @@ public record DriverServiceImpl(DriverRepository driverRepository,
     @Override
     public Page<Driver> getAll(Pageable pageable) {
         return driverRepository.findAllByDeletedFalse(pageable);
+    }
+    private String getDriverIdFromString(String request){
+        int lnt = request.length();
+        char[] arr = new char[lnt];
+
+        for(int i = 0; i < lnt; i++){
+            if(request.charAt(i) != '$')
+                arr[i] = request.charAt(i);
+            if(request.charAt(i) == '$')
+                break;
+        }
+        return Arrays.toString(arr);
     }
 }

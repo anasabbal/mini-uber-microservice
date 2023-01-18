@@ -7,6 +7,7 @@ import com.nas.core.util.JSONUtil;
 import com.nas.customer.service.command.CustomerCommand;
 import com.nas.customer.service.command.CustomerInfoUpdateCmd;
 import com.nas.customer.service.command.CustomerRequestDriver;
+import com.nas.customer.service.config.ProducerRabbitMqConfig;
 import com.nas.customer.service.model.Customer;
 import com.nas.customer.service.model.Driver;
 import com.nas.customer.service.repository.CustomerRepository;
@@ -68,16 +69,15 @@ public class CustomerServiceImpl implements CustomerService{
     @Override
     public void sendRequestDriver(CustomerRequestDriver requestDriver){
 
-        final Driver driver = getDriversAvailable().stream().filter(
+     final Driver driver = getDriversAvailable().stream().filter(
                 dv -> dv.getId().equals(requestDriver.getDriverId()))
                 .findAny().orElseThrow(
                 () -> new BusinessException(ExceptionPayloadFactory.DRIVER_LOCATION_NOT_FOUND.get())
         );
         final Customer customer = findById(requestDriver.getCustomerId());
-
-        final String customerIdAndDriverId = driver.getId() + "$" + customer.getId();
-        // convertAndSend(exchange, routingKey, message);
-        rabbitTemplate.convertAndSend("uber-nas", "uber_nas_routing_key", customerIdAndDriverId);
+        log.info("Begin sending message");
+        rabbitTemplate.convertAndSend("customer.exchange", "customer.routingkey", requestDriver);
+        log.info("message send good");
     }
     @Override
     public void updateInfo(CustomerInfoUpdateCmd customerCommand, String customerId) {

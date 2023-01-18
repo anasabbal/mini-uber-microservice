@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static com.nas.core.constants.ResourcePath.DRIVERS;
 import static com.nas.core.constants.ResourcePath.V1;
@@ -33,16 +34,19 @@ public class DriverController {
         return ResponseEntity.created(uri).body(driverMapper.toDto(driver));
     }
     @GetMapping("/available")
-    public ResponseEntity<Set<Driver>> getAllAvailable(Pageable pageable){
-        return ResponseEntity.ok(driverService.getDriversAvailable(pageable));
+    public ResponseEntity<Set<DriverDto>> getAllAvailable(Pageable pageable){
+        return ResponseEntity.ok(driverService.getDriversAvailable(pageable)
+                .stream().map(driverMapper::toDto)
+                .collect(Collectors.toSet()));
     }
     @GetMapping("/{driverId}")
-    public ResponseEntity<Driver> getDriverById(@PathVariable("driverId") final String driverId){
-        return ResponseEntity.ok(driverService.findById(driverId));
+    public ResponseEntity<DriverDto> getDriverById(@PathVariable("driverId") final String driverId){
+        final Driver driver = driverService.findById(driverId);
+        return ResponseEntity.ok(driverMapper.toDto(driver));
     }
     @GetMapping
-    public ResponseEntity<Page<Driver>> getAll(Pageable pageable){
-        return ResponseEntity.ok(driverService.getAll(pageable));
+    public ResponseEntity<Page<DriverDto>> getAll(Pageable pageable){
+        return ResponseEntity.ok(driverService.getAll(pageable).map(driverMapper::toDto));
     }
     @PutMapping("/{driverId}")
     public ResponseEntity<Void> updateInfo(

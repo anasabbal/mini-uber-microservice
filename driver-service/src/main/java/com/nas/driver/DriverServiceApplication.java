@@ -10,7 +10,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @SpringBootApplication
 @EnableEurekaClient
 @EnableJpaAuditing
-@EnableRabbit
 public class DriverServiceApplication {
     public static void main(String[] args) {
         SpringApplication.run(DriverServiceApplication.class, args);

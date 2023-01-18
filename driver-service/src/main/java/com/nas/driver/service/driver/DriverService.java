@@ -1,5 +1,6 @@
 package com.nas.driver.service.driver;
 
+import com.nas.driver.command.CustomerRequestDriver;
 import com.nas.driver.command.DriverCommand;
 import com.nas.driver.model.Driver;
 import org.springframework.data.domain.Page;
@@ -13,4 +14,5 @@ public interface DriverService {
     Page<Driver> getAll(Pageable pageable);
     Driver findById(String driverId);
     Set<Driver> getDriversAvailable(Pageable pageable);
+    void listenToMessage(CustomerRequestDriver message);
 }

@@ -80,16 +80,4 @@ public record DriverServiceImpl(DriverRepository driverRepository,
     public Page<Driver> getAll(Pageable pageable) {
         return driverRepository.findAllByDeletedFalse(pageable);
     }
-    private String getDriverIdFromString(String request){
-        int lnt = request.length();
-        char[] arr = new char[lnt];
-
-        for(int i = 0; i < lnt; i++){
-            if(request.charAt(i) != '$')
-                arr[i] = request.charAt(i);
-            if(request.charAt(i) == '$')
-                break;
-        }
-        return Arrays.toString(arr);
-    }
 }

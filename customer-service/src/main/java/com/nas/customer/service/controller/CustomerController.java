@@ -4,6 +4,7 @@ package com.nas.customer.service.controller;
 import com.nas.customer.service.command.CustomerCommand;
 import com.nas.customer.service.command.CustomerInfoUpdateCmd;
 import com.nas.customer.service.command.CustomerRequestDriver;
+import com.nas.customer.service.criteria.CustomerCriteria;
 import com.nas.customer.service.dto.CustomerDto;
 import com.nas.customer.service.dto.mapper.CustomerMapper;
 import com.nas.customer.service.model.Customer;
@@ -42,8 +43,8 @@ public class CustomerController {
         return ResponseEntity.ok("Message send successfully");
     }
     @GetMapping
-    public ResponseEntity<Page<CustomerDto>> getAll(Pageable pageable){
-        final Page<Customer> customers = customerService.findAllByDeletedFalse(pageable);
+    public ResponseEntity<Page<CustomerDto>> getAll(Pageable pageable, CustomerCriteria customerCriteria){
+        final Page<Customer> customers = customerService.findAllByDeletedFalse(pageable, customerCriteria);
         return ResponseEntity.ok(customers.map(customerMapper::toDto));
     }
     @GetMapping("/driver/available")

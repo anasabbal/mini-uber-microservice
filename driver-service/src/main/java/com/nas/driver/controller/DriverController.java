@@ -2,6 +2,7 @@ package com.nas.driver.controller;
 
 
 import com.nas.driver.command.DriverCommand;
+import com.nas.driver.criteria.DriverCriteria;
 import com.nas.driver.dto.DriverDto;
 import com.nas.driver.dto.mapper.DriverMapper;
 import com.nas.driver.model.Driver;
@@ -34,8 +35,8 @@ public class DriverController {
         return ResponseEntity.created(uri).body(driverMapper.toDto(driver));
     }
     @GetMapping("/available")
-    public ResponseEntity<Set<DriverDto>> getAllAvailable(Pageable pageable){
-        return ResponseEntity.ok(driverService.getDriversAvailable(pageable)
+    public ResponseEntity<Set<DriverDto>> getAllAvailable(Pageable pageable, DriverCriteria driverCriteria){
+        return ResponseEntity.ok(driverService.getDriversAvailable(pageable, driverCriteria)
                 .stream().map(driverMapper::toDto)
                 .collect(Collectors.toSet()));
     }
@@ -45,8 +46,8 @@ public class DriverController {
         return ResponseEntity.ok(driverMapper.toDto(driver));
     }
     @GetMapping
-    public ResponseEntity<Page<DriverDto>> getAll(Pageable pageable){
-        return ResponseEntity.ok(driverService.getAll(pageable).map(driverMapper::toDto));
+    public ResponseEntity<Page<DriverDto>> getAll(Pageable pageable, DriverCriteria driverCriteria){
+        return ResponseEntity.ok(driverService.getAll(pageable, driverCriteria).map(driverMapper::toDto));
     }
     @PutMapping("/{driverId}")
     public ResponseEntity<Void> updateInfo(

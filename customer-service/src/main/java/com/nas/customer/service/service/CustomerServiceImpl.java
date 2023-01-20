@@ -8,6 +8,7 @@ import com.nas.customer.service.command.CustomerCommand;
 import com.nas.customer.service.command.CustomerInfoUpdateCmd;
 import com.nas.customer.service.command.CustomerRequestDriver;
 import com.nas.customer.service.config.ProducerRabbitMqConfig;
+import com.nas.customer.service.criteria.CustomerCriteria;
 import com.nas.customer.service.model.Customer;
 import com.nas.customer.service.model.Driver;
 import com.nas.customer.service.repository.CustomerRepository;
@@ -43,8 +44,8 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
-    public Page<Customer> findAllByDeletedFalse(Pageable pageable) {
-        return customerRepository.findCustomersByDeletedFalse(pageable);
+    public Page<Customer> findAllByDeletedFalse(Pageable pageable, CustomerCriteria customerCriteria) {
+        return customerRepository.findCustomersByDeletedFalse(pageable, customerCriteria);
     }
     @Override
     public Customer findById(String customerId) {

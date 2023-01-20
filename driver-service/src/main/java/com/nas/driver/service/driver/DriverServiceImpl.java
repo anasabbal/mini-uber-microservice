@@ -6,6 +6,7 @@ import com.nas.core.exception.ExceptionPayloadFactory;
 import com.nas.core.util.JSONUtil;
 import com.nas.driver.command.CustomerRequestDriver;
 import com.nas.driver.command.DriverCommand;
+import com.nas.driver.criteria.DriverCriteria;
 import com.nas.driver.dto.mapper.DriverMapper;
 import com.nas.driver.enums.DriverStatus;
 import com.nas.driver.model.Driver;
@@ -53,8 +54,8 @@ public record DriverServiceImpl(DriverRepository driverRepository,
         log.info("Driver with id {} updated successfully", driver.getId());
     }
     @Override
-    public Set<Driver> getDriversAvailable(Pageable pageable) {
-        return getAll(pageable).stream().filter(
+    public Set<Driver> getDriversAvailable(Pageable pageable, DriverCriteria driverCriteria) {
+        return getAll(pageable, driverCriteria).stream().filter(
                 dv -> dv.getDriverStatus() == DriverStatus.AVAILABLE)
                 .collect(Collectors.toSet());
 
@@ -77,7 +78,7 @@ public record DriverServiceImpl(DriverRepository driverRepository,
       return driver;
     }
     @Override
-    public Page<Driver> getAll(Pageable pageable) {
-        return driverRepository.findAllByDeletedFalse(pageable);
+    public Page<Driver> getAll(Pageable pageable, DriverCriteria driverCriteria) {
+        return driverRepository.findAllByDeletedFalse(pageable, driverCriteria);
     }
 }

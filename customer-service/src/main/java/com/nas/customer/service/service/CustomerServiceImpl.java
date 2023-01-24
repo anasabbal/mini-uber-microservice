@@ -44,8 +44,8 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
-    public Page<Customer> findAllByDeletedFalse(Pageable pageable, CustomerCriteria customerCriteria) {
-        return customerRepository.findCustomersByDeletedFalse(pageable, customerCriteria);
+    public Page<Customer> findAllByDeletedFalse(Pageable pageable) {
+        return customerRepository.findCustomersByDeletedFalse(pageable);
     }
     @Override
     public Customer findById(String customerId) {
@@ -75,10 +75,10 @@ public class CustomerServiceImpl implements CustomerService{
                 .findAny().orElseThrow(
                 () -> new BusinessException(ExceptionPayloadFactory.DRIVER_LOCATION_NOT_FOUND.get())
         );
-        final Customer customer = findById(requestDriver.getCustomerId());
-        log.info("Begin sending message");
-        rabbitTemplate.convertAndSend("customer.exchange", "customer.routingkey", requestDriver);
-        log.info("message send good");
+     final Customer customer = findById(requestDriver.getCustomerId());
+     log.info("Begin sending message");
+     rabbitTemplate.convertAndSend("customer.exchange", "customer.routingkey", requestDriver);
+     log.info("message send good");
     }
     @Override
     public void updateInfo(CustomerInfoUpdateCmd customerCommand, String customerId) {

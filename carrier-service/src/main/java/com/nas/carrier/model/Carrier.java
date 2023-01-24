@@ -1,6 +1,8 @@
 package com.nas.carrier.model;
 
 
+import com.nas.carrier.command.CarrierCommand;
+import com.nas.carrier.command.JobCommand;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -8,6 +10,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -18,10 +21,13 @@ public class Carrier extends BaseEntity{
     @OneToMany
     private Set<Job> jobs;
 
-
-    public static Carrier create(){
+    public static Carrier create(final CarrierCommand carrierCommand){
         final Carrier carrier = new Carrier();
 
+        carrier.jobs = createSetOfJobs(carrierCommand.getJobCommands());
         return carrier;
+    }
+    public static Set<Job> createSetOfJobs(Set<JobCommand> jobCommands){
+        return jobCommands.stream().map(Job::create).collect(Collectors.toSet());
     }
 }

@@ -13,7 +13,7 @@ import java.util.Set;
 
 public interface CustomerService {
     Customer create(final CustomerCommand customerCommand);
-    Page<Customer> findAllByDeletedFalse(Pageable pageable, CustomerCriteria customerCriteria);
+    Page<Customer> findAllByDeletedFalse(Pageable pageable);
     Customer findById(String customerId);
     void updateInfo(final CustomerInfoUpdateCmd customerCommand, String customerId);
     Set<Driver> getDriversAvailable();

@@ -1,6 +1,7 @@
 package com.nas.driver.criteria;
 
 
+import com.nas.driver.enums.DriverStatus;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,5 +10,5 @@ import lombok.Setter;
 public class DriverCriteria {
     private String firstName;
     private String lastName;
-    private String status;
+    private DriverStatus status;
 }

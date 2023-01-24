@@ -54,8 +54,8 @@ public record DriverServiceImpl(DriverRepository driverRepository,
         log.info("Driver with id {} updated successfully", driver.getId());
     }
     @Override
-    public Set<Driver> getDriversAvailable(Pageable pageable, DriverCriteria driverCriteria) {
-        return getAll(pageable, driverCriteria).stream().filter(
+    public Set<Driver> getDriversAvailable(Pageable pageable) {
+        return getAll(pageable).stream().filter(
                 dv -> dv.getDriverStatus() == DriverStatus.AVAILABLE)
                 .collect(Collectors.toSet());
 
@@ -78,7 +78,7 @@ public record DriverServiceImpl(DriverRepository driverRepository,
       return driver;
     }
     @Override
-    public Page<Driver> getAll(Pageable pageable, DriverCriteria driverCriteria) {
-        return driverRepository.findAllByDeletedFalse(pageable, driverCriteria);
+    public Page<Driver> getAll(Pageable pageable) {
+        return driverRepository.findAllByDeletedFalse(pageable);
     }
 }

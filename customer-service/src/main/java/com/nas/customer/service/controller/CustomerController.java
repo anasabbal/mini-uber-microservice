@@ -43,8 +43,8 @@ public class CustomerController {
         return ResponseEntity.ok("Message send successfully");
     }
     @GetMapping
-    public ResponseEntity<Page<CustomerDto>> getAll(Pageable pageable, CustomerCriteria customerCriteria){
-        final Page<Customer> customers = customerService.findAllByDeletedFalse(pageable, customerCriteria);
+    public ResponseEntity<Page<CustomerDto>> getAll(Pageable pageable){
+        final Page<Customer> customers = customerService.findAllByDeletedFalse(pageable);
         return ResponseEntity.ok(customers.map(customerMapper::toDto));
     }
     @GetMapping("/driver/available")

@@ -6,10 +6,7 @@ import com.nas.driver.command.DriverCommand;
 import com.nas.driver.enums.DriverStatus;
 import lombok.*;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -25,6 +22,7 @@ public class Driver extends BaseEntity{
     private String carId;
     private String firstName;
     private String lastName;
+    @Enumerated(EnumType.STRING)
     private DriverStatus driverStatus;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "driver")

@@ -12,8 +12,8 @@ import java.util.Set;
 public interface DriverService {
     Driver create(final DriverCommand driverCommand);
     void update(String driverId, DriverCommand driverCommand);
-    Page<Driver> getAll(Pageable pageable, DriverCriteria driverCriteria);
+    Page<Driver> getAll(Pageable pageable);
     Driver findById(String driverId);
-    Set<Driver> getDriversAvailable(Pageable pageable, DriverCriteria driverCriteria);
+    Set<Driver> getDriversAvailable(Pageable pageable);
     void listenToMessage(CustomerRequestDriver message);
 }

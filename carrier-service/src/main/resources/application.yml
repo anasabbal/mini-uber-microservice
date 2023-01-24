@@ -1,0 +1,25 @@
+spring:
+  devtools:
+    livereload:
+      enabled: true
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/carrier
+    username: postgres
+    password: postgres
+
+  application:
+    name: driver
+  profiles:
+    active: default
+
+
+server:
+  port: 8084

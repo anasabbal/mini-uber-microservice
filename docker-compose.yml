@@ -5,88 +5,73 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-  #  healthcheck:
-  #    test: [ "CMD-SHELL", "pg_isready -U postgres" ]
-  #    interval: 10s
-  #    timeout: 5s
-  #    retries: 5
-  #  volumes:
-  #    - postgres:/data/postgres
     ports:
       - "5432:5432"
-  #  networks:
-  #    - postgres
-  #  restart: unless-stopped
-  #pgadmin:
-  #  container_name: pgadmin
-  #  image: dpage/pgadmin4
-  #  environment:
-  #    PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
-  #    PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
-  #    PGADMIN_CONFIG_SERVER_MODE: 'False'
-  #  volumes:
-  #    - pgadmin:/var/lib/pgadmin
-  #  ports:
-  #    - "5050:80"
-  #  networks:
-  #    - postgres
-  #  restart: unless-stopped
+    networks:
+      - postgres
+    restart: unless-stopped
   eureka-server:
     build: ./eureka-server
     image: eureka-server:latest
     ports:
       - "8761:8761"
-  notification-service:
-    container_name: notification-service
-    build: ./notification-service
-    image: notification-service:latest
-    depends_on:
-      - eureka-server
-      - postgres
-    port:
-      - "9090:9090"
-  driver-service:
-    container_name: driver-service
-    build: ./driver-service
-    image: driver-service:latest
-    depends_on:
-      - eureka-server
-    port:
-      - "8081:8081"
   customer-service:
-    container_name: customer-service
     build: ./customer-service
     image: customer-service:latest
     ports:
-      - "8080:8080"
+      - "9091:9091"
+    environment:
+      - JAVA_OPTS=
+        -DEUREKA_SERVER=http://CUSTOMER:9091/eureka
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/customer
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
     depends_on:
-      - postgres
       - eureka-server
-  zookeeper:
-    image: confluentinc/cp-zookeeper:latest
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_TICK_TIME: 2000
-    ports:
-      - 2181:2181
-  kafka:
-    image: confluentinc/cp-kafka:latest
-    depends_on:
-      - zookeeper
-    ports:
-      - 9092:9092
-    environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-#networks:
-#  postgres:
-#    driver: bridge
-#  spring:
-#    driver: bridge
+      - postgres
+  #driver-service:
+  #  container_name: driver-service
+  #  build: ./driver-service
+  #  image: driver-service:latest
+  #  depends_on:
+  #    - eureka-server
+  #  port:
+  #    - "8081:8081"
+  #customer-service:
+  #  container_name: customer-service
+  #  build: ./customer-service
+  #  image: customer-service:latest
+  #  ports:
+  #    - "8080:8080"
+  #  depends_on:
+  #    - postgres
+  #   - eureka-server
+  #zookeeper:
+  #  image: confluentinc/cp-zookeeper:latest
+  #  environment:
+  #    ZOOKEEPER_CLIENT_PORT: 2181
+  #    ZOOKEEPER_TICK_TIME: 2000
+  #  ports:
+  #    - 2181:2181
+  #kafka:
+  #  image: confluentinc/cp-kafka:latest
+  #  depends_on:
+  #    - zookeeper
+  #  ports:
+  #    - 9092:9092
+  #  environment:
+  #    KAFKA_BROKER_ID: 1
+  #    KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+  #    KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+  #    KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+  #    KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+  #    KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+networks:
+  postgres:
+    driver: bridge
+  spring:
+    driver: bridge
 
-#volumes:
-#  postgres:
+volumes:
+  postgres:

@@ -3,27 +3,29 @@ package com.nas.auth.controller;
 
 import com.nas.auth.command.UserCommand;
 import com.nas.auth.model.Account;
+import com.nas.auth.payload.JwtResponse;
 import com.nas.auth.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import static com.nas.core.constants.ResourcePath.USERS;
-import static com.nas.core.constants.ResourcePath.V1;
+import static com.nas.core.constants.ResourcePath.*;
 
 @RestController
-@RequestMapping(V1 + USERS)
+@RequestMapping(V1 + AUTH)
 @RequiredArgsConstructor
+@CrossOrigin
 public class UserController {
 
     private final UserService userService;
 
 
-    @PostMapping
+    @PostMapping(REGISTER)
     public ResponseEntity<Account> signUp(@RequestBody final UserCommand userCommand){
         return ResponseEntity.ok(userService.create(userCommand));
+    }
+    @PostMapping(LOGIN)
+    public ResponseEntity<JwtResponse> login(@RequestBody final UserCommand userCommand){
+        return ResponseEntity.ok(userService.login(userCommand));
     }
 }

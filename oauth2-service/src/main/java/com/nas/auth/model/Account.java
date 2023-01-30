@@ -27,7 +27,7 @@ public class Account extends BaseEntity{
     private String email;
     @Column(name = "PASSWORD")
     private String password;
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -43,7 +43,7 @@ public class Account extends BaseEntity{
         account.userName = userCommand.getUserName();
         account.email = userCommand.getEmail();
         account.password = userCommand.getPassword();
+        account.roles.add(Role.create());
         return account;
     }
-
 }

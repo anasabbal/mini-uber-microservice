@@ -36,6 +36,9 @@ public class Driver extends BaseEntity{
         driver.driverStatus = DriverStatus.AVAILABLE;
         return driver;
     }
+    public void addToDriver(NotificationDriver notificationDriver){
+        this.notificationDrivers.add(notificationDriver);
+    }
     public void updateInfo(final DriverCommand driverCommand){
         this.firstName = driverCommand.getFirstName();
         this.lastName = driverCommand.getLastName();

@@ -8,7 +8,7 @@ const CustomerList: React.FC = () => {
 
     useEffect(() => {
         getCustomer();
-    },);
+    },[customers]);
 
     const getCustomer = () => {
         customerService.findAllByDeletedFalse()

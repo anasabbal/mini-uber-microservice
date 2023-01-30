@@ -58,7 +58,6 @@ public record DriverServiceImpl(DriverRepository driverRepository,
         return getAll(pageable).stream().filter(
                 dv -> dv.getDriverStatus() == DriverStatus.AVAILABLE)
                 .collect(Collectors.toSet());
-
     }
     @Override
     @RabbitListener(queues = "${spring.rabbitmq.queue}")

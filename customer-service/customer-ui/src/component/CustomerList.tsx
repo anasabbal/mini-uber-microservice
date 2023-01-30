@@ -21,20 +21,20 @@ const CustomerList: React.FC = () => {
     };
     return (
         <>
-            <h1>Tiny Store</h1>
+            <h1>Customer List</h1>
             <div className={'App-container'}>
                 {
-                    customers.map((product ) => {
+                    customers.map((customer ) => {
                         return (
                             <div className={'App-item'}>
-                                <div><h3> {product.firstName}</h3> </div>
+                                <div><h3> {customer.firstName}</h3> </div>
                                 <div>
-                                    <img src={product.lastName}
-                                         alt={product.email}
+                                    <img src={customer.lastName}
+                                         alt={customer.email}
                                     />
                                 </div>
                                 <div className={'Price-item'}>
-                                    price ${product.id}
+                                    price ${customer.id}
                                 </div>
                             </div>
                         )

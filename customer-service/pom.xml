@@ -18,6 +18,7 @@
         <kotlin.version>1.8.0-RC2</kotlin.version>
         <org.mapstruct.version>1.5.3.Final</org.mapstruct.version>
         <jpamodelgen.version>5.4.12.Final</jpamodelgen.version>
+        <swagger.version>2.9.2</swagger.version>
     </properties>
 
     <dependencies>
@@ -68,6 +69,16 @@
             <artifactId>spring-mock-mvc</artifactId>
             <version>3.3.0</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

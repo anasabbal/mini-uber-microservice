@@ -76,7 +76,7 @@ public class CustomerServiceImpl implements CustomerService{
                 () -> new BusinessException(ExceptionPayloadFactory.DRIVER_LOCATION_NOT_FOUND.get())
         );
      final Customer customer = findById(requestDriver.getCustomerId());
-     log.info("Begin sending message");
+     log.info("[+] Begin sending message");
      rabbitTemplate.convertAndSend("customer.exchange", "customer.routingkey", requestDriver);
      log.info("message send good");
     }

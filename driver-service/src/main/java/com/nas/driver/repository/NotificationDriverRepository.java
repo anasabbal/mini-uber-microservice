@@ -6,9 +6,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 
 @Repository
 public interface NotificationDriverRepository extends JpaRepository<NotificationDriver, String> {
 
-    Page<NotificationDriver> findAllByDriverId(Pageable pageable, String driverId);
+    List<NotificationDriver> findAllByDriverId(String driverId);
 }

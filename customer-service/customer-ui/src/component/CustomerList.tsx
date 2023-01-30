@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
-import Customer from "../type/customer";
 import customerService from "../service/customerService";
+import CustomerResponse from "../type/customer";
 
 
 const CustomerList: React.FC = () => {
-    const [customers, setCustomers] = useState<Array<Customer>>([]);
+    const [customers, setCustomers] = useState<Array<CustomerResponse>>([]);
 
     useEffect(() => {
         getCustomer();

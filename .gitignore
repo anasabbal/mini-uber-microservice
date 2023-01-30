@@ -13,3 +13,4 @@
 /rabbitmq-example/target
 /zull-proxy/target
 /.vscode
+/oauth2-service/auth-service-ui.iml

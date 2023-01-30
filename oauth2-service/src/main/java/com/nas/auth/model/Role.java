@@ -10,9 +10,10 @@ import javax.persistence.*;
 @Table(name = "ROLES")
 @Getter
 @Setter
-@AllArgsConstructor(access = AccessLevel.PACKAGE)
-@NoArgsConstructor(access = AccessLevel.PACKAGE)
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Role extends BaseEntity{
+
     @Enumerated(EnumType.STRING)
     @Column(name = "ROLE_TYPE")
     private RoleType roleType;

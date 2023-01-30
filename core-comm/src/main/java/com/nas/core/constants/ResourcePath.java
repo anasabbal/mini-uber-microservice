@@ -9,4 +9,7 @@ public class ResourcePath {
     public static final String CARS = "/cars";
     public static final String NOTIFICATIONS = "/notifications";
     public static final String NOTIFICATION_DRIVER = "notifications-driver";
+    public static final String REGISTER = "/register";
+    public static final String LOGIN = "/login";
+    public static final String AUTH= "/auth";
 }

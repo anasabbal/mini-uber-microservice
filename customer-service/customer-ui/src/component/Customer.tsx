@@ -2,6 +2,8 @@ import React, {ChangeEvent, useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import customerService from "../service/customerService";
 import CustomerCommand from "../type/customer";
+import DriverResponse from "../type/driver";
+import CustomerRequestDriver from "../type/request";
 
 
 const Customer: React.FC = () => {
@@ -16,8 +18,18 @@ const Customer: React.FC = () => {
         password: "",
         published: false
     };
+    const initDriver = {
+        driver: [],
+    };
+    const initRequest = {
+        driverId: "",
+        customerId: ""
+    };
+
     const [customer, setCustomer] = useState<CustomerCommand>(initCustomer);
     const [message, setMessage] = useState<string>("");
+    const [driver, setDriver] = useState<Array<DriverResponse>>([]);
+    const [request, setRequest] = useState<CustomerRequestDriver>(initRequest);
 
 
     useEffect(() => {
@@ -28,6 +40,39 @@ const Customer: React.FC = () => {
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
         setCustomer({ ...customer, [name]: value });
+    };
+    const getDriversAvailable = () => {
+        customerService.getDriversAvailable()
+            .then((response : any) => {
+                console.log(response.data);
+                setDriver(driver => [...driver]);
+            }).catch((e: Error) => {
+                console.log(e);
+        });
+    };
+    const sendRequestToDriver = (request: CustomerRequestDriver) => {
+        const data = {
+            customerId: request.customerId,
+            driverId: request.driverId
+        };
+        customerService.sendRequestToDriver(data)
+            .then((response : any ) => {
+                console.log(response.data);
+                setRequest({
+                    customerId: response.data.customerId,
+                    driverId: response.data.driverId,
+                });
+            }).catch((e: Error) => {
+                console.log(e);
+        });
+    };
+    const getCustomers = () => {
+        customerService.findAllByDeletedFalse()
+            .then((res: any) => {
+                console.log(res.data);
+            }).catch((e: Error) => {
+                console.log(e);
+        });
     };
     const getCustomerById = (id: string) => {
         customerService.findById(id)
@@ -70,7 +115,7 @@ const Customer: React.FC = () => {
             console.log(e);
         });
     }
-    const deleteTutorial = () => {
+    const deleteCustomerById = () => {
         customerService.deleteById(customer.id)
             .then((response: any) => {
                 console.log(response.data);
@@ -131,7 +176,7 @@ const Customer: React.FC = () => {
                             />
                         </div>
                     </form>
-                    <button className="badge badge-danger mr-2" onClick={deleteTutorial}>
+                    <button className="badge badge-danger mr-2" onClick={deleteCustomerById}>
                         Delete
                     </button>
                     <button
@@ -146,7 +191,7 @@ const Customer: React.FC = () => {
             ) : (
                 <div>
                     <br />
-                    <p>Please click on a Tutorial...</p>
+                    <p>Please click on a Customer...</p>
                 </div>
             )}
         </div>

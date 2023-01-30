@@ -4,8 +4,8 @@ import AddCustomer from "./component/AddCustomer";
 
 function App() {
     return (
-       <AddCustomer/>
-    )
+        <AddCustomer/>
+    );
 }
 
 export default App;

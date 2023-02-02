@@ -1,6 +1,5 @@
 import React, {useState, useEffect, ChangeEvent} from "react";
 import DriverResponse from "../types/driver";
-import DriverCommand from "../types/driver";
 import driverService from "../service/driverService";
 
 

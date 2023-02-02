@@ -28,6 +28,10 @@ public class Driver extends BaseEntity{
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "driver")
     private Set<NotificationDriver> notificationDrivers;
 
+
+    @Column(name = "BANK_ACCOUNT_ID")
+    private String bankAccountId;
+
     public static Driver create(final DriverCommand driverCommand){
         final Driver driver = new Driver();
 

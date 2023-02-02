@@ -1,0 +1,38 @@
+spring:
+  #rabbitmq:
+  #  host: localhost
+  #  password: guest
+  #  port: 5672
+  #  username: guest
+  #  queue: customer.queue
+  #  template:
+  #    routing-key: customer.routingkey
+  #    exchange: customer.exchange
+  devtools:
+    livereload:
+      enabled: true
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/bank
+    username: postgres
+    password: postgres
+
+  application:
+    name: driver
+  profiles:
+    active: default
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+server:
+  port: 2345

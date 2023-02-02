@@ -13,4 +13,5 @@ public class ResourcePath {
     public static final String LOGIN = "/login";
     public static final String AUTH= "/auth";
     public static final String REQUEST = "/request";
+    public static final String BANK_ACCOUNT = "/bank-account";
 }

@@ -28,4 +28,13 @@ public class BankAccount extends BaseEntity{
     @Column(name = "ACCOUNT_STATUS")
     private AccountStatus status;
 
+    public static BankAccount create(){
+        final BankAccount bankAccount = new BankAccount();
+
+        bankAccount.type = AccountType.SAVINGS_ACCOUNT;
+        bankAccount.status = AccountStatus.ACTIVE;
+
+        return bankAccount;
+    }
+
 }

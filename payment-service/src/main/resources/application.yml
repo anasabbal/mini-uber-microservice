@@ -1,13 +1,14 @@
 spring:
-  #rabbitmq:
-  #  host: localhost
-  #  password: guest
-  #  port: 5672
-  #  username: guest
-  #  queue: customer.queue
-  #  template:
-  #    routing-key: customer.routingkey
-  #    exchange: customer.exchange
+  # config rabbitmq for producer
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    queue: bank.customer
+    template:
+      exchange: customer.exchange
+      routing-key: customer.routingkey
   devtools:
     livereload:
       enabled: true
@@ -25,7 +26,7 @@ spring:
     password: postgres
 
   application:
-    name: driver
+    name: payment
   profiles:
     active: default
 

@@ -4,11 +4,10 @@ package com.nas.customer.service.service;
 import com.nas.core.exception.BusinessException;
 import com.nas.core.exception.ExceptionPayloadFactory;
 import com.nas.core.util.JSONUtil;
+import com.nas.customer.service.command.RequestToBankAccount;
 import com.nas.customer.service.command.CustomerCommand;
 import com.nas.customer.service.command.CustomerInfoUpdateCmd;
 import com.nas.customer.service.command.CustomerRequestDriver;
-import com.nas.customer.service.config.ProducerRabbitMqConfig;
-import com.nas.customer.service.criteria.CustomerCriteria;
 import com.nas.customer.service.model.Customer;
 import com.nas.customer.service.model.Driver;
 import com.nas.customer.service.repository.CustomerRepository;
@@ -23,7 +22,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import javax.websocket.SendResult;
 import java.util.Set;
 
 @Service
@@ -39,10 +37,14 @@ public class CustomerServiceImpl implements CustomerService{
     public Customer create(CustomerCommand customerCommand) {
         customerCommand.validate();
         log.info("Begin creating customer with payload {}", JSONUtil.toJSON(customerCommand));
-
-        return customerRepository.save(Customer.create(customerCommand));
+        final Customer customer = Customer.create(customerCommand);
+        log.info("Customer with payload {} created successfully", JSONUtil.toJSON(customer));
+        final RequestToBankAccount requestToBankAccount = RequestToBankAccount.map(customer.getId());
+        log.info("[+] Begin sending message");
+        rabbitTemplate.convertAndSend("customer.exchange", "customer.routingkey", requestToBankAccount);
+        log.info("message send good");
+        return customerRepository.save(customer);
     }
-
     @Override
     public Page<Customer> findAllByDeletedFalse(Pageable pageable) {
         return customerRepository.findCustomersByDeletedFalse(pageable);
@@ -70,12 +72,12 @@ public class CustomerServiceImpl implements CustomerService{
     @Override
     public void sendRequestDriver(CustomerRequestDriver requestDriver){
 
-     final Driver driver = getDriversAvailable().stream().filter(
+     getDriversAvailable().stream().filter(
                 dv -> dv.getId().equals(requestDriver.getDriverId()))
                 .findAny().orElseThrow(
                 () -> new BusinessException(ExceptionPayloadFactory.DRIVER_LOCATION_NOT_FOUND.get())
         );
-     final Customer customer = findById(requestDriver.getCustomerId());
+     findById(requestDriver.getCustomerId());
      log.info("[+] Begin sending message");
      rabbitTemplate.convertAndSend("customer.exchange", "customer.routingkey", requestDriver);
      log.info("message send good");

@@ -24,6 +24,8 @@ public class Customer extends BaseEntity{
     private String email;
     @Column(name = "PASSWORD")
     private String password;
+    @Column(name = "BANK_ACCOUNT_ID")
+    private String bankAccountId;
     @Column(name = "DRIVER_ID")
     private String driverId = null;
 

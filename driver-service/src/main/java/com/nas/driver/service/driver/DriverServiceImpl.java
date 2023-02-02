@@ -42,7 +42,7 @@ public record DriverServiceImpl(DriverRepository driverRepository,
                 "http://DRIVER-LOCATION:8082/v1/driver-location/{driverId}",
                 DriverLocationRequest.class,
                 driver.getId());
-        restTemplate.getForEntity("http://PAYMENT:2345/v1/bank-account/{driverId}", String.class, driver.getBankAccountId());
+        restTemplate.getForEntity("http://PAYMENT:2345/v1/bank-account/{userId}", String.class, driver.getId());
         return driver;
     }
     @Override

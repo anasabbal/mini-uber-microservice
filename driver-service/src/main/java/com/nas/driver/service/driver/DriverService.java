@@ -14,6 +14,6 @@ public interface DriverService {
     void update(String driverId, DriverCommand driverCommand);
     Page<Driver> getAll(Pageable pageable);
     Driver findById(String driverId);
-    Set<Driver> getDriversAvailable(Pageable pageable);
+    Set<Driver> getDriversAvailable();
     void listenToMessage(CustomerRequestDriver message);
 }

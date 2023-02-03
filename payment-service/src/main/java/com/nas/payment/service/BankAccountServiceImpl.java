@@ -8,6 +8,8 @@ import com.nas.payment.repository.BankAccountRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,12 +20,16 @@ public class BankAccountServiceImpl implements BankAccountService{
     private final BankAccountRepository bankAccountRepository;
 
     @Override
-    @RabbitListener(queues = "bank.customer")
-    public BankAccount create(RequestToBankAccount requestToBankAccount) {
-        log.info(String.format("Received message -> %s", requestToBankAccount.getId()));
+    public BankAccount create(String  requestToBankAccount) {
+        log.info(String.format("Received message -> %s", requestToBankAccount));
         final BankAccount bankAccount = BankAccount.create();
-        bankAccount.setUserId(requestToBankAccount.getId());
+        bankAccount.setUserId(requestToBankAccount);
         log.info("[+] Bank Account created successfully with payload {}", JSONUtil.toJSON(bankAccount));
         return bankAccountRepository.save(bankAccount);
+    }
+
+    @Override
+    public Page<BankAccount> getAllAccount(Pageable pageable) {
+        return bankAccountRepository.findByDeletedFalse(pageable);
     }
 }

@@ -29,6 +29,7 @@ public class NotificationServiceImpl implements NotificationService{
     private final RabbitTemplate rabbitTemplate;
 
 
+
     @Override
     public List<NotificationDriver> getNotificationsByDriverId(String driverId) {
         log.info("Begin fetching driver with id {}", driverId);
@@ -39,16 +40,16 @@ public class NotificationServiceImpl implements NotificationService{
     }
 
     @Override
-    public Driver acceptRequest(String driverId, final AcceptRequestCustomer acceptRequestCustomer) {
-        log.info("Begin fetching driver with id {}", driverId);
-        final Driver driver = driverRepository.findById(driverId).orElseThrow(
+    public Driver acceptRequest(final AcceptRequestCustomer acceptRequestCustomer) {
+        log.info("Begin fetching driver with id {}", acceptRequestCustomer.getDriverId());
+        final Driver driver = driverRepository.findById(acceptRequestCustomer.getDriverId()).orElseThrow(
                 () -> new BusinessException(ExceptionPayloadFactory.DRIVER_NOT_FOUND.get()));
-        log.info("Driver with id {} fetched successfully", driverId);
+        log.info("Driver with id {} fetched successfully", acceptRequestCustomer.getDriverId());
 
-        final List<NotificationDriver> notificationDrivers = getNotificationsByDriverId(driverId);
+        final List<NotificationDriver> notificationDrivers = getNotificationsByDriverId(acceptRequestCustomer.getDriverId());
         notificationDrivers.stream().filter(nt -> nt.getId().equals(acceptRequestCustomer.getCustomerId())).forEach(driver::addToDriver);
         log.info("[+] Begin sending acceptation to customers...");
-        rabbitTemplate.convertAndSend(driverId);
+        rabbitTemplate.convertAndSend(acceptRequestCustomer);
         return driverRepository.save(driver);
     }
 }

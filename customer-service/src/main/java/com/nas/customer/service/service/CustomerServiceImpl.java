@@ -4,16 +4,16 @@ package com.nas.customer.service.service;
 import com.nas.core.exception.BusinessException;
 import com.nas.core.exception.ExceptionPayloadFactory;
 import com.nas.core.util.JSONUtil;
-import com.nas.customer.service.command.RequestToBankAccount;
-import com.nas.customer.service.command.CustomerCommand;
-import com.nas.customer.service.command.CustomerInfoUpdateCmd;
-import com.nas.customer.service.command.CustomerRequestDriver;
+import com.nas.customer.service.command.*;
 import com.nas.customer.service.model.Customer;
 import com.nas.customer.service.model.Driver;
 import com.nas.customer.service.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,6 +22,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.net.URI;
 import java.util.Set;
 
 @Service
@@ -33,16 +34,14 @@ public class CustomerServiceImpl implements CustomerService{
     private final RestTemplate restTemplate;
     private final RabbitTemplate rabbitTemplate;
 
+    @SneakyThrows
     @Override
     public Customer create(CustomerCommand customerCommand) {
         customerCommand.validate();
         log.info("Begin creating customer with payload {}", JSONUtil.toJSON(customerCommand));
         final Customer customer = Customer.create(customerCommand);
         log.info("Customer with payload {} created successfully", JSONUtil.toJSON(customer));
-        final RequestToBankAccount requestToBankAccount = RequestToBankAccount.map(customer.getId());
         log.info("[+] Begin sending message");
-        rabbitTemplate.convertAndSend("customer.exchange", "customer.routingkey", requestToBankAccount);
-        log.info("message send good");
         return customerRepository.save(customer);
     }
     @Override
@@ -81,6 +80,13 @@ public class CustomerServiceImpl implements CustomerService{
      log.info("[+] Begin sending message");
      rabbitTemplate.convertAndSend("customer.exchange", "customer.routingkey", requestDriver);
      log.info("message send good");
+    }
+    @RabbitListener(queues = "${spring.rabbitmq.queue}")
+    public void listen(ResponseDriver responseDriver){
+        log.info("[+] Begin listening to message and get response with payload {}", JSONUtil.toJSON(responseDriver));
+        final Customer customer = findById(responseDriver.getCustomerId());
+        customer.setDriverId(responseDriver.getDriverId());
+        customerRepository.save(customer);
     }
     @Override
     public void updateInfo(CustomerInfoUpdateCmd customerCommand, String customerId) {

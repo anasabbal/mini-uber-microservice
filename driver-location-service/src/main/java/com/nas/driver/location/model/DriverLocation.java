@@ -7,6 +7,7 @@ import lombok.*;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -22,12 +23,16 @@ public class DriverLocation extends BaseEntity{
     private String carId;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "driverLocation")
-    private Set<LocationEntity> locationEntities;
+    private Set<LocationEntity> locationEntities = new HashSet<>();
 
     public static DriverLocation create(final DriverLocationCommand driverLocationCommand){
         final DriverLocation driverLocation = new DriverLocation();
 
         driverLocation.name = driverLocationCommand.getName();
         return driverLocation;
+    }
+    public void addToSet(LocationEntity location){
+        this.locationEntities.add(location);
+        location.linkToDriver(this);
     }
 }

@@ -8,4 +8,5 @@ import lombok.Setter;
 @Setter
 public class AcceptRequestCustomer {
     private String customerId;
+    private String driverId;
 }

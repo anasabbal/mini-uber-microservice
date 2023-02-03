@@ -35,8 +35,8 @@ public class DriverController {
         return ResponseEntity.created(uri).body(driverMapper.toDto(driver));
     }
     @GetMapping("/available")
-    public ResponseEntity<Set<DriverDto>> getAllAvailable(Pageable pageable){
-        return ResponseEntity.ok(driverService.getDriversAvailable(pageable)
+    public ResponseEntity<Set<DriverDto>> getAllAvailable(){
+        return ResponseEntity.ok(driverService.getDriversAvailable()
                 .stream().map(driverMapper::toDto)
                 .collect(Collectors.toSet()));
     }

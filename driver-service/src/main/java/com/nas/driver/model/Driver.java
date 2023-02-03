@@ -7,7 +7,6 @@ import com.nas.driver.enums.DriverStatus;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -22,7 +21,8 @@ public class Driver extends BaseEntity{
     private String carId;
     private String firstName;
     private String lastName;
-    @Enumerated(EnumType.STRING)
+
+    @OneToOne(cascade = CascadeType.ALL)
     private DriverStatus driverStatus;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "driver")
@@ -37,7 +37,7 @@ public class Driver extends BaseEntity{
 
         driver.firstName = driverCommand.getFirstName();
         driver.lastName = driverCommand.getLastName();
-        driver.driverStatus = DriverStatus.AVAILABLE;
+        driver.driverStatus = DriverStatus.create();
         return driver;
     }
     public void addToDriver(NotificationDriver notificationDriver){
@@ -47,9 +47,6 @@ public class Driver extends BaseEntity{
         this.firstName = driverCommand.getFirstName();
         this.lastName = driverCommand.getLastName();
     }
-    /*public void addToSet(NotificationDriver notificationDriver){
-        this.notificationDrivers.add(notificationDriver);
-    }*/
     public static Set<NotificationDriver> createNotificationPayload(Set<CustomerRequestDriver> customerRequestDrivers){
         return customerRequestDrivers
                 .stream().map(

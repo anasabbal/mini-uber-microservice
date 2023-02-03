@@ -36,10 +36,10 @@ public class NotificationDriverController {
        final Page<NotificationDriver> notificationDrivers = new PageImpl<>(notificationDriverList);
         return ResponseEntity.ok(notificationDrivers.map(notificationDriverMapper::toDto));
     }
-    @PostMapping(REQUEST + "/{driverId}")
-    public ResponseEntity<DriverDto> acceptRequest(@PathVariable("driverId") final String driverId,
+    @PostMapping(REQUEST )
+    public ResponseEntity<DriverDto> acceptRequest(
                                                    @RequestBody final AcceptRequestCustomer acceptRequestCustomer){
-        final Driver driver = notificationService.acceptRequest(driverId, acceptRequestCustomer);
+        final Driver driver = notificationService.acceptRequest(acceptRequestCustomer);
         return ResponseEntity.ok(driverMapper.toDto(driver));
     }
 }

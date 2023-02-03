@@ -18,4 +18,9 @@ public class LocationEntity extends BaseEntity{
     @ManyToOne
     private DriverLocation driverLocation;
     private String geoIp;
+
+
+    public void linkToDriver(DriverLocation driverLocation){
+        this.driverLocation = driverLocation;
+    }
 }

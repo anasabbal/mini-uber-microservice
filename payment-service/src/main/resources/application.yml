@@ -17,7 +17,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
     show-sql: true
   datasource:
     driverClassName: org.postgresql.Driver
@@ -26,7 +26,7 @@ spring:
     password: postgres
 
   application:
-    name: payment
+    name: bank-account
   profiles:
     active: default
 

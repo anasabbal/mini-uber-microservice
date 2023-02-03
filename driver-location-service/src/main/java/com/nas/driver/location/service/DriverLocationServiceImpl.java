@@ -31,7 +31,7 @@ public record DriverLocationServiceImpl(
 
         final DriverLocation driverLocation = DriverLocation.create(driverLocationCommand);
         driverLocation.setDriverId(driverLocationId);
-        driverLocation.getLocationEntities().add(location);
+        driverLocation.addToSet(location);
         return driverLocationRepository.save(driverLocation);
     }
 

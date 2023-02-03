@@ -36,13 +36,15 @@ public record DriverServiceImpl(DriverRepository driverRepository,
         driverCommand.validate();
         log.info("Begin creating driver with payload {}", JSONUtil.toJSON(driverCommand));
         final Driver driver = Driver.create(driverCommand);
-        driverRepository.save(driver);
         log.info("Driver with id {} created successfully", driver.getId());
+        driverRepository.save(driver);
         restTemplate.getForObject(
                 "http://DRIVER-LOCATION:8082/v1/driver-location/{driverId}",
-                DriverLocationRequest.class,
+                String.class,
                 driver.getId());
-        restTemplate.getForEntity("http://PAYMENT:2345/v1/bank-account/{userId}", String.class, driver.getId());
+        restTemplate.getForObject(
+                "http://localhost:2345/v1/bank-account/user/{driverId}", String.class,  driver.getId()
+        );
         return driver;
     }
     @Override
@@ -53,12 +55,11 @@ public record DriverServiceImpl(DriverRepository driverRepository,
         log.info("Begin updating driver with payload {}", JSONUtil.toJSON(driverCommand));
         driver.updateInfo(driverCommand);
         log.info("Driver with id {} updated successfully", driver.getId());
+        driverRepository.save(driver);
     }
     @Override
-    public Set<Driver> getDriversAvailable(Pageable pageable) {
-        return getAll(pageable).stream().filter(
-                dv -> dv.getDriverStatus() == DriverStatus.AVAILABLE)
-                .collect(Collectors.toSet());
+    public Set<Driver> getDriversAvailable() {
+        return driverRepository.findByDriverStatusStatus("AVAILABLE");
     }
     @Override
     @RabbitListener(queues = "${spring.rabbitmq.queue}")

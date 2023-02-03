@@ -37,7 +37,7 @@ public class Driver extends BaseEntity{
 
         driver.firstName = driverCommand.getFirstName();
         driver.lastName = driverCommand.getLastName();
-        driver.driverStatus = new DriverStatus();
+        driver.driverStatus = DriverStatus.create();
         return driver;
     }
     public void addToDriver(NotificationDriver notificationDriver){
@@ -47,9 +47,6 @@ public class Driver extends BaseEntity{
         this.firstName = driverCommand.getFirstName();
         this.lastName = driverCommand.getLastName();
     }
-    /*public void addToSet(NotificationDriver notificationDriver){
-        this.notificationDrivers.add(notificationDriver);
-    }*/
     public static Set<NotificationDriver> createNotificationPayload(Set<CustomerRequestDriver> customerRequestDrivers){
         return customerRequestDrivers
                 .stream().map(

@@ -11,5 +11,5 @@ import java.util.List;
 public interface NotificationService {
 
     List<NotificationDriver> getNotificationsByDriverId(String driverId);
-    Driver acceptRequest(final String driverId, final AcceptRequestCustomer acceptRequestCustomer);
+    Driver acceptRequest(final AcceptRequestCustomer acceptRequestCustomer);
 }

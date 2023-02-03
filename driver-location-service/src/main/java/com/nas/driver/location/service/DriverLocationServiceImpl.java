@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 
@@ -19,7 +20,7 @@ import java.io.IOException;
 @Slf4j
 public record DriverLocationServiceImpl(
         DriverLocationRepository driverLocationRepository,
-        LocationService locationService) implements DriverLocationService{
+        LocationService locationService, RestTemplate restTemplate) implements DriverLocationService{
 
     @Override
     public DriverLocation getOne(String driverLocationId) throws IOException, GeoIp2Exception {
@@ -31,6 +32,9 @@ public record DriverLocationServiceImpl(
 
         final DriverLocation driverLocation = DriverLocation.create(driverLocationCommand);
         driverLocation.setDriverId(driverLocationId);
+        restTemplate.getForObject(
+                "http://BANK-ACCOUNT:2345/v1/bank-account/user/{driverId}", String.class,  driverLocationId
+        );
         driverLocation.addToSet(location);
         return driverLocationRepository.save(driverLocation);
     }

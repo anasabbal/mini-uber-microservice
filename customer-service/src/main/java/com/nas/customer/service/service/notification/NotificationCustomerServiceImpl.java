@@ -1,0 +1,12 @@
+package com.nas.customer.service.service.notification;
+
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+@Service
+@Slf4j
+@RequiredArgsConstructor
+public class NotificationCustomerServiceImpl implements NotificationCustomerService{
+}

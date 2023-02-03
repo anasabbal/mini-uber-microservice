@@ -4,6 +4,7 @@ package com.nas.driver.service.driver;
 import com.nas.core.exception.BusinessException;
 import com.nas.core.exception.ExceptionPayloadFactory;
 import com.nas.core.util.JSONUtil;
+import com.nas.driver.command.AcceptRequestCustomer;
 import com.nas.driver.command.CustomerRequestDriver;
 import com.nas.driver.command.DriverCommand;
 import com.nas.driver.criteria.DriverCriteria;
@@ -16,6 +17,7 @@ import com.nas.driver.repository.DriverRepository;
 import com.nas.driver.repository.NotificationDriverRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -30,7 +32,8 @@ import java.util.stream.Collectors;
 public record DriverServiceImpl(DriverRepository driverRepository,
                                 RestTemplate restTemplate,
                                 DriverMapper driverMapper,
-                                NotificationDriverRepository notificationDriverRepository) implements DriverService{
+                                NotificationDriverRepository notificationDriverRepository,
+                                RabbitTemplate rabbitTemplate) implements DriverService{
     @Override
     public Driver create(DriverCommand driverCommand) {
         driverCommand.validate();
@@ -42,9 +45,6 @@ public record DriverServiceImpl(DriverRepository driverRepository,
                 "http://DRIVER-LOCATION:8082/v1/driver-location/{driverId}",
                 String.class,
                 driver.getId());
-        restTemplate.getForObject(
-                "http://localhost:2345/v1/bank-account/user/{driverId}", String.class,  driver.getId()
-        );
         return driver;
     }
     @Override
@@ -70,6 +70,7 @@ public record DriverServiceImpl(DriverRepository driverRepository,
         notificationDriver.setDriver(driver);
         notificationDriverRepository.save(notificationDriver);
     }
+
     @Override
     public Driver findById(String driverId){
       log.info("Begin fetching driver with id {}", driverId);

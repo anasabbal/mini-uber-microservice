@@ -23,6 +23,7 @@
         <module>carrier-service</module>
         <module>payment-service</module>
         <module>api-gateway</module>
+        <module>wallet-service</module>
     </modules>
 
     <properties>

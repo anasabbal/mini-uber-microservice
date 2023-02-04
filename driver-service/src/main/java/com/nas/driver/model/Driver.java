@@ -3,7 +3,6 @@ package com.nas.driver.model;
 
 import com.nas.driver.command.CustomerRequestDriver;
 import com.nas.driver.command.DriverCommand;
-import com.nas.driver.enums.DriverStatus;
 import lombok.*;
 
 import javax.persistence.*;

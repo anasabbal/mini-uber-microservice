@@ -1,7 +1,7 @@
 package com.nas.driver.criteria;
 
 
-import com.nas.driver.enums.DriverStatus;
+import com.nas.driver.model.DriverStatus;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -1,4 +1,4 @@
-package com.nas.driver.enums;
+package com.nas.driver.model;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

@@ -4,14 +4,10 @@ package com.nas.driver.service.driver;
 import com.nas.core.exception.BusinessException;
 import com.nas.core.exception.ExceptionPayloadFactory;
 import com.nas.core.util.JSONUtil;
-import com.nas.driver.command.AcceptRequestCustomer;
 import com.nas.driver.command.CustomerRequestDriver;
 import com.nas.driver.command.DriverCommand;
-import com.nas.driver.criteria.DriverCriteria;
 import com.nas.driver.dto.mapper.DriverMapper;
-import com.nas.driver.enums.DriverStatus;
 import com.nas.driver.model.Driver;
-import com.nas.driver.model.DriverLocationRequest;
 import com.nas.driver.model.NotificationDriver;
 import com.nas.driver.repository.DriverRepository;
 import com.nas.driver.repository.NotificationDriverRepository;
@@ -23,9 +19,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Arrays;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 @Slf4j

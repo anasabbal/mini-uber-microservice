@@ -7,6 +7,7 @@ import lombok.*;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.ManyToOne;
 import java.math.BigDecimal;
 
 @Entity
@@ -21,4 +22,6 @@ public class TransactionWallet extends BaseEntity {
 
     private BigDecimal amount;
 
+    @ManyToOne
+    private Wallet wallet;
 }

@@ -15,3 +15,4 @@
 /.vscode
 /oauth2-service/auth-service-ui.iml
 /driver-location-service/untitled.iml
+/wallet-service/target/

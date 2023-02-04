@@ -19,6 +19,7 @@ public class WalletDto {
     private String updatedBy;
     protected Boolean deleted;
     protected Boolean active;
+    private String accountId;
     private BalanceDto balance;
     private List<Currency> currency;
     private List<TransactionWalletDto> transactionWallets;

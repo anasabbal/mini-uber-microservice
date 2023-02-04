@@ -76,10 +76,10 @@ public class CustomerServiceImpl implements CustomerService{
                 .findAny().orElseThrow(
                 () -> new BusinessException(ExceptionPayloadFactory.DRIVER_LOCATION_NOT_FOUND.get())
         );
-     findById(requestDriver.getCustomerId());
+     final Customer customer = findById(requestDriver.getCustomerId());
      log.info("[+] Begin sending message");
      rabbitTemplate.convertAndSend("customer.exchange", "customer.routingkey", requestDriver);
-     log.info("message send good");
+     log.info("[+] Message send Good :)");
     }
     @RabbitListener(queues = "${spring.rabbitmq.queue}")
     public void listen(ResponseDriver responseDriver){

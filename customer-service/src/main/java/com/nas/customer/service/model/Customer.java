@@ -27,7 +27,7 @@ public class Customer extends BaseEntity{
     @Column(name = "BANK_ACCOUNT_ID")
     private String bankAccountId;
     @Column(name = "DRIVER_ID")
-    private String driverId = null;
+    private String driverId;
 
 
     public static Customer create(final CustomerCommand command){

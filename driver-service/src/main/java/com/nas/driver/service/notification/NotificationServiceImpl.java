@@ -52,4 +52,9 @@ public class NotificationServiceImpl implements NotificationService{
         rabbitTemplate.convertAndSend(acceptRequestCustomer);
         return driverRepository.save(driver);
     }
+
+    @Override
+    public Page<NotificationDriver> getAll(Pageable pageable) {
+        return notificationDriverRepository.findAll(pageable);
+    }
 }

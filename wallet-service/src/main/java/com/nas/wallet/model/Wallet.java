@@ -16,9 +16,11 @@ import java.util.List;
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class Wallet extends BaseEntity{
 
-    private String accountId;
 
-    @OneToOne
+
+
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Balance balance;
 
     @Enumerated(EnumType.STRING)
@@ -28,12 +30,16 @@ public class Wallet extends BaseEntity{
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "wallet")
     private List<TransactionWallet> transactionWallets;
 
+    @Column(name = "ACCOUNT_ID")
+    private String accountId;
 
-    public static Wallet create(){
+
+    public static Wallet create(String accountId){
         final Wallet wallet = new Wallet();
 
         wallet.balance = Balance.create();
         wallet.transactionWallets = new ArrayList<>();
+        wallet.accountId = accountId;
 
         return wallet;
     }

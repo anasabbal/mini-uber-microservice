@@ -43,6 +43,8 @@
     <file url="file://$PROJECT_DIR$/shared-configuration/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wallet-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wallet-service/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/zull-proxy/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/zull-proxy/src/main/resources" charset="UTF-8" />
   </component>

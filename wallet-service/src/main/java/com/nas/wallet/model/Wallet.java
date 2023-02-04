@@ -5,6 +5,7 @@ import com.nas.wallet.enums.Currency;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -24,6 +25,16 @@ public class Wallet extends BaseEntity{
     @ElementCollection(targetClass = Currency.class)
     private List<Currency> currency;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "wallet")
     private List<TransactionWallet> transactionWallets;
+
+
+    public static Wallet create(){
+        final Wallet wallet = new Wallet();
+
+        wallet.balance = Balance.create();
+        wallet.transactionWallets = new ArrayList<>();
+
+        return wallet;
+    }
 }

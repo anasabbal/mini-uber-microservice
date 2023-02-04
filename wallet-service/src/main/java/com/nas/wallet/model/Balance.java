@@ -25,4 +25,13 @@ public class Balance{
     private Currency currency;
 
     private BigDecimal amount;
+
+    public static Balance create(){
+        final Balance balance = new Balance();
+
+        balance.currency = Currency.USD;
+        balance.amount = BigDecimal.valueOf(13);
+
+        return balance;
+    }
 }

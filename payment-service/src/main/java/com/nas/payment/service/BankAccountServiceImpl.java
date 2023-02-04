@@ -11,6 +11,7 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 @Service
 @RequiredArgsConstructor
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Service;
 public class BankAccountServiceImpl implements BankAccountService{
 
     private final BankAccountRepository bankAccountRepository;
+    private final RestTemplate restTemplate;
 
     @Override
     public BankAccount create(String  requestToBankAccount) {

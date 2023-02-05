@@ -2,7 +2,14 @@
 Mini Uber is a ride sharing that hires independent contractors as drivers.
 
 # Setup On Mac
-On your teminal put:
+
+```
+SSH: git@github.com:anasabbal/mini-uber-microservice.git
+HTTPS: https://github.com/anasabbal/mini-uber-microservice.git
+cd mini-uber-microservice
+mvn clean install compile
+mvn spring-boot:run
+```
 ```
 brew install update
 ```

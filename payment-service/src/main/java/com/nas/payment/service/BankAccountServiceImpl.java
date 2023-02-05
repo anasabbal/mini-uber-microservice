@@ -3,11 +3,9 @@ package com.nas.payment.service;
 
 import com.nas.core.util.JSONUtil;
 import com.nas.payment.model.BankAccount;
-import com.nas.payment.payload.RequestToBankAccount;
 import com.nas.payment.repository.BankAccountRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;

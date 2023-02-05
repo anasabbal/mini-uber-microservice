@@ -4,7 +4,6 @@ package com.nas.driver.location.controller;
 import com.maxmind.geoip2.exception.GeoIp2Exception;
 import com.nas.driver.location.dto.DriverLocationDto;
 import com.nas.driver.location.dto.mapper.DriverLocationMapper;
-import com.nas.driver.location.model.DriverLocation;
 import com.nas.driver.location.service.DriverLocationService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

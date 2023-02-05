@@ -27,8 +27,6 @@ spring:
 
   application:
     name: driver
-  profiles:
-    active: default
 
 eureka:
   client:

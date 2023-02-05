@@ -1,7 +1,6 @@
-import React, {useState, useEffect, ChangeEvent} from "react";
+import React, {ChangeEvent, useState} from "react";
 import DriverResponse from "../types/driver";
 import driverService from "../service/driverService";
-
 
 
 const AddDriver: React.FC = () => {

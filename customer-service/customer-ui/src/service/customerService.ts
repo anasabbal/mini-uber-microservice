@@ -2,7 +2,6 @@ import ApiRoutes from "../core/ApiRoutes";
 import http from "../core/http-common";
 import CustomerCommand from "../type/customer";
 import CustomerResponse from "../type/customer";
-import {Params} from "react-router-dom";
 import DriverResponse from "../type/driver";
 import CustomerRequestDriver from "../type/request";
 

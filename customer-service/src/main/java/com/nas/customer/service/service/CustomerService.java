@@ -3,7 +3,6 @@ package com.nas.customer.service.service;
 import com.nas.customer.service.command.CustomerCommand;
 import com.nas.customer.service.command.CustomerInfoUpdateCmd;
 import com.nas.customer.service.command.CustomerRequestDriver;
-import com.nas.customer.service.criteria.CustomerCriteria;
 import com.nas.customer.service.model.Customer;
 import com.nas.customer.service.model.Driver;
 import org.springframework.data.domain.Page;

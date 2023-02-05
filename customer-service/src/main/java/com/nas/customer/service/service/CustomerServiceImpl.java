@@ -4,7 +4,10 @@ package com.nas.customer.service.service;
 import com.nas.core.exception.BusinessException;
 import com.nas.core.exception.ExceptionPayloadFactory;
 import com.nas.core.util.JSONUtil;
-import com.nas.customer.service.command.*;
+import com.nas.customer.service.command.CustomerCommand;
+import com.nas.customer.service.command.CustomerInfoUpdateCmd;
+import com.nas.customer.service.command.CustomerRequestDriver;
+import com.nas.customer.service.command.ResponseDriver;
 import com.nas.customer.service.model.Customer;
 import com.nas.customer.service.model.Driver;
 import com.nas.customer.service.repository.CustomerRepository;
@@ -13,7 +16,6 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,7 +24,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.net.URI;
 import java.util.Set;
 
 @Service

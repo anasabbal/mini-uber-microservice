@@ -5,7 +5,6 @@ import com.nas.car.service.command.CarCommand;
 import com.nas.car.service.enums.CarType;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.redis.core.RedisHash;
 
 import javax.persistence.Entity;
 

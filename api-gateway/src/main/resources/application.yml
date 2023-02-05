@@ -1,43 +1,34 @@
-test:
-  #  hostport: httpbin.org:80
-  #  hostport: localhost:5000
-  #  uri: http://${test.hostport}
-  uri: lb://httpbin
-
-
+server:
+  port: 8000
 spring:
-  jmx:
-    enabled: false
-  cloud:
-    gateway:
-      default-filters:
-        - PrefixPath=/httpbin
-        - AddResponseHeader=X-Response-Default-Foo, Default-Bar
+  cloud.gateway:
+    discovery:
+      locator:
+        enabled: true
+        lowerCaseServiceId: true
+  main:
+    web-application-type: reactive
+  application:
+    name: api-gateway
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
 
-      routes:
-        # =====================================
-        # to run server
-        # $ wscat --listen 9000
-        # to run client
-        # $ wscat --connect ws://localhost:8080/echo
-        - id: websocket_test
-          uri: ws://localhost:9000
-          order: 9000
-          predicates:
-            - Path=/echo
-        # =====================================
-        - id: default_path_to_httpbin
-          uri: ${test.uri}
-          order: 10000
-          predicates:
-            - Path=/**
-
-logging:
-  level:
-    org.springframework.cloud.gateway: TRACE
-    org.springframework.http.server.reactive: DEBUG
-    org.springframework.web.reactive: DEBUG
-    reactor.ipc.netty: DEBUG
-    reactor.netty: DEBUG
-
-management.endpoints.web.exposure.include: '*'
+zuul:
+  routes:
+    driver:
+      path: /v1/driver/**
+      service-id: driver
+    customer:
+      path: /v1/customers
+      service-id: customer
+    driver-location:
+      path: /v1/driver-location
+      service-id: driver-location
+    payment:
+      path: /v1/bank-account
+      service-id: bank-account
+    wallet:
+      path: /v1/wallet
+      service-id: wallet

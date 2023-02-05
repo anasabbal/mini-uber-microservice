@@ -9,4 +9,6 @@ spring:
     name: config-server
   cloud:
     config:
-      uri: http://localhost:8888
+      server:
+        git:
+          uri: https://github.com/anasabbal/mini-uber-microservice/tree/master/config-server

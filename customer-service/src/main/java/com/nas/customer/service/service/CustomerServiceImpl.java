@@ -42,7 +42,6 @@ public class CustomerServiceImpl implements CustomerService{
         log.info("Begin creating customer with payload {}", JSONUtil.toJSON(customerCommand));
         final Customer customer = Customer.create(customerCommand);
         log.info("Customer with payload {} created successfully", JSONUtil.toJSON(customer));
-        log.info("[+] Begin sending message");
         return customerRepository.save(customer);
     }
     @Override

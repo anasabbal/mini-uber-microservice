@@ -37,7 +37,7 @@ public class CustomerController {
         final URI uri = fromCurrentRequest().path("/{id}").buildAndExpand(customer.getId()).toUri();
         return ResponseEntity.created(uri).body(customerMapper.toDto(customer));
     }
-    @PostMapping("/send-request")
+    @PostMapping(SEND_REQUEST)
     public ResponseEntity<String> sendRequestToDriver(@RequestBody final CustomerRequestDriver customerRequestDriver){
         customerService.sendRequestDriver(customerRequestDriver);
         return ResponseEntity.ok("Message send successfully");
@@ -47,7 +47,7 @@ public class CustomerController {
         final Page<Customer> customers = customerService.findAllByDeletedFalse(pageable);
         return ResponseEntity.ok(customers.map(customerMapper::toDto));
     }
-    @GetMapping("/driver/available")
+    @GetMapping(DRIVER_AVAILABLE)
     public ResponseEntity<Set<Driver>> getAllDriversAvailable(){
         return ResponseEntity.ok(customerService.getDriversAvailable());
     }

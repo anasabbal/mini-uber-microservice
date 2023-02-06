@@ -18,4 +18,7 @@ public class ResourcePath {
     public static final String USER = "/user";
     public static final String WALLET = "/wallet";
     public static final String RATINGS = "/ratings";
+    public static final String SEND_REQUEST = "/send-request";
+    public static final String DRIVER_AVAILABLE = "/driver/available";
+    public static final String AVAILABLE = "/available";
 }

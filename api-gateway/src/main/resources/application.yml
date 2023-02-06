@@ -34,4 +34,4 @@ zuul:
       service-id: wallet
     rating-service:
       path: /v1/ratings
-      service-id: rating-service
+      service-id: rating

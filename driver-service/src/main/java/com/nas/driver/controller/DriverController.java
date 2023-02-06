@@ -33,7 +33,7 @@ public class DriverController {
         final URI uri = fromCurrentRequest().path("/{id}").buildAndExpand(driver.getId()).toUri();
         return ResponseEntity.created(uri).body(driverMapper.toDto(driver));
     }
-    @GetMapping("/available")
+    @GetMapping(AVAILABLE)
     public ResponseEntity<Set<DriverDto>> getAllAvailable(){
         return ResponseEntity.ok(driverService.getDriversAvailable()
                 .stream().map(driverMapper::toDto)

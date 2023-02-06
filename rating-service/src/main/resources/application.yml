@@ -16,7 +16,7 @@ spring:
     password: postgres
 
   application:
-    name: rating-service
+    name: rating
   profiles:
     active: default
 

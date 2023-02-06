@@ -1,6 +1,27 @@
 # Mini Uber
 Mini Uber is a ride sharing that hires independent contractors as drivers.
 
+# Table of contents
+- [Introduction](#introduction)
+- [Talk for each service](#talk-for-each-service)
+    - [Customer service]()
+    - [Driver serivce](#)
+    - [Driver location service](#)
+    - [Api gateway service](#)
+    - [Config service](#)
+    - [Payment service](#)
+    - [Wallet service](#)
+    - [Rating service](#)
+- [Setup On Mac](#setup-on-mac)
+- [Even Driven](#)
+  - [Rabbit MQ](#)
+- [Docker](#docker)
+    - [Build](#build)
+    - [Run locally](#run-locally)
+
+
+# Introduction
+# Talk for Each service
 # Setup On Mac
 
 ```
@@ -140,212 +161,3 @@ public class TopicProducer {
 # Circuit Breaker
 
 # Edge Server
-
-# Data JSON Example
-```json
-{
-	"info": {
-		"_postman_id": "4f254243-79ad-4ced-afbe-f4a72dc4f565",
-		"name": "micro",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
-		"_exporter_id": "20437983"
-	},
-	"item": [
-		{
-			"name": "driver",
-			"item": [
-				{
-					"name": "post driver",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"firstName\": \"btn\",\n    \"lastName\": \"btn\",\n    \"notificationDriverRequests\" : []\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "http://localhost:8081/v1/drivers"
-					},
-					"response": []
-				},
-				{
-					"name": "get drivers",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "http://localhost:8081/v1/drivers"
-					},
-					"response": []
-				},
-				{
-					"name": "get driver by id",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "http://localhost:8081/v1/drivers/b1ea3b54-fded-498c-8031-dc0e3dc528c4"
-					},
-					"response": []
-				},
-				{
-					"name": "get drivers availables",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "http://localhost:8081/v1/drivers/available"
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "driver-location",
-			"item": [
-				{
-					"name": "get drivers location",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "http://localhost:8082/v1/driver-location"
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "customer",
-			"item": [
-				{
-					"name": "get customers",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "http://localhost:9091/v1/customers"
-					},
-					"response": []
-				},
-				{
-					"name": "create customer",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"firstName\": \"anas\",\n    \"lastName\": \"abbal\",\n    \"email\": \"anas.abbal10@gmail.com\",\n    \"password\": \"zadina123\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "http://localhost:9091/v1/customers"
-					},
-					"response": []
-				},
-				{
-					"name": "post request to driver",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"driverId\": \"b1ea3b54-fded-498c-8031-dc0e3dc528c4\",\n    \"customerId\": \"8f9f5a44-7bfc-42d6-a73f-898566b9352c\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "http://localhost:9091/v1/customers/send-request"
-					},
-					"response": []
-				},
-				{
-					"name": "get customer by id",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "http://localhost:9091/v1/customers/8f9f5a44-7bfc-42d6-a73f-898566b9352c"
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "bank",
-			"item": [
-				{
-					"name": "get all bank account",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "http://localhost:2345/v1/bank-account"
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "notification",
-			"item": [
-				{
-					"name": "driver-notification",
-					"item": [
-						{
-							"name": "get notification by driver id",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": "http://localhost:8081/v1/notifications/drivers/b1ea3b54-fded-498c-8031-dc0e3dc528c4"
-							},
-							"response": []
-						},
-						{
-							"name": "accept request",
-							"request": {
-								"method": "GET",
-								"header": []
-							},
-							"response": []
-						}
-					]
-				}
-			]
-		},
-		{
-			"name": "wallet",
-			"item": [
-				{
-					"name": "get all wallets",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "http://localhost:2000/v1/wallet"
-					},
-					"response": []
-				},
-				{
-					"name": "get wallet by account id",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "http://localhost:2000/v1/wallet/b1ea3b54-fded-498c-8031-dc0e3dc528c4"
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "rating-service",
-			"item": []
-		},
-		{
-			"name": "api-gateway",
-			"item": []
-		}
-	]
-}
-```

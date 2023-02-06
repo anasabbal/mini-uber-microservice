@@ -17,8 +17,6 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpRequest;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -44,7 +42,6 @@ public record DriverServiceImpl(DriverRepository driverRepository,
                 driver.getId());
         return driver;
     }
-
     @Override
     public String sendRating(RatingCommand ratingCommand) {
         final Driver driver = findById(ratingCommand.getDriverId());
@@ -61,7 +58,6 @@ public record DriverServiceImpl(DriverRepository driverRepository,
             return "Message Not Sent";
         }
     }
-
     @Override
     public void update(String driverId, DriverCommand driverCommand) {
         driverCommand.validate();

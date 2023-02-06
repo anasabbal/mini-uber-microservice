@@ -19,7 +19,6 @@
         <module>config-server</module>
         <module>circuit-breaker</module>
         <module>circuit-breaker-example</module>
-        <module>zull-proxy</module>
         <module>carrier-service</module>
         <module>payment-service</module>
         <module>api-gateway</module>

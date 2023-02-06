@@ -16,7 +16,6 @@
         <module name="api-gateway" />
         <module name="circuit-breaker" />
         <module name="car-service" />
-        <module name="zull-proxy" />
         <module name="eureka-server" />
         <module name="oauth2-service" />
       </profile>
@@ -145,6 +144,7 @@
       <module name="notification-service" target="17" />
       <module name="producer-service" target="17" />
       <module name="shared-configuration" target="17" />
+      <module name="zull-proxy" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

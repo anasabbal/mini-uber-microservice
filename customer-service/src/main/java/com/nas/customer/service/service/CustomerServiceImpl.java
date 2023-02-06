@@ -4,10 +4,7 @@ package com.nas.customer.service.service;
 import com.nas.core.exception.BusinessException;
 import com.nas.core.exception.ExceptionPayloadFactory;
 import com.nas.core.util.JSONUtil;
-import com.nas.customer.service.command.CustomerCommand;
-import com.nas.customer.service.command.CustomerInfoUpdateCmd;
-import com.nas.customer.service.command.CustomerRequestDriver;
-import com.nas.customer.service.command.ResponseDriver;
+import com.nas.customer.service.command.*;
 import com.nas.customer.service.model.Customer;
 import com.nas.customer.service.model.Driver;
 import com.nas.customer.service.repository.CustomerRepository;
@@ -47,6 +44,21 @@ public class CustomerServiceImpl implements CustomerService{
     @Override
     public Page<Customer> findAllByDeletedFalse(Pageable pageable) {
         return customerRepository.findCustomersByDeletedFalse(pageable);
+    }
+    @Override
+    public String sendRating(RatingCommand ratingCommand) {
+        final Customer customer = findById(ratingCommand.getDriverId());
+        final String customerId = customer.getDriverId();
+        if(ratingCommand.getCustomerId().equals(customerId)) {
+            restTemplate.postForEntity(
+                    "http://localhost:8000/rating-service/v1/ratings", ratingCommand,
+                    RatingCommand.class
+            );
+            return "Message Sent";
+        }
+        else{
+            return "Message Not Sent";
+        }
     }
     @Override
     public Customer findById(String customerId) {

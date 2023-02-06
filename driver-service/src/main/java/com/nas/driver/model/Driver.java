@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -28,7 +29,7 @@ public class Driver extends BaseEntity{
     @OneToOne(cascade = CascadeType.ALL)
     private DriverStatus driverStatus;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "driver")
-    private Set<NotificationDriver> notificationDrivers;
+    private List<NotificationDriver> notificationDrivers;
     @Column(name = "BANK_ACCOUNT_ID")
     private String bankAccountId;
 
@@ -40,6 +41,10 @@ public class Driver extends BaseEntity{
         driver.driverStatus = DriverStatus.create();
 
         return driver;
+    }
+    public String getLastNotification(){
+        final NotificationDriver notificationDriver = this.notificationDrivers.get(notificationDrivers.size() - 1);
+        return notificationDriver.getCustomerId();
     }
     public void addToDriver(NotificationDriver notificationDriver){
         this.notificationDrivers.add(notificationDriver);

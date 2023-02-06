@@ -18,7 +18,7 @@ public class JavaConfig {
     }
 
     @Bean
-    public AuditorAware<String> auditorProvider() {
-        return () -> Optional.of("NAS");
+    public AuditorAware<String> auditorProvider(){
+        return () -> Optional.of("NAS_SYSTEM");
     }
 }

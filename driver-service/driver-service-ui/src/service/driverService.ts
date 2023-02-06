@@ -1,8 +1,7 @@
 import DriverCommand from "../types/driver";
+import DriverResponse from "../types/driver";
 import http from "../core/http-common";
 import ApiRoutes from "../core/ApiRoutes";
-import DriverResponse from "../types/driver";
-
 
 
 const findAllByDeletedFalse = () => {

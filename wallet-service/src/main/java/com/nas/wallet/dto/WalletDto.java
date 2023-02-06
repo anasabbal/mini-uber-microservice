@@ -2,9 +2,9 @@ package com.nas.wallet.dto;
 
 
 import com.nas.wallet.enums.Currency;
-import com.nas.wallet.model.Balance;
 import lombok.Getter;
 import lombok.Setter;
+
 import java.time.LocalDateTime;
 import java.util.List;
 

@@ -8,7 +8,6 @@ import com.nas.auth.payload.UserDetailsImpl;
 import com.nas.auth.repository.AuthRepository;
 import com.nas.auth.security.UserDetailsServiceImpl;
 import com.nas.auth.utils.TokenHandler;
-import com.nas.auth.utils.TokenHandler2;
 import com.nas.core.exception.BusinessException;
 import com.nas.core.exception.ExceptionPayloadFactory;
 import com.nas.core.util.JSONUtil;

@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import DriverResponse from "../types/driver";
 import driverService from "../service/driverService";
-import DriverCommand from "../types/driver";
 
 
 const DriverList: React.FC = () => {

@@ -7,6 +7,8 @@ import com.nas.rating.models.Rating;
 import com.nas.rating.repository.RatingRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -23,5 +25,10 @@ public class RatingServiceImpl implements RatingService{
         final Rating rating = Rating.create(ratingCommand);
         log.info("[+] Rating with id {} created successfully", rating.getId());
         return ratingRepository.save(rating);
+    }
+
+    @Override
+    public Page<Rating> getRatings(Pageable pageable) {
+        return ratingRepository.findAll(pageable);
     }
 }

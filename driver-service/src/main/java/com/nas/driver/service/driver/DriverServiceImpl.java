@@ -51,7 +51,8 @@ public record DriverServiceImpl(DriverRepository driverRepository,
         final String customerId = driver.getLastNotification();
         if(ratingCommand.getCustomerId().equals(customerId)) {
             restTemplate.postForEntity(
-                    "http://localhost:8000/rating-service/v1/ratings", ratingCommand,
+                    "http://RATING:2018/v1/ratings",
+                    ratingCommand,
                     RatingCommand.class
             );
             return "Message Sent";

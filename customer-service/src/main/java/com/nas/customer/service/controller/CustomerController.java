@@ -4,6 +4,7 @@ package com.nas.customer.service.controller;
 import com.nas.customer.service.command.CustomerCommand;
 import com.nas.customer.service.command.CustomerInfoUpdateCmd;
 import com.nas.customer.service.command.CustomerRequestDriver;
+import com.nas.customer.service.command.RatingCommand;
 import com.nas.customer.service.dto.CustomerDto;
 import com.nas.customer.service.dto.mapper.CustomerMapper;
 import com.nas.customer.service.model.Customer;
@@ -18,8 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.Set;
 
-import static com.nas.core.constants.ResourcePath.CUSTOMERS;
-import static com.nas.core.constants.ResourcePath.V1;
+import static com.nas.core.constants.ResourcePath.*;
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
 @RestController
@@ -61,5 +61,9 @@ public class CustomerController {
                                        @RequestBody final CustomerInfoUpdateCmd command){
         customerService.updateInfo(command, customerId);
         return ResponseEntity.noContent().build();
+    }
+    @PostMapping(RATINGS)
+    public ResponseEntity<String> sendRating(@RequestBody final RatingCommand ratingCommand){
+        return ResponseEntity.ok(customerService.sendRating(ratingCommand));
     }
 }

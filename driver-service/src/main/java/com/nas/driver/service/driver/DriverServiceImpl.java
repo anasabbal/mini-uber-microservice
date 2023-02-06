@@ -6,6 +6,7 @@ import com.nas.core.exception.ExceptionPayloadFactory;
 import com.nas.core.util.JSONUtil;
 import com.nas.driver.command.CustomerRequestDriver;
 import com.nas.driver.command.DriverCommand;
+import com.nas.driver.command.RatingCommand;
 import com.nas.driver.dto.mapper.DriverMapper;
 import com.nas.driver.model.Driver;
 import com.nas.driver.model.NotificationDriver;
@@ -16,6 +17,8 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -41,6 +44,23 @@ public record DriverServiceImpl(DriverRepository driverRepository,
                 driver.getId());
         return driver;
     }
+
+    @Override
+    public String sendRating(RatingCommand ratingCommand) {
+        final Driver driver = findById(ratingCommand.getDriverId());
+        final String customerId = driver.getLastNotification();
+        if(ratingCommand.getCustomerId().equals(customerId)) {
+            restTemplate.postForEntity(
+                    "http://localhost:8000/rating-service/v1/ratings", ratingCommand,
+                    RatingCommand.class
+            );
+            return "Message Sent";
+        }
+        else{
+            return "Message Not Sent";
+        }
+    }
+
     @Override
     public void update(String driverId, DriverCommand driverCommand) {
         driverCommand.validate();
@@ -55,6 +75,7 @@ public record DriverServiceImpl(DriverRepository driverRepository,
     public Set<Driver> getDriversAvailable() {
         return driverRepository.findByDriverStatusStatus("AVAILABLE");
     }
+
     @Override
     @RabbitListener(queues = "${spring.rabbitmq.queue}")
     public void listenToMessage(CustomerRequestDriver payload){

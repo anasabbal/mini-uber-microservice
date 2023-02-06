@@ -2,6 +2,7 @@ package com.nas.driver.controller;
 
 
 import com.nas.driver.command.DriverCommand;
+import com.nas.driver.command.RatingCommand;
 import com.nas.driver.dto.DriverDto;
 import com.nas.driver.dto.mapper.DriverMapper;
 import com.nas.driver.model.Driver;
@@ -16,8 +17,7 @@ import java.net.URI;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static com.nas.core.constants.ResourcePath.DRIVERS;
-import static com.nas.core.constants.ResourcePath.V1;
+import static com.nas.core.constants.ResourcePath.*;
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
 @RestController
@@ -54,5 +54,9 @@ public class DriverController {
             @RequestBody final DriverCommand driverCommand){
         driverService.update(driverId, driverCommand);
         return ResponseEntity.noContent().build();
+    }
+    @PostMapping(RATINGS)
+    public ResponseEntity<String> sendRating(@RequestBody final RatingCommand ratingCommand){
+        return ResponseEntity.ok(driverService.sendRating(ratingCommand));
     }
 }

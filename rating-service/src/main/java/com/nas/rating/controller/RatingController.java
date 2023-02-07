@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 
-import static com.nas.core.constants.ResourcePath.RATINGS;
-import static com.nas.core.constants.ResourcePath.V1;
+import static com.nas.core.constants.ResourcePath.*;
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
 @RestController
@@ -32,5 +31,9 @@ public class RatingController {
     @GetMapping
     public ResponseEntity<Page<Rating>> getRatings(Pageable pageable){
         return ResponseEntity.ok(ratingService.getRatings(pageable));
+    }
+    @GetMapping(DRIVERS + "/{driverId}")
+    public ResponseEntity<Rating> getByDriverId(@PathVariable("driverId") final String driverId){
+        return ResponseEntity.ok(ratingService.findRatingByDriverId(driverId));
     }
 }

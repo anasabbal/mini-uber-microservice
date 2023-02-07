@@ -26,7 +26,7 @@ public class UserDetailsImpl implements UserDetails {
         this.authorities = authorities;
     }
     public static UserDetailsImpl build(Account account){
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + account.getRoles());
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + account.getRole().getRoleType());
         return new UserDetailsImpl(
                 account.getId(),
                 account.getEmail(),

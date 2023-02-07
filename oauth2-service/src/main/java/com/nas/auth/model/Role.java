@@ -20,8 +20,8 @@ public class Role extends BaseEntity{
 
     public static Role create(){
         final Role role = new Role();
-        role.roleType = RoleType.CUSTOMER;
 
+        role.roleType = RoleType.CUSTOMER;
         return role;
     }
 }

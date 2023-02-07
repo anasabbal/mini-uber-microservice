@@ -8,6 +8,5 @@ import lombok.Setter;
 @Setter
 public class RatingCommand {
     private Integer ratingScore;
-    private String customerId;
-    private String driverId;
+    private String userId;
 }

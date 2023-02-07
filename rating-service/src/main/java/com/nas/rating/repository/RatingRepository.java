@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RatingRepository extends JpaRepository<Rating, String> {
+    Rating findRatingByUserId(String id);
 }

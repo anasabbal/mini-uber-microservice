@@ -8,7 +8,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -27,14 +29,11 @@ public class Account extends BaseEntity{
     private String email;
     @Column(name = "PASSWORD")
     private String password;
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    private Set<Role> roles = new HashSet<>();
 
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Role role;
+
+    @Column(name = "CUSTOMER_ID")
     private String customerId;
 
     public static Account create(final UserCommand userCommand){
@@ -43,7 +42,7 @@ public class Account extends BaseEntity{
         account.userName = userCommand.getUserName();
         account.email = userCommand.getEmail();
         account.password = userCommand.getPassword();
-        account.roles.add(Role.create());
+        account.role = Role.create();
         return account;
     }
 }

@@ -1,7 +1,7 @@
 package com.nas.auth.security;
 
 
-import com.nas.auth.utils.TokenHandler2;
+import com.nas.auth.utils.TokenHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,7 +23,7 @@ public class UserAuthenticationFilter extends OncePerRequestFilter {
     private UserDetailsServiceImpl userDetailsService;
 
     @Autowired
-    private TokenHandler2 tokenHandler;
+    private TokenHandler tokenHandler;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)

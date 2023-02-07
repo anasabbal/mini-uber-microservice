@@ -8,4 +8,6 @@ import org.springframework.data.domain.Pageable;
 public interface RatingService {
     Rating createRating(final RatingCommand ratingCommand);
     Page<Rating> getRatings(Pageable pageable);
+    Rating findById(String ratingId);
+    Rating findRatingByDriverId(String driverId);
 }

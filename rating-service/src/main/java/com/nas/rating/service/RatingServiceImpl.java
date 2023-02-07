@@ -1,6 +1,8 @@
 package com.nas.rating.service;
 
 
+import com.nas.core.exception.BusinessException;
+import com.nas.core.exception.ExceptionPayloadFactory;
 import com.nas.core.util.JSONUtil;
 import com.nas.rating.command.RatingCommand;
 import com.nas.rating.models.Rating;
@@ -30,5 +32,22 @@ public class RatingServiceImpl implements RatingService{
     @Override
     public Page<Rating> getRatings(Pageable pageable) {
         return ratingRepository.findAll(pageable);
+    }
+    @Override
+    public Rating findById(String ratingId){
+        log.info("[+] Begin fetching rating with driver id {}", ratingId);
+        final Rating rating = ratingRepository.findById(ratingId).orElseThrow(
+                () -> new BusinessException(ExceptionPayloadFactory.RATING_NOT_FOUND.get())
+        );
+        log.info("[+] Rating with id {} fetched successfully", rating.getId());
+        return rating;
+    }
+
+    @Override
+    public Rating findRatingByDriverId(String driverId) {
+        log.info("[+] Begin fetching rating with driver id {}", driverId);
+        final Rating rating = ratingRepository.findRatingByUserId(driverId);
+        log.info("[+] Rating with id {} fetched successfully", rating.getId());
+        return rating;
     }
 }

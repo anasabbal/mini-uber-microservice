@@ -68,7 +68,7 @@ public class UserServiceImpl implements UserService{
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
 
-        final String token = tokenHandler.generateToken((Authentication) userDetails);
+        final String token = tokenHandler.generateToken(userDetails);
         log.info("token : {}", token);
         log.info("authority {}", userDetails.getAuthorities());
         return new JwtResponse(base.getUserId(), token, base.getUsername(), roles);

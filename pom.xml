@@ -24,6 +24,7 @@
         <module>api-gateway</module>
         <module>wallet-service</module>
         <module>rating-service</module>
+        <module>booking-service</module>
     </modules>
 
     <properties>

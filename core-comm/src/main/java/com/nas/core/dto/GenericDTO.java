@@ -12,7 +12,7 @@ public class GenericDTO<E, D> {
     private final E entity;
     private final D dto;
 
-    public GenericDTO(E entity, D dto){
+    public GenericDTO(E entity, D dto) {
         this.entity = entity;
         this.dto = dto;
     }
@@ -32,7 +32,7 @@ public class GenericDTO<E, D> {
         }
         return objs;
     }
-    public static List<String> merge(List<String> list){
+    public static List<String> merge(List<String> list) {
         final List<String> newList = new ArrayList<>();
 
         for(String str: list){

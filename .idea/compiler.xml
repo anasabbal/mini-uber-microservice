@@ -13,6 +13,7 @@
         <module name="carrier-service" />
         <module name="rabbitmq-example" />
         <module name="circuit-breaker-example" />
+        <module name="booking-service" />
         <module name="api-gateway" />
         <module name="circuit-breaker" />
         <module name="car-service" />
@@ -106,15 +107,6 @@
         </processorPath>
         <module name="wallet-service" />
       </profile>
-      <profile name="Annotation profile for sport-micro" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.24/lombok-1.18.24.jar" />
-        </processorPath>
-        <module name="core-comm" />
-      </profile>
       <profile name="Annotation profile for rating-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -135,6 +127,15 @@
           <entry name="$MAVEN_REPOSITORY$/com/sun/xml/fastinfoset/FastInfoset/1.2.15/FastInfoset-1.2.15.jar" />
         </processorPath>
         <module name="rating-service" />
+      </profile>
+      <profile name="Annotation profile for sport-micro" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.24/lombok-1.18.24.jar" />
+        </processorPath>
+        <module name="core-comm" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

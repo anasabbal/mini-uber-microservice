@@ -21,6 +21,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -35,7 +36,7 @@ public class CustomerServiceImpl implements CustomerService{
     @SneakyThrows
     @Override
     public Customer create(CustomerCommand customerCommand) {
-        customerCommand.validate();
+        //customerCommand.validate();
         log.info("Begin creating customer with payload {}", JSONUtil.toJSON(customerCommand));
         final Customer customer = Customer.create(customerCommand);
         log.info("Customer with payload {} created successfully", JSONUtil.toJSON(customer));
@@ -106,5 +107,8 @@ public class CustomerServiceImpl implements CustomerService{
         final Customer customer = findById(customerId);
         customer.updateInfo(customerCommand);
         customerRepository.save(customer);
+    }
+    public List<Customer> findAll(){
+        return customerRepository.findAll();
     }
 }

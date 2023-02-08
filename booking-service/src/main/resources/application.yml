@@ -1,4 +1,14 @@
 spring:
+  # config rabbitmq for producer
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    queue: booking.queue
+    template:
+      exchange: booking.exchange
+      routing-key: booking.routingkey
   application:
     name: booking-service
   redis:

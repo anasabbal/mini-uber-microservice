@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
 import java.lang.reflect.ParameterizedType;
-import java.util.Map;
+
 
 
 
@@ -28,11 +28,6 @@ public class BaseRepositoryImpl<E> implements BaseRepository<String, E>{
     @PostConstruct
     private void init(){
         hashOperations = redisTemplate.opsForHash();
-    }
-
-    @Override
-    public Map<String, E> findAll() throws InstantiationException, IllegalAccessException {
-        return hashOperations.@(getParameterTypeName(), null);
     }
 
     @SneakyThrows

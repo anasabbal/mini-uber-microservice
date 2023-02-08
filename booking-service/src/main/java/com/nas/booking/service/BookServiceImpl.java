@@ -1,8 +1,7 @@
 package com.nas.booking.service;
 
 
-import com.nas.booking.models.Book;
-import com.nas.booking.repository.BookRepository;
+import com.nas.booking.models.Booking;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +13,7 @@ public class BookServiceImpl implements BookService{
 
 
     @Override
-    public Book create(Book book) {
+    public Booking create(Booking booking) {
         return null;
     }
 }

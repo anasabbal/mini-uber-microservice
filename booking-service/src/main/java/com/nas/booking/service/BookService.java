@@ -1,7 +1,7 @@
 package com.nas.booking.service;
 
-import com.nas.booking.models.Book;
+import com.nas.booking.models.Booking;
 
 public interface BookService {
-    Book create(final Book book);
+    Booking create(final Booking booking);
 }

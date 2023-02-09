@@ -1,8 +1,8 @@
 package com.nas.driver.command;
 
+import com.nas.core.util.AssertValidation;
 import lombok.Getter;
 import lombok.Setter;
-import com.nas.core.util.AssertValidation;
 
 @Getter
 @Setter

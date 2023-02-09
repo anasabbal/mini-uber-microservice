@@ -7,16 +7,12 @@ import com.nas.driver.dto.NotificationDriverDto;
 import com.nas.driver.dto.mapper.DriverMapper;
 import com.nas.driver.dto.mapper.NotificationDriverMapper;
 import com.nas.driver.model.Driver;
-import com.nas.driver.model.NotificationDriver;
 import com.nas.driver.service.notification.NotificationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 import static com.nas.core.constants.ResourcePath.*;
 

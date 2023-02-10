@@ -3,6 +3,7 @@ package com.nas.customer.service.service;
 import com.nas.customer.service.command.CustomerCommand;
 import com.nas.customer.service.model.Customer;
 import com.nas.customer.service.repository.CustomerRepository;
+import com.nas.customer.service.service.customer.CustomerServiceImpl;
 import org.junit.BeforeClass;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

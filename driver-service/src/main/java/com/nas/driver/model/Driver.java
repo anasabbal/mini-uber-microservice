@@ -34,7 +34,7 @@ public class Driver extends BaseEntity{
     @Column(name = "BANK_ACCOUNT_ID")
     private String bankAccountId;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "driver")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "driver")
     private List<Address> addresses;
 
 

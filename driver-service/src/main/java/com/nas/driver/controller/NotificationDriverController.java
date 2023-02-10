@@ -35,7 +35,7 @@ public class NotificationDriverController {
         return ResponseEntity.ok(notificationService.getAll(pageable).map(notificationDriverMapper::toDto));
     }
     @GetMapping(DRIVERS + "/{driverId}")
-    public ResponseEntity<Page<NotificationDriverDto>> findAllByDriverId(@PathVariable("driverId") final String driverId){
-        return ResponseEntity.ok(notificationService.findAllByDriverId(driverId).map(notificationDriverMapper::toDto));
+    public ResponseEntity<Page<NotificationDriverDto>> findAllByDriverId(@PathVariable("driverId") final String driverId, Pageable pageable){
+        return ResponseEntity.ok(notificationService.findAllByDriverId(pageable, driverId).map(notificationDriverMapper::toDto));
     }
 }

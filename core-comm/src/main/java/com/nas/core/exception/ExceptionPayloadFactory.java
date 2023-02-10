@@ -21,7 +21,8 @@ public enum ExceptionPayloadFactory {
     DRIVER_LOCATION_NOT_FOUND(7, HttpStatus.NOT_FOUND, "driver.location.not.found"),
     CAR_NOT_FOUND(8, HttpStatus.NOT_FOUND, "car.not.found"),
     LOCATION_NOT_FOUND(9, HttpStatus.NOT_FOUND, "location.not.found"),
-    RATING_NOT_FOUND(10, HttpStatus.NOT_FOUND, "rating.not.found");
+    RATING_NOT_FOUND(10, HttpStatus.NOT_FOUND, "rating.not.found"),
+    ORDER_NOT_FOUND(11, HttpStatus.NOT_FOUND, "order.not.found");
 
     private final Integer code;
     private final HttpStatus status;

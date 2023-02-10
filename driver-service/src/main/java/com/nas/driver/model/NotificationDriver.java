@@ -7,9 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 
 @Entity
@@ -20,7 +18,7 @@ import javax.persistence.ManyToOne;
 public class NotificationDriver extends BaseEntity{
     @Column(name = "CUSTOMER_ID")
     private String customerId;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL ,fetch = FetchType.EAGER)
     private Driver driver;
 
     public static NotificationDriver create(final CustomerRequestDriver customerRequestDriver){

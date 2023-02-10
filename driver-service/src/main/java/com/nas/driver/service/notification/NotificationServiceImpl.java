@@ -53,11 +53,11 @@ public class NotificationServiceImpl implements NotificationService{
     }
 
     @Override
-    public Page<NotificationDriver> findAllByDriverId(String driverId) {
+    public Page<NotificationDriver> findAllByDriverId(Pageable pageable, String driverId) {
         final Driver driver = driverRepository.findById(driverId).orElseThrow(
                 () -> new BusinessException(ExceptionPayloadFactory.DRIVER_NOT_FOUND.get()));
         log.info("Driver with id {} fetched successfully", driverId);
-        return notificationDriverRepository.findAllByDriver(driver);
+        return notificationDriverRepository.findAllByDriver(pageable, driver);
     }
 
     @Override

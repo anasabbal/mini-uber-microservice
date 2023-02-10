@@ -1,4 +1,4 @@
-package com.nas.customer.service.service;
+package com.nas.customer.service.service.customer;
 
 
 import com.nas.core.exception.BusinessException;
@@ -36,10 +36,10 @@ public class CustomerServiceImpl implements CustomerService{
     @SneakyThrows
     @Override
     public Customer create(CustomerCommand customerCommand) {
-        //customerCommand.validate();
+        customerCommand.validate();
         log.info("Begin creating customer with payload {}", JSONUtil.toJSON(customerCommand));
         final Customer customer = Customer.create(customerCommand);
-        log.info("Customer with payload {} created successfully", JSONUtil.toJSON(customer));
+        log.info("Customer with id {} created successfully", JSONUtil.toJSON(customer.getId()));
         return customerRepository.save(customer);
     }
     @Override
@@ -49,17 +49,11 @@ public class CustomerServiceImpl implements CustomerService{
     @Override
     public String sendRating(RatingCommand ratingCommand) {
         final Customer customer = findById(ratingCommand.getDriverId());
-        final String customerId = customer.getDriverId();
-        if(ratingCommand.getCustomerId().equals(customerId)) {
-            restTemplate.postForEntity(
-                    "http://localhost:8000/rating-service/v1/ratings", ratingCommand,
-                    RatingCommand.class
-            );
-            return "Message Sent";
-        }
-        else{
-            return "Message Not Sent";
-        }
+        restTemplate.postForEntity(
+                "http://localhost:8000/rating-service/v1/ratings", ratingCommand,
+                RatingCommand.class
+        );
+        return "Message Sent successfully !!";
     }
     @Override
     public Customer findById(String customerId) {
@@ -78,7 +72,7 @@ public class CustomerServiceImpl implements CustomerService{
                 null,
                 new ParameterizedTypeReference<>() {
                 });
-        log.info("Object with payload {}", JSONUtil.toJSON(objects.getBody()));
+        log.info("Drivers with payload {}", JSONUtil.toJSON(objects.getBody()));
         return objects.getBody();
     }
     @Override
@@ -88,11 +82,10 @@ public class CustomerServiceImpl implements CustomerService{
                 dv -> dv.getId().equals(requestDriver.getDriverId()))
                 .findAny().orElseThrow(
                 () -> new BusinessException(ExceptionPayloadFactory.DRIVER_LOCATION_NOT_FOUND.get())
-        );
-     final Customer customer = findById(requestDriver.getCustomerId());
-     log.info("[+] Begin sending message");
+             );
+     log.info("[+] Begin sending message with payload {}", JSONUtil.toJSON(requestDriver));
      rabbitTemplate.convertAndSend("customer.exchange", "customer.routingkey", requestDriver);
-     log.info("[+] Message send Good :)");
+     log.info("[+] Message with payload {} send Good :)", JSONUtil.toJSON(requestDriver));
     }
     @RabbitListener(queues = "${spring.rabbitmq.queue}")
     public void listen(ResponseDriver responseDriver){

@@ -2,6 +2,7 @@ package com.nas.auth.security;
 
 
 import com.nas.auth.utils.TokenHandler;
+import com.nas.core.util.JSONUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -39,10 +40,12 @@ public class UserAuthenticationFilter extends OncePerRequestFilter {
         email = tokenHandler.extractUsername(jwt);
         if(email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = userDetailsService.loadUserByUsername(email);
+            log.info("Begin fetching userDetails with payload {}", JSONUtil.toJSON(userDetails));
             if (tokenHandler.isTokenValid(jwt, userDetails)) {
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                         userDetails, null, userDetails.getAuthorities()
                 );
+                log.info("authToken with payload {}", JSONUtil.toJSON(authToken));
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authToken);
             }

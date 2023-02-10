@@ -9,7 +9,7 @@ import com.nas.customer.service.dto.CustomerDto;
 import com.nas.customer.service.dto.mapper.CustomerMapper;
 import com.nas.customer.service.model.Customer;
 import com.nas.customer.service.model.Driver;
-import com.nas.customer.service.service.CustomerService;
+import com.nas.customer.service.service.customer.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

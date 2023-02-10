@@ -25,6 +25,7 @@
         <module>wallet-service</module>
         <module>rating-service</module>
         <module>booking-service</module>
+        <module>order-service</module>
     </modules>
 
     <properties>

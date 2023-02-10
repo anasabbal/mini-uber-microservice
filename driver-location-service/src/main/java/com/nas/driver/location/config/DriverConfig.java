@@ -27,7 +27,6 @@ public class DriverConfig {
 
     @Bean
     public AuditorAware<String> auditorProvider() {
-        // TODO : take into consideration the authenticated user
         return () -> Optional.of("NAS");
     }
 }

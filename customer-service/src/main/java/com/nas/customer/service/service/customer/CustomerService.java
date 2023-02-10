@@ -1,4 +1,4 @@
-package com.nas.customer.service.service;
+package com.nas.customer.service.service.customer;
 
 import com.nas.customer.service.command.CustomerCommand;
 import com.nas.customer.service.command.CustomerInfoUpdateCmd;

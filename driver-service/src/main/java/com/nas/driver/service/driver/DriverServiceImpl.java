@@ -82,7 +82,6 @@ public record DriverServiceImpl(DriverRepository driverRepository,
         notificationDriver.setDriver(driver);
         notificationDriverRepository.save(notificationDriver);
     }
-
     @Override
     public Driver findById(String driverId){
         log.info("Begin fetching driver with id {}", driverId);

@@ -1,6 +1,10 @@
 package com.nas.driver.model;
 
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,6 +36,8 @@ public abstract class BaseEntity {
     private Integer version;
 
     @CreatedDate
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @Column(name = "CREATED_AT", updatable = false)
     private LocalDateTime createdAt;
 
@@ -40,6 +46,8 @@ public abstract class BaseEntity {
     private String createdBy = "NAS SYSTEM";
 
     @LastModifiedDate
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @Column(name = "UPDATED_AT")
     private LocalDateTime updatedAt;
 
@@ -53,5 +61,3 @@ public abstract class BaseEntity {
     @Column(name = "ACTIVE")
     protected Boolean active = true;
 }
-
-

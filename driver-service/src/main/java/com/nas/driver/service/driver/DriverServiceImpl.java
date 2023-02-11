@@ -61,11 +61,11 @@ public record DriverServiceImpl(DriverRepository driverRepository,
     @Override
     public void update(String driverId, DriverCommand driverCommand) {
         driverCommand.validate();
-        log.info("Begin updating driver with id {}", driverId);
-        final Driver driver =findById(driverId); 
-        log.info("Begin updating driver with payload {}", JSONUtil.toJSON(driverCommand));
+        log.info("[+] Begin updating driver with id {}", driverId);
+        final Driver driver =findById(driverId);
+        log.info("[+] Begin updating driver with payload {}", JSONUtil.toJSON(driverCommand));
         driver.updateInfo(driverCommand);
-        log.info("Driver with id {} updated successfully", driver.getId());
+        log.info("[+] Driver with id {} updated successfully", driver.getId());
         driverRepository.save(driver);
     }
     @Override
@@ -76,7 +76,7 @@ public record DriverServiceImpl(DriverRepository driverRepository,
     @Override
     @RabbitListener(queues = "${spring.rabbitmq.queue}")
     public void listenToMessage(CustomerRequestDriver payload){
-        log.info(String.format("Received message -> %s", JSONUtil.toJSON(payload)));
+        log.info(String.format("[+] Received message -> %s", JSONUtil.toJSON(payload)));
         final Driver driver = findById(payload.getDriverId());
         final NotificationDriver notificationDriver = NotificationDriver.create(payload);
         notificationDriver.setDriver(driver);
@@ -85,14 +85,15 @@ public record DriverServiceImpl(DriverRepository driverRepository,
 
     @Override
     public Driver findById(String driverId){
-      log.info("Begin fetching driver with id {}", driverId);
-      final Driver driver = driverRepository.findById(driverId).orElseThrow(
-          () -> new BusinessException(ExceptionPayloadFactory.DRIVER_NOT_FOUND.get()));
-      log.info("Driver with id {} fetched successfully", driverId);
-      return driver;
+        log.info("Begin fetching driver with id {}", driverId);
+        final Driver driver = driverRepository.findById(driverId).orElseThrow(
+                () -> new BusinessException(ExceptionPayloadFactory.DRIVER_NOT_FOUND.get()));
+        log.info("Driver with id {} fetched successfully", driverId);
+        return driver;
     }
     @Override
     public Page<Driver> getAll(Pageable pageable) {
         return driverRepository.findAllByDeletedFalse(pageable);
     }
 }
+

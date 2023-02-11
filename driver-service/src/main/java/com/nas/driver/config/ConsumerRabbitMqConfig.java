@@ -39,11 +39,6 @@ public class ConsumerRabbitMqConfig {
     Queue queue() {
         return new Queue(queue, true);
     }
-
-    /**
-     *
-     * @return
-     */
     @Bean
     Exchange myExchange() {
         return ExchangeBuilder.directExchange(exchange).durable(true).build();

@@ -29,7 +29,7 @@ public class Driver extends BaseEntity{
     private String lastName;
     @OneToOne(cascade = CascadeType.ALL)
     private DriverStatus driverStatus;
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "driver")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, mappedBy = "driver")
     private List<NotificationDriver> notificationDrivers;
     @Column(name = "BANK_ACCOUNT_ID")
     private String bankAccountId;
@@ -48,8 +48,12 @@ public class Driver extends BaseEntity{
         return driver;
     }
     public String getLastNotification(){
-        final NotificationDriver notificationDriver = this.notificationDrivers.get(notificationDrivers.size() - 1);
-        return notificationDriver.getCustomerId();
+        if(this.notificationDrivers.isEmpty()){
+            return null;
+        }else{
+            final NotificationDriver notificationDriver = this.notificationDrivers.get(notificationDrivers.size() - 1);
+            return notificationDriver.getCustomerId();
+        }
     }
     public void addToDriver(NotificationDriver notificationDriver){
         this.notificationDrivers.add(notificationDriver);

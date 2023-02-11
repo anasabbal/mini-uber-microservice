@@ -1,5 +1,6 @@
 package com.nas.driver.location.dto;
 
+import com.nas.driver.location.model.GeoIp;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,12 +14,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class LocationEntityDto {
     protected String id;
-    private Integer version;
-    private LocalDateTime createdAt;
-    private String createdBy;
-    private LocalDateTime updatedAt;
-    private String updatedBy;
-    protected Boolean deleted;
     protected Boolean active;
-    private String geoIp;
+    private GeoIp geoIp;
 }

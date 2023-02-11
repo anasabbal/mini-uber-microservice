@@ -9,6 +9,7 @@ import com.nas.core.exception.ExceptionPayloadFactory;
 import com.nas.core.util.JSONUtil;
 import com.nas.driver.location.model.GeoIp;
 import com.nas.driver.location.model.LocationEntity;
+import com.nas.driver.location.repository.GeoIpRepository;
 import com.nas.driver.location.repository.LocationEntityRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ import java.net.MalformedURLException;
 @Slf4j
 public record LocationServiceImpl(
         LocationEntityRepository locationEntityRepository,
-        DatabaseReader databaseReader) implements LocationService{
+        DatabaseReader databaseReader, GeoIpRepository geoIpRepository) implements LocationService{
 
     @Override
     public LocationEntity create() throws IOException, GeoIp2Exception {
@@ -30,11 +31,12 @@ public record LocationServiceImpl(
         log.info("IP ADDRESS => {}", ipAddress);
         final GeoIp geoIp = getLocation("128.101.101.101");
 
-        location.setGeoIp(geoIp.getId());
+        location.setGeoIp(geoIp);
+        geoIpRepository.save(geoIp);
         log.info("Location with payload {} saved successfully", JSONUtil.toJSON(location));
         return locationEntityRepository.save(location);
     }
-    private String getIpAddress() throws MalformedURLException, IOException {
+    private String getIpAddress() throws IOException {
         InetAddress inetAddress = InetAddress.getLocalHost();
         String _inetAddress = InetAddress.getLocalHost().getHostAddress().trim();
         log.info("Your current IP Address : {}", _inetAddress);

@@ -1,19 +1,29 @@
 package com.nas.driver.location.model;
 
 
-import lombok.Data;
+
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 
-@Data
-public class GeoIp {
+@Entity
+@Getter
+@Setter
+@NoArgsConstructor
+public class GeoIp{
 
-
+    @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    private String id;
+    @Column(name = "ID")
+    @EqualsAndHashCode.Include
+    protected String id;
+
     private String ipAddress;
     private String country;
     private String city;

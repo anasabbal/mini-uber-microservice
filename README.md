@@ -4,8 +4,8 @@ Mini Uber is a ride sharing that hires independent contractors as drivers.
 # Table of contents
 - [Introduction](#introduction)
 - [Talk for each service](#talk-for-each-service)
-    - [Customer service]()
-    - [Driver serivce](#)
+    - [Customer service](#customer-service)
+    - [Driver serivce](#driver-service)
     - [Driver location service](#)
     - [Api gateway service](#)
     - [Config service](#)
@@ -22,6 +22,17 @@ Mini Uber is a ride sharing that hires independent contractors as drivers.
 
 # Introduction
 # Talk for Each service
+##### Customer Service
+- create account in Nuber 
+- update profile
+- get available drivers 
+- send request to driver
+- payment
+- find job from Nuber carriers
+- earn money from sending link to another client that create account in Nuber
+- post rating for driver
+
+##### Driver Service
 # Setup On Mac
 
 ```

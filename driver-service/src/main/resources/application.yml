@@ -8,6 +8,7 @@ spring:
     template:
       routing-key: customer.routingkey
       exchange: customer.exchange
+    
   devtools:
     livereload:
       enabled: true

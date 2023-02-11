@@ -11,7 +11,6 @@ import com.nas.customer.service.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.domain.Page;
@@ -28,7 +27,7 @@ import java.util.Set;
 @RequiredArgsConstructor
 @Slf4j
 public class CustomerServiceImpl implements CustomerService{
-    
+
     private final CustomerRepository customerRepository;
     private final RestTemplate restTemplate;
     private final RabbitTemplate rabbitTemplate;
@@ -37,9 +36,9 @@ public class CustomerServiceImpl implements CustomerService{
     @Override
     public Customer create(CustomerCommand customerCommand) {
         customerCommand.validate();
-        log.info("Begin creating customer with payload {}", JSONUtil.toJSON(customerCommand));
+        log.info("[+] Begin creating customer with payload {}", JSONUtil.toJSON(customerCommand));
         final Customer customer = Customer.create(customerCommand);
-        log.info("Customer with id {} created successfully", JSONUtil.toJSON(customer.getId()));
+        log.info("[+] Customer with id {} created successfully", JSONUtil.toJSON(customer.getId()));
         return customerRepository.save(customer);
     }
     @Override
@@ -53,15 +52,15 @@ public class CustomerServiceImpl implements CustomerService{
                 "http://localhost:8000/rating-service/v1/ratings", ratingCommand,
                 RatingCommand.class
         );
-        return "Message Sent successfully !!";
+        return "[+] Message Sent successfully !!";
     }
     @Override
     public Customer findById(String customerId) {
-        log.info("Begin fetching customer by id {}", customerId);
+        log.info("[+] Begin fetching customer by id {}", customerId);
         final Customer customer = customerRepository.findById(customerId).orElseThrow(
                 () -> new BusinessException(ExceptionPayloadFactory.CUSTOMER_NOT_FOUND.get())
         );
-        log.info("Customer with id {} fetched successfully", customer.getId());
+        log.info("[+] Customer with id {} fetched successfully", customer.getId());
         return customer;
     }
 
@@ -72,22 +71,22 @@ public class CustomerServiceImpl implements CustomerService{
                 null,
                 new ParameterizedTypeReference<>() {
                 });
-        log.info("Drivers with payload {}", JSONUtil.toJSON(objects.getBody()));
+        log.info("[+] Drivers with payload {}", JSONUtil.toJSON(objects.getBody()));
         return objects.getBody();
     }
     @Override
     public void sendRequestDriver(CustomerRequestDriver requestDriver){
 
-     getDriversAvailable().stream().filter(
-                dv -> dv.getId().equals(requestDriver.getDriverId()))
+        getDriversAvailable().stream().filter(
+                        dv -> dv.getId().equals(requestDriver.getDriverId()))
                 .findAny().orElseThrow(
-                () -> new BusinessException(ExceptionPayloadFactory.DRIVER_LOCATION_NOT_FOUND.get())
-             );
-     log.info("[+] Begin sending message with payload {}", JSONUtil.toJSON(requestDriver));
-     rabbitTemplate.convertAndSend("customer.exchange", "customer.routingkey", requestDriver);
-     log.info("[+] Message with payload {} send Good :)", JSONUtil.toJSON(requestDriver));
+                        () -> new BusinessException(ExceptionPayloadFactory.DRIVER_LOCATION_NOT_FOUND.get())
+                );
+        log.info("[+] Begin sending message with payload {}", JSONUtil.toJSON(requestDriver));
+        rabbitTemplate.convertAndSend("customer.exchange", "customer.routingkey", requestDriver);
+        log.info("[+] Message with payload {} send Good :)", JSONUtil.toJSON(requestDriver));
     }
-    @RabbitListener(queues = "${spring.rabbitmq.queue}")
+    //@RabbitListener(queues = "${spring.rabbitmq.queue}")
     public void listen(ResponseDriver responseDriver){
         log.info("[+] Begin listening to message and get response with payload {}", JSONUtil.toJSON(responseDriver));
         final Customer customer = findById(responseDriver.getCustomerId());

@@ -1,10 +1,18 @@
 package com.nas.customer.service.command;
 
 
-import lombok.Getter;
+
+import lombok.*;
+import lombok.extern.jackson.Jacksonized;
+
+import java.io.Serializable;
 
 @Getter
-public class CustomerRequestDriver {
-    private String driverId;
+@AllArgsConstructor
+@NoArgsConstructor
+@Jacksonized
+public class  CustomerRequestDriver implements Serializable {
     private String customerId;
+    private String driverId;
+
 }

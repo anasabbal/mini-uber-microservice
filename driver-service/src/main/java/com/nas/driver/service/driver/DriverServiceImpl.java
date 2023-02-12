@@ -79,7 +79,8 @@ public record DriverServiceImpl(DriverRepository driverRepository,
         log.info(String.format("[+] Received message -> %s", JSONUtil.toJSON(payload)));
         final Driver driver = findById(payload.getDriverId());
         final NotificationDriver notificationDriver = NotificationDriver.create(payload);
-        notificationDriver.setDriver(driver);
+        driver.addToDriver(notificationDriver);
+        //notificationDriver.setDriver(driver);
         notificationDriverRepository.save(notificationDriver);
     }
     @Override

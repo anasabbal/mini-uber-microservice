@@ -13,7 +13,6 @@
         <module name="carrier-service" />
         <module name="rabbitmq-example" />
         <module name="circuit-breaker-example" />
-        <module name="booking-service" />
         <module name="api-gateway" />
         <module name="circuit-breaker" />
         <module name="car-service" />

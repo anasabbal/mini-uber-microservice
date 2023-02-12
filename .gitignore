@@ -24,3 +24,6 @@
 /driver-location-service/target/
 /payment-service/target/
 /rating-service/target/
+/.idea/
+/.run/
+/.vscode/

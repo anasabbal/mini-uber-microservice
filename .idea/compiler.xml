@@ -12,9 +12,7 @@
         <module name="config-server" />
         <module name="carrier-service" />
         <module name="rabbitmq-example" />
-        <module name="circuit-breaker-example" />
         <module name="api-gateway" />
-        <module name="circuit-breaker" />
         <module name="car-service" />
         <module name="eureka-server" />
         <module name="oauth2-service" />
@@ -173,6 +171,8 @@
     <bytecodeTargetLevel>
       <module name="apache-kafka-example" target="17" />
       <module name="booking-service" target="17" />
+      <module name="circuit-breaker" target="17" />
+      <module name="circuit-breaker-example" target="17" />
       <module name="consumer-service" target="17" />
       <module name="core-exception" target="17" />
       <module name="notification-service" target="17" />

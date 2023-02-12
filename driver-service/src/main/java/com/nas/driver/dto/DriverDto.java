@@ -24,4 +24,5 @@ public class DriverDto {
     private String updatedBy;
     private String status;
     private DriverStatus driverStatus;
+    private List<NotificationDriverDto> notificationDrivers;
 }

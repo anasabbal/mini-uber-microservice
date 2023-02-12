@@ -67,10 +67,4 @@ public class Driver extends BaseEntity{
                 .map(Address::create)
                 .collect(Collectors.toList());
     }
-    public static Set<NotificationDriver> createNotificationPayload(Set<CustomerRequestDriver> customerRequestDrivers){
-        return customerRequestDrivers
-                .stream().map(
-                        NotificationDriver::create)
-                .collect(Collectors.toSet());
-    }
 }

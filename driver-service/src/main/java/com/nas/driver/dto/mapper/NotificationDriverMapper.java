@@ -8,7 +8,5 @@ import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public abstract class NotificationDriverMapper {
-
-    @Mapping(source = "driver" , target = "driverDto")
     public abstract NotificationDriverDto toDto(NotificationDriver notificationDriver);
 }

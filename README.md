@@ -1,5 +1,6 @@
 # Mini Uber
-Mini Uber is a ride sharing that hires independent contractors as drivers.
+![logo](./img/back.png)
+NUBER is a ride sharing that hires independent contractors as drivers.
 
 # Table of contents
 - [Introduction](#introduction)

@@ -21,4 +21,5 @@ public class ResourcePath {
     public static final String SEND_REQUEST = "/send-request";
     public static final String DRIVER_AVAILABLE = "/driver/available";
     public static final String AVAILABLE = "/available";
+    public static final String API_GATEWAY_PREDICATE = "api-gateway";
 }

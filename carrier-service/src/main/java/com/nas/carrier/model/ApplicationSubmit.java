@@ -2,15 +2,15 @@ package com.nas.carrier.model;
 
 
 import com.nas.carrier.command.ApplicationSubmitCommand;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
 @Entity
+@Getter
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class ApplicationSubmit extends BaseEntity{
@@ -18,11 +18,11 @@ public class ApplicationSubmit extends BaseEntity{
 
     @Column(name = "FULL_NAME")
     private String fullName;
-
     @Column(name = "EMAIL")
     private String email;
 
-
+    @Column(name = "RESUME")
+    private byte[] resume;
     @ManyToOne
     private Job job;
 

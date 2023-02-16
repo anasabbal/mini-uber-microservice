@@ -11,4 +11,8 @@ import java.util.Set;
 public class JobCommand {
     private String description;
     private Set<ApplicationSubmitCommand> applicationSubmitCommands;
+
+    public void validate(){
+
+    }
 }

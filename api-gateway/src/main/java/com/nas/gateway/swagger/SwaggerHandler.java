@@ -29,6 +29,7 @@ public class SwaggerHandler {
 
     @Autowired(required = false)
     private UiConfiguration uiConfiguration;
+
     private final SwaggerResourcesProvider swaggerResourcesProvider;
 
     @GetMapping("/configuration/security")
@@ -37,14 +38,12 @@ public class SwaggerHandler {
                 Optional.ofNullable(securityConfiguration).orElse(SecurityConfigurationBuilder.builder().build()), HttpStatus.OK));
 
     }
-
     @GetMapping("/configuration/ui")
     public Mono<ResponseEntity<UiConfiguration>> uiConfiguration() {
         return Mono.just(new ResponseEntity<>(
                 Optional.ofNullable(uiConfiguration).orElse(UiConfigurationBuilder.builder().build()), HttpStatus.OK));
     }
-
-    @GetMapping("")
+    @GetMapping
     public Mono<ResponseEntity<?>> swaggerResources() {
         return Mono.just((new ResponseEntity<>(swaggerResourcesProvider.get(), HttpStatus.OK)));
     }

@@ -3,6 +3,7 @@ FROM openjdk:17-alpine
 # label for the image
 LABEL Description="Eureka Server" Version="1.0"
 
+RUN ./mvn
 # mount the temp volume
 VOLUME /tmp
 

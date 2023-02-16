@@ -1,4 +1,10 @@
 spring:
+  cloud:
+    discovery:
+      enabled: true
+    service-registry:
+      auto-registration:
+        fail-fast: true
   rabbitmq:
     host: localhost
     password: guest
@@ -21,10 +27,9 @@ spring:
     show-sql: true
   datasource:
     driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/driver
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/driver}
     username: postgres
     password: postgres
-    initialization-mode: always
 
   application:
     name: driver
@@ -32,7 +37,7 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: ${EUREKA_SERVER:http://eureka-server:8761/eureka}
 
 server:
   port: 8081

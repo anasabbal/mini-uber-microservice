@@ -1,35 +1,47 @@
 services:
   postgres:
+    image: postgres:11
     container_name: postgres
-    image: postgres
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:
       - "5432:5432"
-    networks:
-      - postgres
-    restart: unless-stopped
+  #  networks:
+  #    - postgres
+  #  restart: unless-stopped
   eureka-server:
-    build: ./eureka-server
-    image: eureka-server:latest
+    image: eureka-server
+    build:
+      context: ./eureka-server
+      dockerfile: Dockerfile
     ports:
       - "8761:8761"
-  customer-service:
-    build: ./customer-service
-    image: customer-service:latest
-    ports:
-      - "9091:9091"
+  driver-service:
+    image: driver-service
+    build:
+      context: ./driver-service
+      dockerfile: Dockerfile
     environment:
-      - JAVA_OPTS=
-        -DEUREKA_SERVER=http://CUSTOMER:9091/eureka
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/customer
-      - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=postgres
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      SPRING_APPLICATION_JSON: '{"eureka":{"client":{"serviceUrl":{"defaultZone":"http://eureka-server:8761/eureka"}}}}'
     depends_on:
       - eureka-server
       - postgres
+  #customer-service:
+  #  build: ./customer-service
+  #  image: customer-service:latest
+  #  ports:
+  #    - "9091:9091"
+  #  environment:
+  #    - JAVA_OPTS=
+  #      -DEUREKA_SERVER=http://CUSTOMER:9091/eureka
+  #    - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/customer
+  #    - SPRING_DATASOURCE_USERNAME=postgres
+  #    - SPRING_DATASOURCE_PASSWORD=postgres
+  #    - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+  #  depends_on:
+  #    - eureka-server
+  #    - postgres
   #driver-service:
   #  container_name: driver-service
   #  build: ./driver-service

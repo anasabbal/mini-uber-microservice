@@ -2,6 +2,10 @@ server:
   port: 8761
 
 spring:
+  cloud:
+    service-registry:
+      auto-registration:
+        fail-fast: true
   devtools:
     livereload:
       enabled: true
@@ -10,5 +14,3 @@ eureka:
   client:
     fetch-registry: false
     register-with-eureka: false
-    server:
-      waitTimeInMsWhenSyncEmpty: 0

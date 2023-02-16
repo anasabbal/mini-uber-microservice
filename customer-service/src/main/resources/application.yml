@@ -1,4 +1,10 @@
 spring:
+  cloud:
+    discovery:
+      enabled: true
+    service-registry:
+      auto-registration:
+        fail-fast: true
   # config rabbitmq for producer
   rabbitmq:
     host: localhost

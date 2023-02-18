@@ -36,7 +36,7 @@ public class Wallet extends BaseEntity{
     public static Wallet create(String accountId){
         final Wallet wallet = new Wallet();
 
-        wallet.balance = Balance.create();
+        wallet.balance = Balance.create(null);
         wallet.transactionWallets = new ArrayList<>();
         wallet.accountId = accountId;
 

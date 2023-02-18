@@ -15,4 +15,5 @@ public interface NotificationService {
     Driver acceptRequest(final AcceptRequestCustomer acceptRequestCustomer);
     Page<NotificationDriver> getAll(Pageable pageable);
     Page<NotificationDriver> findAllByDriverId(Pageable pageable, String driverId);
+    public Driver cancelRequest(final AcceptRequestCustomer acceptRequestCustomer);
 }

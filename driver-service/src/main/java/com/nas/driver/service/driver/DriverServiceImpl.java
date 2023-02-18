@@ -43,12 +43,21 @@ public record DriverServiceImpl(DriverRepository driverRepository,
         return driver;
     }
     @Override
+    @RabbitListener(queues = "${spring.rabbitmq.queue}")
+    public void listenToMessage(CustomerRequestDriver payload){
+        log.info(String.format("[+] Received message -> %s", JSONUtil.toJSON(payload)));
+        final Driver driver = findById(payload.getDriverId());
+        log.info("[+] Begin creating notification for driver with id {}", driver.getId());
+        driver.addToDriver(payload);
+        driverRepository.save(driver);
+    }
+    @Override
     public String sendRating(RatingCommand ratingCommand) {
         final Driver driver = findById(ratingCommand.getDriverId());
         final String customerId = driver.getLastNotification();
         if(ratingCommand.getCustomerId().equals(customerId)) {
             restTemplate.postForEntity(
-                    "http://RATING:2018/v1/ratings",
+                    "http://RATING:2018/v1/ratings/",
                     ratingCommand,
                     RatingCommand.class
             );
@@ -71,17 +80,6 @@ public record DriverServiceImpl(DriverRepository driverRepository,
     @Override
     public Set<Driver> getDriversAvailable() {
         return driverRepository.findByDriverStatusStatus("AVAILABLE");
-    }
-
-    @Override
-    @RabbitListener(queues = "${spring.rabbitmq.queue}")
-    public void listenToMessage(CustomerRequestDriver payload){
-        log.info(String.format("[+] Received message -> %s", JSONUtil.toJSON(payload)));
-        final Driver driver = findById(payload.getDriverId());
-        final NotificationDriver notificationDriver = NotificationDriver.create(payload);
-        driver.addToDriver(notificationDriver);
-        //notificationDriver.setDriver(driver);
-        notificationDriverRepository.save(notificationDriver);
     }
     @Override
     public Driver findById(String driverId){

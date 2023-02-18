@@ -11,7 +11,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Entity
@@ -55,8 +54,10 @@ public class Driver extends BaseEntity{
             return notificationDriver.getCustomerId();
         }
     }
-    public void addToDriver(NotificationDriver notificationDriver){
-        this.notificationDrivers.add(notificationDriver);
+    public void addToDriver(CustomerRequestDriver requestDriver){
+        final NotificationDriver notificationDriver = NotificationDriver.create(requestDriver);
+        notificationDriver.linkToDriver(this);
+        notificationDrivers.add(notificationDriver);
     }
     public void updateInfo(final DriverCommand driverCommand){
         this.firstName = driverCommand.getFirstName();
@@ -66,5 +67,8 @@ public class Driver extends BaseEntity{
         return addressCommands.stream()
                 .map(Address::create)
                 .collect(Collectors.toList());
+    }
+    public void addToDriver(NotificationDriver notificationDriver) {
+        notificationDrivers.add(notificationDriver);
     }
 }

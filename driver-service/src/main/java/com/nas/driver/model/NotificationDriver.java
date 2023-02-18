@@ -28,4 +28,7 @@ public class NotificationDriver extends BaseEntity{
 
         return notificationDriver;
     }
+    public void linkToDriver(Driver driver){
+        this.driver = driver;
+    }
 }

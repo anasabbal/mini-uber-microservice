@@ -3,7 +3,7 @@ package com.nas.wallet.controller;
 
 import com.nas.wallet.dto.WalletDto;
 import com.nas.wallet.dto.mapper.WalletMapper;
-import com.nas.wallet.service.WalletService;
+import com.nas.wallet.service.wallet.WalletService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

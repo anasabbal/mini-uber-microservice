@@ -2,7 +2,6 @@ package com.nas.driver.dto;
 
 
 import com.nas.driver.model.DriverStatus;
-import com.nas.driver.model.NotificationDriver;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -22,4 +22,13 @@ public class TransactionWallet extends BaseEntity {
 
     @ManyToOne
     private Wallet wallet;
+
+    public static TransactionWallet create(final Currency currency, final BigDecimal amount){
+        final TransactionWallet transactionWallet = new TransactionWallet();
+
+        transactionWallet.currency = currency;
+        transactionWallet.amount = amount;
+
+        return transactionWallet;
+    }
 }

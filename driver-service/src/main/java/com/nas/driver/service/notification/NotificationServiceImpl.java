@@ -51,6 +51,11 @@ public class NotificationServiceImpl implements NotificationService{
         rabbitTemplate.convertAndSend(acceptRequestCustomer);
         return driverRepository.save(driver);
     }
+    @Override
+    public Driver cancelRequest(final AcceptRequestCustomer acceptRequestCustomer){
+        return null;
+    }
+
 
     @Override
     public Page<NotificationDriver> findAllByDriverId(Pageable pageable, String driverId) {

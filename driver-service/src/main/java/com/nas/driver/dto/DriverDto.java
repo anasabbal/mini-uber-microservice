@@ -21,7 +21,6 @@ public class DriverDto {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private String updatedBy;
-    private String status;
     private DriverStatus driverStatus;
     private List<NotificationDriverDto> notificationDrivers;
 }

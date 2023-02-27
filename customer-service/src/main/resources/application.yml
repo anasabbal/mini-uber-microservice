@@ -13,14 +13,14 @@ spring:
     password: guest
     queue: customer.queue
     template:
-      exchange: customer.exchange
+      exchange: amq.direct
       routing-key: customer.routingkey
   jpa:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     show-sql: true
   application:
     name: customer

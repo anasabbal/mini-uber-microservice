@@ -15,10 +15,6 @@ import java.util.List;
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class Wallet extends BaseEntity{
 
-
-
-
-
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Balance balance;
 

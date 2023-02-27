@@ -9,4 +9,5 @@ import lombok.Setter;
 public class RatingCommand {
     private Integer ratingScore;
     private String userId;
+    private String driverId;
 }

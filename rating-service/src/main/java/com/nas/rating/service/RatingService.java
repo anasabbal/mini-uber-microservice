@@ -1,13 +1,9 @@
 package com.nas.rating.service;
 
 import com.nas.rating.command.RatingCommand;
-import com.nas.rating.models.Rating;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import com.nas.rating.models.RatingEntity;
 
 public interface RatingService {
-    Rating createRating(final RatingCommand ratingCommand);
-    Page<Rating> getRatings(Pageable pageable);
-    Rating findById(String ratingId);
-    Rating findRatingByDriverId(String driverId);
+    RatingEntity createRating(final RatingCommand ratingCommand);
+    RatingEntity getOneAndCreate(final String accountId);
 }

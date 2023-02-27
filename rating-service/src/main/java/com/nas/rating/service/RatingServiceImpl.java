@@ -1,16 +1,12 @@
 package com.nas.rating.service;
 
 
-import com.nas.core.exception.BusinessException;
-import com.nas.core.exception.ExceptionPayloadFactory;
 import com.nas.core.util.JSONUtil;
 import com.nas.rating.command.RatingCommand;
-import com.nas.rating.models.Rating;
+import com.nas.rating.models.RatingEntity;
 import com.nas.rating.repository.RatingRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -22,13 +18,22 @@ public class RatingServiceImpl implements RatingService{
 
 
     @Override
-    public Rating createRating(RatingCommand ratingCommand) {
+    public RatingEntity createRating(RatingCommand ratingCommand) {
         log.info("[+] Begin creating Rating with payload {}", JSONUtil.toJSON(ratingCommand));
-        final Rating rating = Rating.create(ratingCommand);
+        final RatingEntity rating = RatingEntity.create(ratingCommand);
         log.info("[+] Rating with id {} created successfully", rating.getId());
         return ratingRepository.save(rating);
     }
 
+    @Override
+    public RatingEntity getOneAndCreate(final String accountId){
+        log.info("[+] Begin creating Rating for account id  {}", accountId);
+        final RatingEntity rating = RatingEntity.getOneAndCreate(accountId);
+        log.info("[+] Rating with id {} created successfully", rating.getId());
+        return ratingRepository.save(rating);
+    }
+
+    /*
     @Override
     public Page<Rating> getRatings(Pageable pageable) {
         return ratingRepository.findAll(pageable);
@@ -49,5 +54,5 @@ public class RatingServiceImpl implements RatingService{
         final Rating rating = ratingRepository.findRatingByUserId(driverId);
         log.info("[+] Rating with id {} fetched successfully", rating.getId());
         return rating;
-    }
+    }*/
 }

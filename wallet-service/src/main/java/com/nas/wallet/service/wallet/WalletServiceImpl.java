@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 @Service
 @RequiredArgsConstructor
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 public class WalletServiceImpl implements WalletService{
 
     private final WalletRepository walletRepository;
+    private final RestTemplate restTemplate;
 
 
     @Override
@@ -22,7 +24,11 @@ public class WalletServiceImpl implements WalletService{
         log.info("[+] Begin Fetching account with id {} ", accountId);
         final Wallet wallet = Wallet.create(accountId);
         log.info("[+] Account with id {} set successfully", accountId);
-        return walletRepository.save(wallet);
+        walletRepository.save(wallet);
+        restTemplate.getForObject(
+                "http://RATING:2018/v1/ratings/" + accountId, String.class, accountId
+        );
+        return wallet;
     }
 
     @Override

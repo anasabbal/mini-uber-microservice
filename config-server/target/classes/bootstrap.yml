@@ -2,6 +2,8 @@ server:
   port: 8888
 
 spring:
+  profiles:
+    active: config-rep
   devtools:
     livereload:
       enabled: true
@@ -11,5 +13,4 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/anasabbal/mini-uber-microservice/tree/master/config-server
-        default-label: master
+          uri: https://github.com/anasabbal/config-repo.git

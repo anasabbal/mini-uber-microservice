@@ -27,3 +27,4 @@
 /.idea/
 /.run/
 /.vscode/
+/config-server/target/

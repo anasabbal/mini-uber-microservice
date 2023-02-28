@@ -4,9 +4,9 @@ package com.nas.carrier.model;
 import com.nas.carrier.command.ApplicationSubmitCommand;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 @Getter

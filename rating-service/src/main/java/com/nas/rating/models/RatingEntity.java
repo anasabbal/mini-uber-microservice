@@ -4,7 +4,7 @@ package com.nas.rating.models;
 import com.nas.rating.command.RatingCommand;
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Getter

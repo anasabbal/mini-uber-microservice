@@ -3,7 +3,7 @@ package com.nas.customer.service.model;
 
 import lombok.*;
 
-import javax.persistence.Entity;
+import jakarta.persistence.Entity;
 
 
 @Entity

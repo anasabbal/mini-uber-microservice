@@ -4,7 +4,7 @@ package com.nas.wallet.model;
 import com.nas.wallet.enums.Currency;
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.math.BigDecimal;
 
 @Entity

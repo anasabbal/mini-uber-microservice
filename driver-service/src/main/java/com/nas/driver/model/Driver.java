@@ -42,7 +42,7 @@ public class Driver extends BaseEntity{
 
         driver.firstName = driverCommand.getFirstName();
         driver.lastName = driverCommand.getLastName();
-        driver.driverStatus = DriverStatus.create();
+        driver.driverStatus = DriverStatus.create("AVAILABLE");
         driver.addresses = createPayloadFromCommand(driverCommand.getAddressCommands());
         return driver;
     }
@@ -58,6 +58,9 @@ public class Driver extends BaseEntity{
         final NotificationDriver notificationDriver = NotificationDriver.create(requestDriver);
         notificationDriver.linkToDriver(this);
         notificationDrivers.add(notificationDriver);
+    }
+    public void cancelRequestNotification(NotificationDriver notificationDriver){
+        this.notificationDrivers.remove(notificationDriver);
     }
     public void updateInfo(final DriverCommand driverCommand){
         this.firstName = driverCommand.getFirstName();

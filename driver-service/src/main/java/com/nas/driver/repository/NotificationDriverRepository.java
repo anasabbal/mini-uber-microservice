@@ -15,4 +15,5 @@ public interface NotificationDriverRepository extends JpaRepository<Notification
 
     List<NotificationDriver> findAllByDriverId(String driverId);
     Page<NotificationDriver> findAllByDriver(Pageable pageable, Driver driver);
+    NotificationDriver findByCustomerIdAndDriver(String customerId, Driver driver);
 }

@@ -25,10 +25,10 @@ public class DriverStatus {
 
     private String status;
 
-    public static DriverStatus create(){
+    public static DriverStatus create(String name){
         final DriverStatus driverStatus = new DriverStatus();
 
-        driverStatus.status = "AVAILABLE";
+        driverStatus.status = name;
 
         return driverStatus;
     }

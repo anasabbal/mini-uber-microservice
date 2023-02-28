@@ -5,6 +5,7 @@ import com.nas.core.exception.BusinessException;
 import com.nas.core.exception.ExceptionPayloadFactory;
 import com.nas.driver.command.AcceptRequestCustomer;
 import com.nas.driver.model.Driver;
+import com.nas.driver.model.DriverStatus;
 import com.nas.driver.model.NotificationDriver;
 import com.nas.driver.repository.DriverRepository;
 import com.nas.driver.repository.NotificationDriverRepository;
@@ -45,6 +46,9 @@ public class NotificationServiceImpl implements NotificationService{
                 () -> new BusinessException(ExceptionPayloadFactory.DRIVER_NOT_FOUND.get()));
         log.info("[+] Driver with id {} fetched successfully", acceptRequestCustomer.getDriverId());
 
+        // Update status
+        driver.setDriverStatus(DriverStatus.create("ONE_ADULT"));
+
         final List<NotificationDriver> notificationDrivers = getNotificationsByDriverId(acceptRequestCustomer.getDriverId());
         notificationDrivers.stream().filter(nt -> nt.getId().equals(acceptRequestCustomer.getCustomerId())).forEach(driver::addToDriver);
         log.info("[+] Begin sending acceptation to customers...");
@@ -53,10 +57,13 @@ public class NotificationServiceImpl implements NotificationService{
     }
     @Override
     public Driver cancelRequest(final AcceptRequestCustomer acceptRequestCustomer){
-        return null;
+        final Driver driver = driverRepository.findById(acceptRequestCustomer.getDriverId()).orElseThrow(
+                () -> new BusinessException(ExceptionPayloadFactory.DRIVER_NOT_FOUND.get()));
+        log.info("[+] Driver with id {} fetched successfully", acceptRequestCustomer.getDriverId());
+        final NotificationDriver notificationDriver = notificationDriverRepository.findByCustomerIdAndDriver(acceptRequestCustomer.getCustomerId(), driver);
+        driver.cancelRequestNotification(notificationDriver);
+        return driver;
     }
-
-
     @Override
     public Page<NotificationDriver> findAllByDriverId(Pageable pageable, String driverId) {
         final Driver driver = driverRepository.findById(driverId).orElseThrow(
@@ -64,7 +71,6 @@ public class NotificationServiceImpl implements NotificationService{
         log.info("Driver with id {} fetched successfully", driverId);
         return notificationDriverRepository.findAllByDriver(pageable, driver);
     }
-
     @Override
     public Page<NotificationDriver> getAll(Pageable pageable) {
         return notificationDriverRepository.findAll(pageable);

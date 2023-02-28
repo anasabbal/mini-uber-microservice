@@ -1,6 +1,7 @@
 package com.nas.customer.service.model;
 
 
+import jakarta.persistence.ManyToOne;
 import lombok.*;
 
 import jakarta.persistence.Entity;
@@ -14,6 +15,8 @@ import jakarta.persistence.Entity;
 public class NotificationCustomer extends BaseEntity{
     private String driverId;
 
+    @ManyToOne
+    private Customer customer;
 
     public static NotificationCustomer create(final String driverId){
         final NotificationCustomer notificationCustomer = new NotificationCustomer();

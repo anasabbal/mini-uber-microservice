@@ -3,10 +3,10 @@ package com.nas.customer.service.model;
 
 import com.nas.customer.service.command.CustomerCommand;
 import com.nas.customer.service.command.CustomerInfoUpdateCmd;
+import jakarta.persistence.*;
 import lombok.*;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
+import java.util.List;
 
 @Entity
 @Getter
@@ -28,6 +28,9 @@ public class Customer extends BaseEntity{
     private String bankAccountId;
     @Column(name = "DRIVER_ID")
     private String driverId;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, mappedBy = "customer")
+    private List<NotificationCustomer> notificationCustomers;
 
 
     public static Customer create(final CustomerCommand command){

@@ -1,12 +1,14 @@
 package com.nas.driver.controller;
 
 
+import com.nas.driver.command.AcceptRequestCustomer;
 import com.nas.driver.command.DriverCommand;
 import com.nas.driver.command.RatingCommand;
 import com.nas.driver.dto.DriverDto;
 import com.nas.driver.dto.mapper.DriverMapper;
 import com.nas.driver.model.Driver;
 import com.nas.driver.service.driver.DriverService;
+import com.nas.driver.service.notification.NotificationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,6 +28,7 @@ import static org.springframework.web.servlet.support.ServletUriComponentsBuilde
 public class DriverController {
     private final DriverService driverService;
     private final DriverMapper driverMapper;
+    private final NotificationService notificationService;
 
     @PostMapping
     public ResponseEntity<DriverDto> create(@RequestBody final DriverCommand driverCommand){
@@ -58,5 +61,10 @@ public class DriverController {
     @PostMapping(RATINGS)
     public ResponseEntity<String> sendRating(@RequestBody final RatingCommand ratingCommand){
         return ResponseEntity.ok(driverService.sendRating(ratingCommand));
+    }
+    @PutMapping(CANCEL)
+    public ResponseEntity<DriverDto> cancelRequest(@RequestBody final AcceptRequestCustomer acceptRequestCustomer){
+        final Driver driver = notificationService.cancelRequest(acceptRequestCustomer);
+        return ResponseEntity.ok(driverMapper.toDto(driver));
     }
 }

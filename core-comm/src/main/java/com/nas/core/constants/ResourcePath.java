@@ -14,6 +14,7 @@ public class ResourcePath {
     public static final String LOGIN = "/login";
     public static final String AUTH= "/auth";
     public static final String REQUEST = "/request";
+    public static final String CANCEL = "/cancel";
     public static final String BANK_ACCOUNT = "/bank-account";
     public static final String USER = "/user";
     public static final String WALLET = "/wallet";
@@ -22,4 +23,5 @@ public class ResourcePath {
     public static final String DRIVER_AVAILABLE = "/driver/available";
     public static final String AVAILABLE = "/available";
     public static final String API_GATEWAY_PREDICATE = "api-gateway";
+    public static final String NOTIFICATION_CUSTOMER = "/notification-customer";
 }

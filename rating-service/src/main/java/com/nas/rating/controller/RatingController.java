@@ -5,6 +5,8 @@ import com.nas.rating.command.RatingCommand;
 import com.nas.rating.models.RatingEntity;
 import com.nas.rating.service.RatingService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +33,10 @@ public class RatingController {
         final RatingEntity rating = ratingService.getOneAndCreate(id);
         final URI uri = fromCurrentRequest().path("/{id}").buildAndExpand(rating.getId()).toUri();
         return ResponseEntity.created(uri).body(rating);
+    }
+    @GetMapping
+    public ResponseEntity<Page<RatingEntity>> gets(Pageable pageable){
+        return ResponseEntity.ok(ratingService.getRatings(pageable));
     }
     /*
     @GetMapping

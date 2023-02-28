@@ -7,8 +7,8 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import java.util.Set;
 import java.util.stream.Collectors;
 

@@ -4,7 +4,7 @@ package com.nas.auth.model;
 import com.nas.auth.enums.RoleType;
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "ROLES")

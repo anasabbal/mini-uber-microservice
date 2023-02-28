@@ -3,10 +3,9 @@ package com.nas.car.service.model;
 
 import com.nas.car.service.command.CarCommand;
 import com.nas.car.service.enums.CarType;
+import jakarta.persistence.Entity;
 import lombok.Getter;
 import lombok.Setter;
-
-import javax.persistence.Entity;
 
 
 @Getter

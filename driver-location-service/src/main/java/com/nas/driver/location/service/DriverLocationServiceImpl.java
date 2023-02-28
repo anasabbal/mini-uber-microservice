@@ -40,6 +40,14 @@ public record DriverLocationServiceImpl(
     }
 
     @Override
+    public void deleteDriverLocationByDriverId(String driverId) {
+        log.info("[+] Begin fetching Driver Location with id {}", driverId);
+        final DriverLocation driverLocation = driverLocationRepository.findDriverLocationByDriverId(driverId);
+        driverLocationRepository.delete(driverLocation);
+        restTemplate.delete("http://BANK-ACCOUNT:2345/v1/bank-account/user/" + driverId, driverId);
+    }
+
+    @Override
     public Page<DriverLocation> getAll(Pageable pageable) {
         return driverLocationRepository.findAll(pageable);
     }

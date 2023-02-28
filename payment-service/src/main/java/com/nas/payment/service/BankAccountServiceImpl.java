@@ -1,6 +1,8 @@
 package com.nas.payment.service;
 
 
+import com.nas.core.exception.BusinessException;
+import com.nas.core.exception.ExceptionPayloadFactory;
 import com.nas.core.util.JSONUtil;
 import com.nas.payment.model.BankAccount;
 import com.nas.payment.repository.BankAccountRepository;
@@ -34,6 +36,15 @@ public class BankAccountServiceImpl implements BankAccountService{
                 bankAccount.getId());
         log.info("[+] Bank Account created successfully with payload {}", JSONUtil.toJSON(bankAccount));
         return bankAccount;
+    }
+    @Override
+    public void deleteBankAccountByUserId(String userId) {
+        log.info("[+] Begin fetching Bank account with userId {}", userId);
+        final BankAccount bankAccount = bankAccountRepository.findBankAccountByUserId(userId).orElseThrow(
+                () -> new BusinessException(ExceptionPayloadFactory.BANK_ACCOUNT_NOT_FOUND.get())
+        );
+        bankAccountRepository.delete(bankAccount);
+        restTemplate.delete("http://WALLET:2000/v1/wallet/" + bankAccount.getId(), bankAccount.getId());
     }
 
     @Override

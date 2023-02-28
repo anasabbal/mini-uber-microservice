@@ -17,4 +17,5 @@ public interface DriverService {
     Set<Driver> getDriversAvailable();
     void listenToMessage(CustomerRequestDriver message);
     String sendRating(final RatingCommand ratingCommand);
+    void deleteAccount(final String driverId);
 }

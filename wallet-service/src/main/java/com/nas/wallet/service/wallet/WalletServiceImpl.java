@@ -1,6 +1,8 @@
 package com.nas.wallet.service.wallet;
 
 
+import com.nas.core.exception.BusinessException;
+import com.nas.core.exception.ExceptionPayloadFactory;
 import com.nas.wallet.model.Wallet;
 import com.nas.wallet.repository.WalletRepository;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +30,23 @@ public class WalletServiceImpl implements WalletService{
         restTemplate.getForObject(
                 "http://RATING:2018/v1/ratings/" + accountId, String.class, accountId
         );
+        return wallet;
+    }
+
+    @Override
+    public void deleteWalletByAccountId(String accountId) {
+        log.info("[+] Begin deleting wallet with account id {}", accountId);
+        final Wallet wallet = findByAccountId(accountId);
+        walletRepository.delete(wallet);
+    }
+
+    @Override
+    public Wallet findByAccountId(String accountId) {
+        log.info("[+] Begin fetching wallet by accountId {}", accountId);
+        final Wallet wallet = walletRepository.findWalletByAccountId(accountId).orElseThrow(
+                () -> new BusinessException(ExceptionPayloadFactory.WALLET_NOT_FOUNS.get())
+        );
+        log.info("[+] Wallet with id {} fetched successfully", wallet.getId());
         return wallet;
     }
 

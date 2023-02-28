@@ -12,6 +12,7 @@
         <module name="config-server" />
         <module name="carrier-service" />
         <module name="rabbitmq-example" />
+        <module name="spring-cloud-stream-sample" />
         <module name="api-gateway" />
         <module name="car-service" />
         <module name="eureka-server" />
@@ -203,6 +204,7 @@
       <module name="rabbitmq-example" options="" />
       <module name="shared-configuration" options="-XDcompilePolicy=simple" />
       <module name="sport-micro" options="" />
+      <module name="spring-cloud-stream-sample" options="-parameters" />
       <module name="zull-proxy" options="" />
     </option>
   </component>

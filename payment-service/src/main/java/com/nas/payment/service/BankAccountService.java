@@ -7,4 +7,5 @@ import org.springframework.data.domain.Pageable;
 public interface BankAccountService {
     BankAccount create(String requestToBankAccount);
     Page<BankAccount> getAllAccount(Pageable pageable);
+    void deleteBankAccountByUserId(String userId);
 }

@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DriverLocationRepository extends JpaRepository<DriverLocation, String> {
+    DriverLocation findDriverLocationByDriverId(String driverId);
 }

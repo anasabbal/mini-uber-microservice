@@ -43,6 +43,13 @@ public record DriverServiceImpl(DriverRepository driverRepository,
         return driver;
     }
     @Override
+    public void deleteAccount(String driverId) {
+        log.info("[+] Begin removing account with id {}", driverId);
+        final Driver driver = findById(driverId);
+        driverRepository.delete(driver);
+        restTemplate.delete("http://DRIVER-LOCATION:8082/v1/driver-location/" + driverId, driverId);
+    }
+    @Override
     @RabbitListener(queues = "${spring.rabbitmq.queue}")
     public void listenToMessage(CustomerRequestDriver payload){
         log.info(String.format("[+] Received message -> %s", JSONUtil.toJSON(payload)));
@@ -67,6 +74,7 @@ public record DriverServiceImpl(DriverRepository driverRepository,
             return "Message Not Sent";
         }
     }
+
     @Override
     public void update(String driverId, DriverCommand driverCommand) {
         driverCommand.validate();

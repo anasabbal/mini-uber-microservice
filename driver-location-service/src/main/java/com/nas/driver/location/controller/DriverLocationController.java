@@ -8,10 +8,7 @@ import com.nas.driver.location.service.DriverLocationService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
@@ -29,5 +26,10 @@ public record DriverLocationController(DriverLocationService driverLocationServi
     @GetMapping
     public ResponseEntity<Page<DriverLocationDto>> getAll(Pageable pageable){
         return ResponseEntity.ok(driverLocationService.getAll(pageable).map(driverLocationMapper::toDto));
+    }
+    @DeleteMapping("/{driverId}")
+    public ResponseEntity<Void> delete(@PathVariable("driverId")final String driverId){
+        driverLocationService.deleteDriverLocationByDriverId(driverId);
+        return ResponseEntity.noContent().build();
     }
 }

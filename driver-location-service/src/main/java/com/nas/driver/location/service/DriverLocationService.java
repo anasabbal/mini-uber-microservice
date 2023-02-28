@@ -11,4 +11,5 @@ public interface DriverLocationService {
     DriverLocation getOne(String driverLocationId) throws IOException, GeoIp2Exception;
     DriverLocation getById(String driverLocationId);
     Page<DriverLocation> getAll(Pageable pageable);
+    void deleteDriverLocationByDriverId(String driverId);
 }

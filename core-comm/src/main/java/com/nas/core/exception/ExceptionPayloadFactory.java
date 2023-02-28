@@ -22,7 +22,9 @@ public enum ExceptionPayloadFactory {
     CAR_NOT_FOUND(8, HttpStatus.NOT_FOUND, "car.not.found"),
     LOCATION_NOT_FOUND(9, HttpStatus.NOT_FOUND, "location.not.found"),
     RATING_NOT_FOUND(10, HttpStatus.NOT_FOUND, "rating.not.found"),
-    ORDER_NOT_FOUND(11, HttpStatus.NOT_FOUND, "order.not.found");
+    ORDER_NOT_FOUND(11, HttpStatus.NOT_FOUND, "order.not.found"),
+    BANK_ACCOUNT_NOT_FOUND(12, HttpStatus.NOT_FOUND, "bank.account.not.found"),
+    WALLET_NOT_FOUNS(13, HttpStatus.NOT_FOUND, "wallet.not.found");
 
     private final Integer code;
     private final HttpStatus status;

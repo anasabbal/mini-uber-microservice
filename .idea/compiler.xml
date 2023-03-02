@@ -12,7 +12,6 @@
         <module name="config-server" />
         <module name="carrier-service" />
         <module name="rabbitmq-example" />
-        <module name="spring-cloud-stream-sample" />
         <module name="api-gateway" />
         <module name="car-service" />
         <module name="eureka-server" />
@@ -179,6 +178,7 @@
       <module name="notification-service" target="17" />
       <module name="producer-service" target="17" />
       <module name="shared-configuration" target="17" />
+      <module name="spring-cloud-stream-sample" target="17" />
       <module name="zull-proxy" target="17" />
     </bytecodeTargetLevel>
   </component>

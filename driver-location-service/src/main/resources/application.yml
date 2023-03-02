@@ -6,11 +6,11 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-  datasource:
-    driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/driverLocation
-    username: postgres
-    password: postgres
+  #datasource:
+  #  driverClassName: org.postgresql.Driver
+  #  url: jdbc:postgresql://localhost:5432/driverLocation
+  #  username: postgres
+  #  password: postgres
 
   application:
     name: driver-location

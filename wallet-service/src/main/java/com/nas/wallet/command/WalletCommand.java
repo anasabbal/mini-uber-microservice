@@ -5,11 +5,12 @@ import com.nas.wallet.enums.Currency;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
-public class WalletCommand {
+import java.util.List;
 
+@Getter
+public class WalletCommand {
 
     private String accountId;
     private Currency currency;
+    private List<CreditCardCommand> creditCards;
 }

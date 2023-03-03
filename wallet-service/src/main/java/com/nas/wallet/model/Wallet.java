@@ -1,41 +1,47 @@
 package com.nas.wallet.model;
 
-
-import com.nas.wallet.enums.Currency;
+import jakarta.persistence.*;
 import lombok.*;
 
-import jakarta.persistence.*;
-import java.util.ArrayList;
+import java.math.BigDecimal;
+import java.util.LinkedList;
 import java.util.List;
+
 
 @Entity
 @Getter
 @Setter
+@Table(name = "WALLETS")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-public class Wallet extends BaseEntity{
+public class Wallet extends BaseEntity {
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Balance balance;
-
-    @Enumerated(EnumType.STRING)
-    @ElementCollection(targetClass = Currency.class)
-    private List<Currency> currency;
-
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "wallet")
-    private List<TransactionWallet> transactionWallets;
 
     @Column(name = "ACCOUNT_ID")
     private String accountId;
 
 
-    public static Wallet create(String accountId){
+    @Column(name = "BALANCE")
+    private BigDecimal balance;
+
+    @OneToMany(mappedBy = "wallet", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<CreditCard> creditCards = new LinkedList<>();
+
+    @OneToMany(mappedBy = "wallet", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Payment> payments = new LinkedList<>();
+
+
+    public static Wallet create(final String accountId){
         final Wallet wallet = new Wallet();
 
-        wallet.balance = Balance.create(null);
-        wallet.transactionWallets = new ArrayList<>();
         wallet.accountId = accountId;
 
         return wallet;
+    }
+    public void addPayment(Payment payment){
+        this.payments.add(payment);
+    }
+    public void addCreditCard(CreditCard creditCard){
+        this.creditCards.add(creditCard);
     }
 }

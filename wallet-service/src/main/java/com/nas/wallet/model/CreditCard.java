@@ -4,6 +4,7 @@ package com.nas.wallet.model;
 import com.nas.wallet.command.CreditCardCommand;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.*;
 
@@ -13,11 +14,8 @@ import lombok.*;
 @Table(name = "BUYERS")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-public class CreditCard extends BaseEntity{
+public class CreditCard extends BaseEntity {
 
-
-    @Column(name = "USER_ID")
-    private String userId;
     @Column(name = "HOLD_NAME")
     private String holdName;
 
@@ -30,6 +28,9 @@ public class CreditCard extends BaseEntity{
     @Column(name = "CVV")
     private String cvv;
 
+    @ManyToOne(optional = false)
+    private Wallet wallet;
+
     public static CreditCard create(final CreditCardCommand command){
         final CreditCard creditCard = new CreditCard();
 
@@ -39,5 +40,8 @@ public class CreditCard extends BaseEntity{
         creditCard.cvv = command.getCvv();
 
         return creditCard;
+    }
+    public void linkToWallet(Wallet wallet){
+        this.wallet = wallet;
     }
 }

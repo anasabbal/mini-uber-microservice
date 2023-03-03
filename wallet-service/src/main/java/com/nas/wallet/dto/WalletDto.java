@@ -12,7 +12,6 @@ import java.util.List;
 @Setter
 public class WalletDto {
     protected String id;
-    private Integer version;
     private LocalDateTime createdAt;
     private String createdBy;
     private LocalDateTime updatedAt;
@@ -20,7 +19,7 @@ public class WalletDto {
     protected Boolean deleted;
     protected Boolean active;
     private String accountId;
-    private BalanceDto balance;
-    private List<Currency> currency;
-    private List<TransactionWalletDto> transactionWallets;
+
+    private List<CreditCardDto> creditCards;
+    private List<PaymentDto> payments;
 }

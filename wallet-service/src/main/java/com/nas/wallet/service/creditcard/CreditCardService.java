@@ -5,5 +5,5 @@ import com.nas.wallet.model.CreditCard;
 
 public interface CreditCardService {
 
-    CreditCard create(final CreditCardCommand creditCardCommand);
+    CreditCard create(String walletId, final CreditCardCommand creditCardCommand);
 }

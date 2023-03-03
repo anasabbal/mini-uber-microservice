@@ -10,4 +10,5 @@ public interface WalletService {
     Page<Wallet> getAll(Pageable pageable);
     Wallet findByAccountId(String accountId);
     void deleteWalletByAccountId(String accountId);
+    Wallet findById(String walletId);
 }

@@ -34,6 +34,13 @@ public class WalletServiceImpl implements WalletService{
     }
 
     @Override
+    public Wallet findById(String walletId){
+        return walletRepository.findById(walletId).orElseThrow(
+                () -> new BusinessException(ExceptionPayloadFactory.WALLET_NOT_FOUND.get())
+        );
+    }
+
+    @Override
     public void deleteWalletByAccountId(String accountId) {
         log.info("[+] Begin deleting wallet with account id {}", accountId);
         final Wallet wallet = findByAccountId(accountId);

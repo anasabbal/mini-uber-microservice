@@ -37,7 +37,6 @@ public class Payment extends BaseEntity {
     @OneToOne
     private Client client;
 
-    @Column(name = "CREDIT_CARD")
     @OneToOne
     private CreditCard creditCard;
 

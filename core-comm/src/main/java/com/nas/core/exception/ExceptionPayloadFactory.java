@@ -24,7 +24,9 @@ public enum ExceptionPayloadFactory {
     RATING_NOT_FOUND(10, HttpStatus.NOT_FOUND, "rating.not.found"),
     ORDER_NOT_FOUND(11, HttpStatus.NOT_FOUND, "order.not.found"),
     BANK_ACCOUNT_NOT_FOUND(12, HttpStatus.NOT_FOUND, "bank.account.not.found"),
-    WALLET_NOT_FOUNS(13, HttpStatus.NOT_FOUND, "wallet.not.found");
+    WALLET_NOT_FOUND(13, HttpStatus.NOT_FOUND, "wallet.not.found"),
+    CREDIT_CARD_NOT_FOUND(14, HttpStatus.NOT_FOUND, "credit.crad.not.found"),
+    WALLER_FOR_ACCOUNT_NOT_FOUND(15, HttpStatus.NOT_FOUND, "wallet.for.account.not.found");
 
     private final Integer code;
     private final HttpStatus status;

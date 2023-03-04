@@ -32,11 +32,12 @@ public record DriverLocationServiceImpl(
 
         final DriverLocation driverLocation = DriverLocation.create(driverLocationCommand);
         driverLocation.setDriverId(driverLocationId);
+        driverLocationRepository.save(driverLocation);
         restTemplate.getForObject(
                 "http://BANK-ACCOUNT:2345/v1/bank-account/user/{driverId}", String.class,  driverLocationId
         );
         driverLocation.addToSet(location);
-        return driverLocationRepository.save(driverLocation);
+        return driverLocation;
     }
 
     @Override

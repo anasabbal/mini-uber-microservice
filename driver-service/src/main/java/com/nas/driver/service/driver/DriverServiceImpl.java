@@ -12,32 +12,43 @@ import com.nas.driver.model.Driver;
 import com.nas.driver.model.NotificationDriver;
 import com.nas.driver.repository.DriverRepository;
 import com.nas.driver.repository.NotificationDriverRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
+import java.net.URI;
 import java.util.Set;
 
 @Service
 @Slf4j
-public record DriverServiceImpl(DriverRepository driverRepository,
-                                RestTemplate restTemplate,
-                                DriverMapper driverMapper,
-                                NotificationDriverRepository notificationDriverRepository,
-                                RabbitTemplate rabbitTemplate) implements DriverService{
+@Transactional
+@RequiredArgsConstructor
+public class DriverServiceImpl implements DriverService{
+
+
+    private final DriverRepository driverRepository;
+    private final RestTemplate restTemplate;
+
+
     @Override
+    @Transactional(readOnly = true)
     public Driver create(DriverCommand driverCommand) {
         driverCommand.validate();
         log.info("Begin creating driver with payload {}", JSONUtil.toJSON(driverCommand));
         final Driver driver = Driver.create(driverCommand);
         log.info("Driver with id {} created successfully", driver.getId());
         driverRepository.save(driver);
+        final String uri = "http://DRIVER-LOCATION:8082/v1/driver-location/" + driver.getId();
+        log.info("[+] URI => {}", uri);
         restTemplate.getForObject(
-                "http://DRIVER-LOCATION:8082/v1/driver-location/" + driver.getId(),
+                uri,
                 String.class,
                 driver.getId());
         return driver;

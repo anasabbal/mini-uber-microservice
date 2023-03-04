@@ -33,7 +33,6 @@ public class Payment extends BaseEntity {
     @Column(name = "AMOUNT")
     private BigDecimal amount;
 
-    @Column(name = "CLIENT")
     @OneToOne
     private Client client;
 

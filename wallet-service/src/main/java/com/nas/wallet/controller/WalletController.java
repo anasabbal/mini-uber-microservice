@@ -10,8 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import static com.nas.core.constants.ResourcePath.V1;
-import static com.nas.core.constants.ResourcePath.WALLET;
+import static com.nas.core.constants.ResourcePath.*;
 
 @RestController
 @RequestMapping(V1 + WALLET)
@@ -29,9 +28,17 @@ public class WalletController {
     public ResponseEntity<Page<WalletDto>> getWallets(Pageable pageable){
         return ResponseEntity.ok(walletService.getAll(pageable).map(walletMapper::toDto));
     }
-    @DeleteMapping("/{accountId}")
+    @DeleteMapping(BANK_ACCOUNT + "/{accountId}")
     public ResponseEntity<Void> deleteByAccountId(@PathVariable("accountId") final String accountId){
         walletService.deleteWalletByAccountId(accountId);
         return ResponseEntity.noContent().build();
+    }
+    @GetMapping(BANK_ACCOUNT + "/{accountId}")
+    public ResponseEntity<WalletDto> getWalletByAccountId(@PathVariable("accountId") final String accountId){
+        return ResponseEntity.ok(walletMapper.toDto(walletService.findByAccountId(accountId)));
+    }
+    @GetMapping("/{walletId}")
+    public ResponseEntity<WalletDto> getOneById(@PathVariable("walletId") final String walletId){
+        return ResponseEntity.ok(walletMapper.toDto(walletService.findById(walletId)));
     }
 }

@@ -20,7 +20,6 @@ public class Wallet extends BaseEntity {
     @Column(name = "ACCOUNT_ID")
     private String accountId;
 
-
     @Column(name = "BALANCE")
     private BigDecimal balance;
 

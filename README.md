@@ -22,6 +22,23 @@ NUBER is a ride sharing that hires independent contractors as drivers.
     - [Build](#build)
     - [Run locally](#run-locally)
 
+### Users
+
+| Method | Url | Description | Sample Valid Request Body |
+| ------ | --- | ----------- | ------------------------- |
+| GET    | /api/users/me | Get logged in user profile | |
+| GET    | /api/users/{username}/profile | Get user profile by username | |
+| GET    | /api/users/{username}/posts | Get posts created by user | |
+| GET    | /api/users/{username}/albums | Get albums created by user | |
+| GET    | /api/users/checkUsernameAvailability | Check if username is available to register | |
+| GET    | /api/users/checkEmailAvailability | Check if email is available to register | |
+| POST   | /api/users | Add user (Only for admins) | [JSON](#usercreate) |
+| PUT    | /api/users/{username} | Update user (If profile belongs to logged in user or logged in user is admin) | [JSON](#userupdate) |
+| DELETE | /api/users/{username} | Delete user (For logged in user or admin) | |
+| PUT    | /api/users/{username}/giveAdmin | Give admin role to user (only for admins) | |
+| PUT    | /api/users/{username}/TakeAdmin | Take admin role from user (only for admins) | |
+| PUT    | /api/users/setOrUpdateInfo | Update user profile (If profile belongs to logged in user or logged in user is admin) | [JSON](#userinfoupdate) |
+
 
 # Introduction
 # Talk for Each service

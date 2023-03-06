@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.*;
 import static com.nas.core.constants.ResourcePath.*;
 
 @RestController
-@RequestMapping(V1 + BANK_ACCOUNT)
+@RequestMapping(V1 + PAYMENT)
 @RequiredArgsConstructor
 public class BankAccountController {
 
     private final BankAccountService bankAccountService;
 
-    @GetMapping(USER + "/{driverId}")
+    @GetMapping("/{driverId}")
     public ResponseEntity<BankAccount> getOne(@PathVariable("driverId") final String driverId){
         return ResponseEntity.ok(bankAccountService.create(driverId));
     }

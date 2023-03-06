@@ -38,7 +38,6 @@ public class DriverServiceImpl implements DriverService{
 
 
     @Override
-    @Transactional(readOnly = true)
     public Driver create(DriverCommand driverCommand) {
         driverCommand.validate();
         log.info("Begin creating driver with payload {}", JSONUtil.toJSON(driverCommand));

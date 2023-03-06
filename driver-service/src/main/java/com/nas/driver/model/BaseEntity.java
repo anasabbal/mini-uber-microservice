@@ -36,9 +36,9 @@ public abstract class BaseEntity {
     private Integer version;
 
     @CreatedDate
+    @Column(name = "CREATED_AT", updatable = false)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-    @Column(name = "CREATED_AT", updatable = false)
     private LocalDateTime createdAt;
 
     @CreatedBy
@@ -46,9 +46,9 @@ public abstract class BaseEntity {
     private String createdBy = "NAS SYSTEM";
 
     @LastModifiedDate
+    @Column(name = "UPDATED_AT")
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-    @Column(name = "UPDATED_AT")
     private LocalDateTime updatedAt;
 
     @LastModifiedBy

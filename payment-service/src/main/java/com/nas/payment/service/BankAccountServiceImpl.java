@@ -28,10 +28,9 @@ public class BankAccountServiceImpl implements BankAccountService{
         log.info("[+] Bank Account with payload {} created successfully", JSONUtil.toJSON(bankAccount));
         bankAccount.setUserId(requestToBankAccount);
         bankAccountRepository.save(bankAccount);
-        String url = "http://WALLET:2000/v1/wallet/" + bankAccount.getId();
-        log.info("[+] URL : {}", url);
+        log.info("[+] URL :  http://WALLET:2000/v1/wallet/{}", bankAccount.getId());
         restTemplate.getForObject(
-                url,
+                "http://WALLET:2000/v1/wallet/" + bankAccount.getId(),
                 String.class,
                 bankAccount.getId());
         log.info("[+] Bank Account created successfully with payload {}", JSONUtil.toJSON(bankAccount));

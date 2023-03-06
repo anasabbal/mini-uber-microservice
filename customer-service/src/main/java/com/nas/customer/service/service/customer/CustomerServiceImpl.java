@@ -37,9 +37,13 @@ public class CustomerServiceImpl implements CustomerService{
     public Customer create(CustomerCommand customerCommand) {
         customerCommand.validate();
         log.info("[+] Begin creating customer with payload {}", JSONUtil.toJSON(customerCommand));
-        final Customer customer = Customer.create(customerCommand);
+        final Customer customer = customerRepository.save(Customer.create(customerCommand));
         log.info("[+] Customer with id {} created successfully", JSONUtil.toJSON(customer.getId()));
-        return customerRepository.save(customer);
+
+        restTemplate.getForObject(
+                "http://DRIVER-LOCATION:8082/v1/driver-location/" + customer.getId(), String.class, customer.getId()
+        );
+        return customer;
     }
     @Override
     public Page<Customer> findAllByDeletedFalse(Pageable pageable) {

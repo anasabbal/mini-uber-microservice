@@ -23,7 +23,7 @@ public record DriverLocationServiceImpl(
         LocationService locationService, RestTemplate restTemplate) implements DriverLocationService{
 
     @Override
-    public DriverLocation getOne(String driverLocationId) throws IOException, GeoIp2Exception {
+    public DriverLocation getOne(String userId) throws IOException, GeoIp2Exception {
 
         final DriverLocationCommand driverLocationCommand = new DriverLocationCommand();
         driverLocationCommand.setName("Driver");
@@ -31,12 +31,12 @@ public record DriverLocationServiceImpl(
         final LocationEntity location = locationService.create();
 
         final DriverLocation driverLocation = DriverLocation.create(driverLocationCommand);
-        driverLocation.setDriverId(driverLocationId);
+        driverLocation.setDriverId(userId);
+        driverLocation.addToSet(location);
         driverLocationRepository.save(driverLocation);
         restTemplate.getForObject(
-                "http://BANK-ACCOUNT:2345/v1/bank-account/user/{driverId}", String.class,  driverLocationId
+                "http://PAYMENT:2345/v1/payment/" + userId, String.class,  userId
         );
-        driverLocation.addToSet(location);
         return driverLocation;
     }
 

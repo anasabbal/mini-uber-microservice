@@ -26,7 +26,7 @@ spring:
     password: postgres
 
   application:
-    name: bank-account
+    name: PAYMENT
   profiles:
     active: default
 

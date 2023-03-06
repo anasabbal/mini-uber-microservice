@@ -18,8 +18,8 @@ public class DriverDto {
     private String id;
     private String firstName;
     private String lastName;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    private String createdAt;
+    private String updatedAt;
     private String updatedBy;
     private DriverStatus driverStatus;
     private List<NotificationDriverDto> notificationDrivers;

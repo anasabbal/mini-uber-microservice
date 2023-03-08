@@ -5,6 +5,7 @@ import com.nas.core.exception.BusinessException;
 import com.nas.core.exception.ExceptionPayloadFactory;
 import com.nas.core.util.JSONUtil;
 import com.nas.customer.service.command.*;
+import com.nas.customer.service.criteria.CustomerCriteria;
 import com.nas.customer.service.model.Customer;
 import com.nas.customer.service.model.Driver;
 import com.nas.customer.service.repository.CustomerRepository;
@@ -40,9 +41,9 @@ public class CustomerServiceImpl implements CustomerService{
         final Customer customer = customerRepository.save(Customer.create(customerCommand));
         log.info("[+] Customer with id {} created successfully", JSONUtil.toJSON(customer.getId()));
 
-        restTemplate.getForObject(
+        /*restTemplate.getForObject(
                 "http://DRIVER-LOCATION:8082/v1/driver-location/" + customer.getId(), String.class, customer.getId()
-        );
+        );*/
         return customer;
     }
     @Override
@@ -97,6 +98,12 @@ public class CustomerServiceImpl implements CustomerService{
         customer.setDriverId(responseDriver.getDriverId());
         customerRepository.save(customer);
     }
+
+    @Override
+    public Page<Customer> getAllByCriteria(Pageable pageable, CustomerCriteria customerCriteria) {
+        return customerRepository.findAllByCriteria(pageable, customerCriteria);
+    }
+
     @Override
     public void updateInfo(CustomerInfoUpdateCmd customerCommand, String customerId) {
         customerCommand.validate();

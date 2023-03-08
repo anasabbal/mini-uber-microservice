@@ -4,6 +4,7 @@ package com.nas.driver.controller;
 import com.nas.driver.command.AcceptRequestCustomer;
 import com.nas.driver.command.DriverCommand;
 import com.nas.driver.command.RatingCommand;
+import com.nas.driver.criteria.DriverCriteria;
 import com.nas.driver.dto.DriverDto;
 import com.nas.driver.dto.mapper.DriverMapper;
 import com.nas.driver.model.Driver;
@@ -66,5 +67,10 @@ public class DriverController {
     public ResponseEntity<DriverDto> cancelRequest(@RequestBody final AcceptRequestCustomer acceptRequestCustomer){
         final Driver driver = notificationService.cancelRequest(acceptRequestCustomer);
         return ResponseEntity.ok(driverMapper.toDto(driver));
+    }
+    @GetMapping(CRITERIA)
+    public ResponseEntity<Page<DriverDto>> getByCriteria(@RequestBody final DriverCriteria driverCriteria, Pageable pageable){
+        final Page<Driver> drivers = driverService.findAllByCriteria(pageable, driverCriteria);
+        return ResponseEntity.ok(drivers.map(driverMapper::toDto));
     }
 }

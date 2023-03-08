@@ -1,13 +1,15 @@
 package com.nas.customer.service.criteria;
 
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.extern.jackson.Jacksonized;
 
-@Getter
-@Setter
-public class CustomerCriteria {
-    private String firstName;
-    private String lastName;
-    private Boolean active;
+
+
+@Jacksonized
+public record CustomerCriteria(String firstName) {
+
+    @Override
+    public String firstName() {
+        return firstName;
+    }
 }

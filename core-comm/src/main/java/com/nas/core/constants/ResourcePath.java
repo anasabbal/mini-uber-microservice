@@ -26,4 +26,5 @@ public class ResourcePath {
     public static final String NOTIFICATION_CUSTOMER = "/notification-customer";
     public static final String CREDIT_CARD = "/credit-card";
     public static final String WALLET_PAYMENT = "/wallet-payment";
+    public static final String CRITERIA = "/criteria";
 }

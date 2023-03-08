@@ -17,6 +17,7 @@ import jakarta.persistence.ManyToOne;
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Address extends BaseEntity{
+
     private String street;
     private String city;
     private String country;

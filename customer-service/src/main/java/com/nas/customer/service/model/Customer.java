@@ -48,5 +48,4 @@ public class Customer extends BaseEntity{
         this.lastName = command.getLastName();
         this.email = command.getEmail();
     }
-
 }

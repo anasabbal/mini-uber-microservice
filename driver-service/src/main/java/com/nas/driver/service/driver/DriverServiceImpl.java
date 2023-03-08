@@ -7,6 +7,7 @@ import com.nas.core.util.JSONUtil;
 import com.nas.driver.command.CustomerRequestDriver;
 import com.nas.driver.command.DriverCommand;
 import com.nas.driver.command.RatingCommand;
+import com.nas.driver.criteria.DriverCriteria;
 import com.nas.driver.dto.mapper.DriverMapper;
 import com.nas.driver.model.Driver;
 import com.nas.driver.model.NotificationDriver;
@@ -68,6 +69,12 @@ public class DriverServiceImpl implements DriverService{
         driver.addToDriver(payload);
         driverRepository.save(driver);
     }
+
+    @Override
+    public Page<Driver> findAllByCriteria(Pageable pageable, DriverCriteria driverCriteria) {
+        return driverRepository.findAllByCriteria(pageable, driverCriteria);
+    }
+
     @Override
     public String sendRating(RatingCommand ratingCommand) {
         final Driver driver = findById(ratingCommand.getDriverId());

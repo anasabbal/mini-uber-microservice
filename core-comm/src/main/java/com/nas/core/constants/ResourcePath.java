@@ -28,4 +28,7 @@ public class ResourcePath {
     public static final String WALLET_PAYMENT = "/wallet-payment";
     public static final String CRITERIA = "/criteria";
     public static final String CARRIERS = "/carriers";
+    public static final String ACCOUNT_DETAILS = "/account-details";
+    public static final String DRIVER_LOCATION_DETAILS = "/driver-location-details";
+    public static final String CUSTOMER_DETAILS = "/customer-details";
 }

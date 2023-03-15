@@ -12,4 +12,5 @@ public interface DriverLocationService {
     DriverLocation getById(String driverLocationId);
     Page<DriverLocation> getAll(Pageable pageable);
     void deleteDriverLocationByDriverId(String driverId);
+    DriverLocation findDriverLocationByDriverId(String driverId);
 }

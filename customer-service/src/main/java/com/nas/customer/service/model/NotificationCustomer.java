@@ -10,7 +10,7 @@ import jakarta.persistence.Entity;
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class NotificationCustomer extends BaseEntity{
     private String driverId;

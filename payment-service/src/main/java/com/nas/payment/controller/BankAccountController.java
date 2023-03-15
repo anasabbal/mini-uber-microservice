@@ -31,4 +31,8 @@ public class BankAccountController {
         bankAccountService.deleteBankAccountByUserId(userId);
         return ResponseEntity.noContent().build();
     }
+    @GetMapping(ACCOUNT_DETAILS + "/{userId}")
+    public ResponseEntity<BankAccount> findById(@PathVariable("userId") final String userId){
+        return ResponseEntity.ok(bankAccountService.findByUserId(userId));
+    }
 }

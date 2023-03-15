@@ -24,6 +24,78 @@ NUBER is a ride sharing that hires independent contractors as drivers.
 
 ### Customers
 
+- Customer Details Payload
+```json
+{
+    "customerId": "91d41932-62fb-4a91-9494-e6431f7757b0",
+    "firstName": "Test",
+    "lastName": "Test",
+    "email": "anas.abbal10@gmail.com",
+    "driverLocationDto": {
+        "id": "b831f19b-e42f-4f19-a276-5756b592442e",
+        "deleted": false,
+        "active": true,
+        "driverId": "91d41932-62fb-4a91-9494-e6431f7757b0",
+        "name": "Driver",
+        "available": true,
+        "carId": null,
+        "locationEntities": [
+            {
+                "id": "f05c7f3c-b921-4757-b034-b59c38361671",
+                "active": null,
+                "geoIp": {
+                    "id": "7c72385c-d537-458d-ab06-5272b66313f9",
+                    "ipAddress": "128.101.101.101",
+                    "country": "United States",
+                    "city": "Minneapolis",
+                    "latitude": "44.8769",
+                    "longitude": "-93.2535"
+                }
+            }
+        ]
+    },
+    "bankAccount": {
+        "id": "df2f244b-8063-43e8-8bd9-9326482dcfbd",
+        "userId": "91d41932-62fb-4a91-9494-e6431f7757b0",
+        "type": "SAVINGS_ACCOUNT",
+        "status": "ACTIVE"
+    },
+    "walletDetails": {
+        "id": "2688c99a-bfa9-4344-903e-667860061910",
+        "createdAt": "2023-03-15T19:21:37.120503",
+        "updatedAt": "2023-03-15T19:21:37.120503",
+        "updatedBy": "NAS",
+        "deleted": false,
+        "active": true,
+        "accountId": "df2f244b-8063-43e8-8bd9-9326482dcfbd",
+      "creditCards": [
+        {
+          "id": "ad12862d-3154-4a10-8c33-478631f4c85a",
+          "createdBy": "NAS",
+          "holdName": "Anas",
+          "number": "2000-2000-2000-2000",
+          "expirationDate": "12/24",
+          "cvv": "180"
+        }
+      ],
+      "payments": [
+        {
+          "id": "ad12862d-3154-4a10-8c33-478631f4c85a",
+          "createdAt": "2023-03-15T19:46:49.352771",
+          "createdBy": "NAS",
+          "updatedAt": "2023-03-15T19:46:49.352771",
+          "updatedBy": "NAS",
+          "amount": null,
+          "creditCard": null,
+          "paymentStatus": null,
+          "barCode": null,
+          "paymentType": null
+        }
+      ]
+    }
+}
+```
+
 | Method | Url                               | Description                                                                           | Sample Valid Request Body |
 |--------|-----------------------------------|---------------------------------------------------------------------------------------| ------------------------- |
 | POST   | /v1/customers                     | Create custmer                                                                        |[JSON](#usercreate) |

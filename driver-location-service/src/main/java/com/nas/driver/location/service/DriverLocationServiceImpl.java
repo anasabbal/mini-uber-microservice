@@ -45,7 +45,7 @@ public record DriverLocationServiceImpl(
         log.info("[+] Begin fetching Driver Location with id {}", driverId);
         final DriverLocation driverLocation = driverLocationRepository.findDriverLocationByDriverId(driverId);
         driverLocationRepository.delete(driverLocation);
-        restTemplate.delete("http://BANK-ACCOUNT:2345/v1/bank-account/user/" + driverId, driverId);
+        restTemplate.delete("http://PAYMENT:2345/v1/bank-account/user/" + driverId, driverId);
     }
 
     @Override
@@ -59,5 +59,10 @@ public record DriverLocationServiceImpl(
         return driverLocationRepository.findById(driverLocationId).orElseThrow(
                 () -> new BusinessException(ExceptionPayloadFactory.DRIVER_LOCATION_NOT_FOUND.get())
         );
+    }
+    @Override
+    public DriverLocation findDriverLocationByDriverId(String driverId){
+        log.info("[+] Begin fetching Driver Location by driver id {}", driverId);
+        return driverLocationRepository.findDriverLocationByDriverId(driverId);
     }
 }

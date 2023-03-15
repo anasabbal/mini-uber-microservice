@@ -1,6 +1,9 @@
 package com.nas.customer.service.service.customer;
 
 
+import com.nas.core.details.BankAccount;
+import com.nas.core.details.DriverLocationDto;
+import com.nas.core.details.WalletDetails;
 import com.nas.core.exception.BusinessException;
 import com.nas.core.exception.ExceptionPayloadFactory;
 import com.nas.core.util.JSONUtil;
@@ -8,6 +11,7 @@ import com.nas.customer.service.command.*;
 import com.nas.customer.service.criteria.CustomerCriteria;
 import com.nas.customer.service.model.Customer;
 import com.nas.customer.service.model.Driver;
+import com.nas.customer.service.payload.CustomerDetails;
 import com.nas.customer.service.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -41,9 +45,9 @@ public class CustomerServiceImpl implements CustomerService{
         final Customer customer = customerRepository.save(Customer.create(customerCommand));
         log.info("[+] Customer with id {} created successfully", JSONUtil.toJSON(customer.getId()));
 
-        /*restTemplate.getForObject(
+        restTemplate.getForObject(
                 "http://DRIVER-LOCATION:8082/v1/driver-location/" + customer.getId(), String.class, customer.getId()
-        );*/
+        );
         return customer;
     }
     @Override
@@ -97,6 +101,29 @@ public class CustomerServiceImpl implements CustomerService{
         final Customer customer = findById(responseDriver.getCustomerId());
         customer.setDriverId(responseDriver.getDriverId());
         customerRepository.save(customer);
+    }
+    @Override
+    public CustomerDetails findCustomerDetailsById(String customerId) {
+        final Customer customer = findById(customerId);
+        final ResponseEntity<DriverLocationDto> driverLocationDtoResponseEntity = restTemplate.getForEntity(
+                "http://DRIVER-LOCATION:8082/v1/driver-location/driver-location-details/" + customerId, DriverLocationDto.class
+        );
+        var driverResponse = driverLocationDtoResponseEntity.getBody();
+        final ResponseEntity<BankAccount> bankAccountResponseEntity = restTemplate.getForEntity(
+                "http://PAYMENT:2345/v1/payment/account-details/" + customerId, BankAccount.class
+        );
+        var bankAccountResponse = bankAccountResponseEntity.getBody();
+        final ResponseEntity<WalletDetails> walletDetailsResponseEntity = restTemplate.getForEntity(
+                "http://WALLET:2000/v1/wallet/payment/" + bankAccountResponse.getId(), WalletDetails.class
+        );
+        var walletDetailsResponse = walletDetailsResponseEntity.getBody();
+        return new CustomerDetails(customerId,
+                customer.getFirstName(),
+                customer.getLastName(),
+                customer.getEmail(),
+                driverResponse,
+                bankAccountResponse,
+                walletDetailsResponse);
     }
 
     @Override

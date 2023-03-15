@@ -39,13 +39,18 @@ public class BankAccountServiceImpl implements BankAccountService{
     @Override
     public void deleteBankAccountByUserId(String userId) {
         log.info("[+] Begin fetching Bank account with userId {}", userId);
-        final BankAccount bankAccount = bankAccountRepository.findBankAccountByUserId(userId).orElseThrow(
-                () -> new BusinessException(ExceptionPayloadFactory.BANK_ACCOUNT_NOT_FOUND.get())
-        );
+        final BankAccount bankAccount = findByUserId(userId);
         bankAccountRepository.delete(bankAccount);
         restTemplate.delete("http://WALLET:2000/v1/wallet/" + bankAccount.getId(), bankAccount.getId());
     }
-
+    public BankAccount findByUserId(String userId){
+        log.info("[+] Begin fetching Bank account with userId {}", userId);
+        final BankAccount bankAccount = bankAccountRepository.findBankAccountByUserId(userId).orElseThrow(
+                () -> new BusinessException(ExceptionPayloadFactory.BANK_ACCOUNT_NOT_FOUND.get())
+        );
+        log.info("[+] Bank Account with id {} fetched successfully", bankAccount.getId());
+        return bankAccount;
+    }
     @Override
     public Page<BankAccount> getAllAccount(Pageable pageable) {
         return bankAccountRepository.findByDeletedFalse(pageable);

@@ -7,6 +7,7 @@ import com.nas.customer.service.command.RatingCommand;
 import com.nas.customer.service.criteria.CustomerCriteria;
 import com.nas.customer.service.model.Customer;
 import com.nas.customer.service.model.Driver;
+import com.nas.customer.service.payload.CustomerDetails;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -21,4 +22,5 @@ public interface CustomerService {
     void sendRequestDriver(CustomerRequestDriver requestDriver);
     String sendRating(final RatingCommand ratingCommand);
     Page<Customer> getAllByCriteria(Pageable pageable, CustomerCriteria customerCriteria);
+    CustomerDetails findCustomerDetailsById(String customerId);
 }

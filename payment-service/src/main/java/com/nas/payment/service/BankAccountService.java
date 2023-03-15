@@ -8,4 +8,5 @@ public interface BankAccountService {
     BankAccount create(String requestToBankAccount);
     Page<BankAccount> getAllAccount(Pageable pageable);
     void deleteBankAccountByUserId(String userId);
+    BankAccount findByUserId(String userId);
 }

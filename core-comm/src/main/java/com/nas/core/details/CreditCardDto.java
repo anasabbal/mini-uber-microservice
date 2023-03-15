@@ -1,11 +1,14 @@
-package com.nas.wallet.command;
+package com.nas.core.details;
 
 
-import jakarta.persistence.Column;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
-public class CreditCardCommand {
+@Setter
+public class CreditCardDto {
+    protected String id;
+    private String createdBy;
     private String holdName;
     private String number;
     private String expirationDate;

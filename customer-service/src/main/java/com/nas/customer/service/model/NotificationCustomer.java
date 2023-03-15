@@ -10,7 +10,6 @@ import jakarta.persistence.Entity;
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class NotificationCustomer extends BaseEntity{
     private String driverId;
@@ -18,6 +17,9 @@ public class NotificationCustomer extends BaseEntity{
     @ManyToOne
     private Customer customer;
 
+    public NotificationCustomer(){
+
+    }
     public static NotificationCustomer create(final String driverId){
         final NotificationCustomer notificationCustomer = new NotificationCustomer();
 

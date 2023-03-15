@@ -62,6 +62,7 @@ public class NotificationServiceImpl implements NotificationService{
         log.info("[+] Driver with id {} fetched successfully", acceptRequestCustomer.getDriverId());
         final NotificationDriver notificationDriver = notificationDriverRepository.findByCustomerIdAndDriver(acceptRequestCustomer.getCustomerId(), driver);
         driver.cancelRequestNotification(notificationDriver);
+        driverRepository.save(driver);
         return driver;
     }
     @Override

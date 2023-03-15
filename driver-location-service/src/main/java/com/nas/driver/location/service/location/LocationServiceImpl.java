@@ -1,4 +1,4 @@
-package com.nas.driver.location.service;
+package com.nas.driver.location.service.location;
 
 
 import com.maxmind.geoip2.DatabaseReader;

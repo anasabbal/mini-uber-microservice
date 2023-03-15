@@ -18,6 +18,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -55,6 +56,9 @@ public class CustomerServiceTest {
      */
     @Mock
     private CustomerRepository customerRepository;
+
+    @Mock
+    private RabbitTemplate rabbitTemplate;
 
 
     @BeforeClass
@@ -130,6 +134,11 @@ public class CustomerServiceTest {
 
         assertThat(customer.getFirstName()).isNotEmpty();
         assertEquals(customer.getFirstName(), "Nassoft");
+    }
+
+    @Test
+    public void should_can_i_send_request_driver(){
+
     }
 
     @Test

@@ -1,7 +1,6 @@
 package com.nas.customer.service.api;
 
 
-import com.nas.customer.service.command.CustomerCommand;
 import com.nas.customer.service.controller.CustomerController;
 import com.nas.customer.service.model.Customer;
 import com.nas.customer.service.repository.CustomerRepository;
@@ -57,15 +56,13 @@ public class CustomerApiTest {
     public void setUp() throws Exception {
         //Initialize all mock objects
         MockitoAnnotations.initMocks(this);
-        CustomerCommand customerCommand = new CustomerCommand();
-        customerCommand.setFirstName("anas");
-        customerCommand.setLastName("abbal");
-        customerCommand.setPassword("zadina123");
-        customerCommand.setEmail("anas.abbal10@gmail.com");
-        customers.add(Customer.create(customerCommand));
         customerService = new CustomerServiceImpl(customerRepository, restTemplate, rabbitTemplate);
     }
 
+
+    @Test
+    public void can_i_create_customer_api(){
+    }
     @Test
     @DisplayName("Test Find All Customers")
     public void find_all_customers() throws Exception {

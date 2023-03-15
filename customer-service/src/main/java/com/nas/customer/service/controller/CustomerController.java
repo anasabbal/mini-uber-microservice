@@ -6,6 +6,7 @@ import com.nas.customer.service.command.CustomerInfoUpdateCmd;
 import com.nas.customer.service.command.CustomerRequestDriver;
 import com.nas.customer.service.command.RatingCommand;
 import com.nas.customer.service.criteria.CustomerCriteria;
+import com.nas.customer.service.details.CustomerDetails;
 import com.nas.customer.service.dto.CustomerDto;
 import com.nas.customer.service.dto.mapper.CustomerMapper;
 import com.nas.customer.service.model.Customer;
@@ -71,5 +72,9 @@ public class CustomerController {
     public ResponseEntity<Page<CustomerDto>> getAllByCriteria(@RequestBody final CustomerCriteria customerCriteria, Pageable pageable){
         final Page<Customer> customers = customerService.getAllByCriteria(pageable, customerCriteria);
        return ResponseEntity.ok(customers.map(customerMapper::toDto));
+    }
+    @GetMapping(CUSTOMER_DETAILS + "/{customerId}")
+    public ResponseEntity<CustomerDetails> findCustomerDetailsByCustomerId(@PathVariable("customerId") final String customerId){
+        return ResponseEntity.ok(customerService.findCustomerDetailsById(customerId));
     }
 }

@@ -22,6 +22,10 @@ public class BankAccountController {
     public ResponseEntity<BankAccount> getOne(@PathVariable("driverId") final String driverId){
         return ResponseEntity.ok(bankAccountService.create(driverId));
     }
+    @GetMapping(ACCOUNT_DETAILS + "/{userId}")
+    public ResponseEntity<BankAccount> findById(@PathVariable("userId") final String userId){
+        return ResponseEntity.ok(bankAccountService.findByUserId(userId));
+    }
     @GetMapping
     public ResponseEntity<Page<BankAccount>> getAll(Pageable pageable){
         return ResponseEntity.ok(bankAccountService.getAllAccount(pageable));

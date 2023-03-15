@@ -1,4 +1,4 @@
-package com.nas.driver.location.service;
+package com.nas.driver.location.service.driverlocation;
 
 
 import com.maxmind.geoip2.exception.GeoIp2Exception;
@@ -8,6 +8,7 @@ import com.nas.driver.location.command.DriverLocationCommand;
 import com.nas.driver.location.model.DriverLocation;
 import com.nas.driver.location.model.LocationEntity;
 import com.nas.driver.location.repository.DriverLocationRepository;
+import com.nas.driver.location.service.location.LocationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -45,7 +46,12 @@ public record DriverLocationServiceImpl(
         log.info("[+] Begin fetching Driver Location with id {}", driverId);
         final DriverLocation driverLocation = driverLocationRepository.findDriverLocationByDriverId(driverId);
         driverLocationRepository.delete(driverLocation);
-        restTemplate.delete("http://BANK-ACCOUNT:2345/v1/bank-account/user/" + driverId, driverId);
+        restTemplate.delete("http://PAYMENT:2345/v1/bank-account/user/" + driverId, driverId);
+    }
+    @Override
+    public DriverLocation findDriverLocationByDriverId(String driverId){
+        log.info("[+] Begin fetching Driver Location by driver id {}", driverId);
+        return driverLocationRepository.findDriverLocationByDriverId(driverId);
     }
 
     @Override

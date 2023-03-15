@@ -1,4 +1,4 @@
-package com.nas.driver.location.service;
+package com.nas.driver.location.service.driverlocation;
 
 import com.maxmind.geoip2.exception.GeoIp2Exception;
 import com.nas.driver.location.model.DriverLocation;
@@ -12,4 +12,5 @@ public interface DriverLocationService {
     DriverLocation getById(String driverLocationId);
     Page<DriverLocation> getAll(Pageable pageable);
     void deleteDriverLocationByDriverId(String driverId);
+    DriverLocation findDriverLocationByDriverId(String driverId);
 }

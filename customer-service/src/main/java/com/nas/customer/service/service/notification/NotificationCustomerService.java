@@ -6,4 +6,5 @@ import org.springframework.data.domain.Pageable;
 
 public interface NotificationCustomerService {
     Page<NotificationCustomer> getNotificationsCustomerById(String customerId, Pageable pageable);
+    void deleteAllNotificationByCustomerId(String customerId);
 }

@@ -1,4 +1,4 @@
-package com.nas.driver.location.service;
+package com.nas.driver.location.service.location;
 
 import com.maxmind.geoip2.exception.GeoIp2Exception;
 import com.nas.driver.location.model.LocationEntity;

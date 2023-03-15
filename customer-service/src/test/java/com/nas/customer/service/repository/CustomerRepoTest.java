@@ -7,10 +7,23 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.assertj.core.api.Assertions;
+import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Arrays;
@@ -31,6 +44,13 @@ public class CustomerRepoTest {
     @Autowired
     private CustomerRepository customerRepository;
 
+    @BeforeEach
+    public void setUp() {
+        final CustomerCommand customerCommand = new CustomerCommand();
+        customerCommand.setFirstName("Anas");
+        customerCommand.setLastName("abbal");
+        customerCommand.setPassword("anas123");
+        customerCommand.setEmail("anas.abbal10@gmail.com");
 
     @BeforeEach
     public void setUp() {
@@ -39,6 +59,7 @@ public class CustomerRepoTest {
         customerCommand.setLastName("abbal");
         customerCommand.setPassword("anas123");
         customerCommand.setEmail("anas.abbal10@gmail.com");
+
 
         final CustomerCommand customerCommand1 = new CustomerCommand();
         customerCommand1.setFirstName("Nassoft");
@@ -52,5 +73,9 @@ public class CustomerRepoTest {
     @Test
     public void should_i_get_all_customers(){
     
+        /*List<Customer> customers = customerRepository.findAll();
+        Assertions.assertThat(customers.size()).isEqualTo(2);
+        Assertions.assertThat(customers.get(0).getFirstName()).isEqualTo("Anas");
+        Assertions.assertThat(customers.get(0).getLastName()).isEqualTo("abbal");*/
     }
 }

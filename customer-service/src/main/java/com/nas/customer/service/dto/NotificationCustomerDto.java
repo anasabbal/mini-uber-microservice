@@ -10,5 +10,4 @@ import lombok.Setter;
 public class NotificationCustomerDto {
     private String id;
     private String driverId;
-    private CustomerDto customer;
 }

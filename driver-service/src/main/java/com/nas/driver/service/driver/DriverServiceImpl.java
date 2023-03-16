@@ -1,6 +1,9 @@
 package com.nas.driver.service.driver;
 
 
+import com.nas.core.details.BankAccount;
+import com.nas.core.details.DriverLocationDto;
+import com.nas.core.details.WalletDetails;
 import com.nas.core.exception.BusinessException;
 import com.nas.core.exception.ExceptionPayloadFactory;
 import com.nas.core.util.JSONUtil;
@@ -11,6 +14,7 @@ import com.nas.driver.criteria.DriverCriteria;
 import com.nas.driver.dto.mapper.DriverMapper;
 import com.nas.driver.model.Driver;
 import com.nas.driver.model.NotificationDriver;
+import com.nas.driver.payload.DriverDetails;
 import com.nas.driver.repository.DriverRepository;
 import com.nas.driver.repository.NotificationDriverRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +24,7 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
@@ -52,6 +57,39 @@ public class DriverServiceImpl implements DriverService{
                 String.class,
                 driver.getId());
         return driver;
+    }
+    private <T> ResponseEntity<T> getEntity(String url, Class<T> eClass){
+        return restTemplate.getForEntity(url, eClass);
+    }
+    @Override
+    public DriverDetails getDriverDetailsByDriverId(String driverId) {
+        final Driver driver = findById(driverId);
+
+        final ResponseEntity<DriverLocationDto> driverLocationDtoResponseEntity = getEntity(
+                "http://DRIVER-LOCATION:8082/v1/driver-location/driver-location-details/"
+                        + driverId,
+                DriverLocationDto.class
+        );
+        var driverResponse = driverLocationDtoResponseEntity.getBody();
+        final ResponseEntity<BankAccount> bankAccountResponseEntity = getEntity(
+                "http://PAYMENT:2345/v1/payment/account-details/"
+                        + driverId,
+                BankAccount.class
+        );
+        var bankAccountResponse = bankAccountResponseEntity.getBody();
+        final ResponseEntity<WalletDetails> walletDetailsResponseEntity = getEntity(
+                "http://WALLET:2000/v1/wallet/payment/" +
+                        bankAccountResponse.getId(),
+                WalletDetails.class
+        );
+        return new DriverDetails(
+                driverId,
+                driver.getFirstName(),
+                driver.getLastName(),
+                driverResponse,
+                bankAccountResponse,
+                walletDetailsResponseEntity.getBody()
+        );
     }
     @Override
     public void deleteAccount(String driverId) {

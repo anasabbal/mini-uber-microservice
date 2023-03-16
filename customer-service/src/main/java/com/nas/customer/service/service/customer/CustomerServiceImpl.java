@@ -105,16 +105,22 @@ public class CustomerServiceImpl implements CustomerService{
     @Override
     public CustomerDetails findCustomerDetailsById(String customerId) {
         final Customer customer = findById(customerId);
-        final ResponseEntity<DriverLocationDto> driverLocationDtoResponseEntity = restTemplate.getForEntity(
-                "http://DRIVER-LOCATION:8082/v1/driver-location/driver-location-details/" + customerId, DriverLocationDto.class
+        final ResponseEntity<DriverLocationDto> driverLocationDtoResponseEntity = getEntity(
+                "http://DRIVER-LOCATION:8082/v1/driver-location/driver-location-details/"
+                        + customerId,
+                DriverLocationDto.class
         );
         var driverResponse = driverLocationDtoResponseEntity.getBody();
-        final ResponseEntity<BankAccount> bankAccountResponseEntity = restTemplate.getForEntity(
-                "http://PAYMENT:2345/v1/payment/account-details/" + customerId, BankAccount.class
+        final ResponseEntity<BankAccount> bankAccountResponseEntity = getEntity(
+                "http://PAYMENT:2345/v1/payment/account-details/"
+                        + customerId,
+                BankAccount.class
         );
         var bankAccountResponse = bankAccountResponseEntity.getBody();
-        final ResponseEntity<WalletDetails> walletDetailsResponseEntity = restTemplate.getForEntity(
-                "http://WALLET:2000/v1/wallet/payment/" + bankAccountResponse.getId(), WalletDetails.class
+        final ResponseEntity<WalletDetails> walletDetailsResponseEntity = getEntity(
+                "http://WALLET:2000/v1/wallet/payment/" +
+                        bankAccountResponse.getId(),
+                WalletDetails.class
         );
         var walletDetailsResponse = walletDetailsResponseEntity.getBody();
         return new CustomerDetails(customerId,
@@ -124,6 +130,9 @@ public class CustomerServiceImpl implements CustomerService{
                 driverResponse,
                 bankAccountResponse,
                 walletDetailsResponse);
+    }
+    private  <T> ResponseEntity<T> getEntity(String url, Class<T> eClass){
+        return restTemplate.getForEntity(url, eClass);
     }
 
     @Override

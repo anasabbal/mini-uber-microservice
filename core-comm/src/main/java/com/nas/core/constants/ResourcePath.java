@@ -31,4 +31,5 @@ public class ResourcePath {
     public static final String ACCOUNT_DETAILS = "/account-details";
     public static final String DRIVER_LOCATION_DETAILS = "/driver-location-details";
     public static final String CUSTOMER_DETAILS = "/customer-details";
+    public static final String DRIVER_DETAILS = "/driver-details";
 }

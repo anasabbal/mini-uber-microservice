@@ -9,6 +9,7 @@ import com.nas.core.exception.ExceptionPayloadFactory;
 import com.nas.core.util.JSONUtil;
 import com.nas.customer.service.command.*;
 import com.nas.customer.service.criteria.CustomerCriteria;
+import com.nas.customer.service.dto.mapper.CustomerMapper;
 import com.nas.customer.service.model.Customer;
 import com.nas.customer.service.model.Driver;
 import com.nas.customer.service.payload.CustomerDetails;
@@ -16,6 +17,7 @@ import com.nas.customer.service.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.domain.Page;
@@ -36,6 +38,7 @@ public class CustomerServiceImpl implements CustomerService{
     private final CustomerRepository customerRepository;
     private final RestTemplate restTemplate;
     private final RabbitTemplate rabbitTemplate;
+    private final CustomerMapper customerMapper;
 
     @SneakyThrows
     @Override
@@ -95,7 +98,7 @@ public class CustomerServiceImpl implements CustomerService{
         rabbitTemplate.convertAndSend("customer.exchange", "customer.routingkey", requestDriver);
         log.info("[+] Message with payload {} send Good :)", JSONUtil.toJSON(requestDriver));
     }
-    //@RabbitListener(queues = "${spring.rabbitmq.queue}")
+    @RabbitListener(queues = "${spring.rabbitmq.queue}")
     public void listen(ResponseDriver responseDriver){
         log.info("[+] Begin listening to message and get response with payload {}", JSONUtil.toJSON(responseDriver));
         final Customer customer = findById(responseDriver.getCustomerId());
@@ -123,10 +126,8 @@ public class CustomerServiceImpl implements CustomerService{
                 WalletDetails.class
         );
         var walletDetailsResponse = walletDetailsResponseEntity.getBody();
-        return new CustomerDetails(customerId,
-                customer.getFirstName(),
-                customer.getLastName(),
-                customer.getEmail(),
+        return new CustomerDetails(
+                customerMapper.toDto(customer),
                 driverResponse,
                 bankAccountResponse,
                 walletDetailsResponse);

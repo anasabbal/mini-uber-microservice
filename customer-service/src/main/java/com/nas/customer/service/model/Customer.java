@@ -43,6 +43,11 @@ public class Customer extends BaseEntity{
 
         return customer;
     }
+    public void linkNotification(String driverId){
+        final NotificationCustomer notificationCustomer = NotificationCustomer.create(driverId);
+        notificationCustomer.linkToCustomer(this);
+        this.notificationCustomers.add(notificationCustomer);
+    }
     public void updateInfo(final CustomerInfoUpdateCmd command){
         this.firstName = command.getFirstName();
         this.lastName = command.getLastName();

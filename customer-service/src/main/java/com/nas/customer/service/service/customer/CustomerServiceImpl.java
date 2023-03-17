@@ -99,9 +99,10 @@ public class CustomerServiceImpl implements CustomerService{
         log.info("[+] Message with payload {} send Good :)", JSONUtil.toJSON(requestDriver));
     }
     @RabbitListener(queues = "${spring.rabbitmq.queue}")
-    public void listen(ResponseDriver responseDriver){
+    public void acceptationResponseFromDriver(ResponseDriver responseDriver){
         log.info("[+] Begin listening to message and get response with payload {}", JSONUtil.toJSON(responseDriver));
         final Customer customer = findById(responseDriver.getCustomerId());
+        customer.linkNotification(responseDriver.getDriverId());
         customer.setDriverId(responseDriver.getDriverId());
         customerRepository.save(customer);
     }

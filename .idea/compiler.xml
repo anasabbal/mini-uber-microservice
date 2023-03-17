@@ -9,9 +9,9 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="api-gateway" />
         <module name="config-server" />
         <module name="rabbitmq-example" />
-        <module name="api-gateway" />
         <module name="car-service" />
         <module name="eureka-server" />
         <module name="oauth2-service" />
@@ -155,15 +155,6 @@
         </processorPath>
         <module name="customer-service" />
       </profile>
-      <profile name="Annotation profile for sport-micro" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.24/lombok-1.18.24.jar" />
-        </processorPath>
-        <module name="core-comm" />
-      </profile>
       <profile name="Annotation profile for carrier-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -183,6 +174,15 @@
           <entry name="$MAVEN_REPOSITORY$/com/sun/istack/istack-commons-runtime/4.0.1/istack-commons-runtime-4.0.1.jar" />
         </processorPath>
         <module name="carrier-service" />
+      </profile>
+      <profile name="Annotation profile for sport-micro" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.24/lombok-1.18.24.jar" />
+        </processorPath>
+        <module name="core-comm" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

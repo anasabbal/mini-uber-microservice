@@ -1,5 +1,10 @@
 FROM openjdk:17-alpine
 
+
+# We do not have to type out full file paths but can use relative paths based on the working directory
+WORKDIR /app
+
+COPY .mvn/ .mvn
 # label for the image
 LABEL Description="Customer service" Version="1.0"
 

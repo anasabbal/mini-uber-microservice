@@ -3,6 +3,7 @@ package com.nas.customer.service.api;
 
 import com.nas.customer.service.command.CustomerCommand;
 import com.nas.customer.service.controller.CustomerController;
+import com.nas.customer.service.dto.mapper.CustomerMapper;
 import com.nas.customer.service.model.Customer;
 import com.nas.customer.service.repository.CustomerRepository;
 import com.nas.customer.service.service.customer.CustomerService;
@@ -49,6 +50,8 @@ public class CustomerApiTest {
 
     @Mock
     private RabbitTemplate rabbitTemplate;
+    @Mock
+    private CustomerMapper customerMapper;
 
     @Mock
     private CustomerRepository customerRepository;
@@ -63,7 +66,7 @@ public class CustomerApiTest {
         customerCommand.setPassword("zadina123");
         customerCommand.setEmail("anas.abbal10@gmail.com");
         customers.add(Customer.create(customerCommand));
-        customerService = new CustomerServiceImpl(customerRepository, restTemplate, rabbitTemplate);
+        customerService = new CustomerServiceImpl(customerRepository, restTemplate, rabbitTemplate, customerMapper);
     }
 
     @Test

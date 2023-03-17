@@ -25,4 +25,7 @@ public class NotificationCustomer extends BaseEntity{
 
         return notificationCustomer;
     }
+    public void linkToCustomer(Customer customer){
+        this.customer = customer;
+    }
 }

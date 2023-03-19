@@ -95,7 +95,7 @@ public class CustomerServiceImpl implements CustomerService{
                         () -> new BusinessException(ExceptionPayloadFactory.DRIVER_LOCATION_NOT_FOUND.get())
                 );
         log.info("[+] Begin sending message with payload {}", JSONUtil.toJSON(requestDriver));
-        rabbitTemplate.convertAndSend("customer.exchange", "customer.routingkey", requestDriver);
+        rabbitTemplate.convertAndSend( "customer.routingkey", requestDriver);
         log.info("[+] Message with payload {} send Good :)", JSONUtil.toJSON(requestDriver));
     }
     @RabbitListener(queues = "${spring.rabbitmq.queue}")

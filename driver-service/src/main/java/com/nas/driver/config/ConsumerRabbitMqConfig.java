@@ -1,6 +1,8 @@
 package com.nas.driver.config;
 
 
+import com.nas.core.util.JSONUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
@@ -12,6 +14,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+
+
+
+@Slf4j
 @Configuration
 @EnableRabbit
 public class ConsumerRabbitMqConfig {
@@ -37,20 +43,26 @@ public class ConsumerRabbitMqConfig {
 
     @Bean
     Queue queue() {
-        return new Queue(queue, true);
+        var q = new Queue(queue, true);
+        log.info("[+] Queue with payload {} created !!!!", JSONUtil.toJSON(q));
+        return q;
     }
     @Bean
     Exchange myExchange() {
-        return ExchangeBuilder.directExchange(exchange).durable(true).build();
+        var newExchange = ExchangeBuilder.directExchange(exchange).durable(true).build();
+        log.info("[+] Exchange with payload {} created !!!", JSONUtil.toJSON(newExchange));
+        return newExchange;
     }
 
     @Bean
     Binding binding() {
-        return BindingBuilder
+        var bind = BindingBuilder
                 .bind(queue())
                 .to(myExchange())
                 .with(routingKey)
                 .noargs();
+        log.info("[+] Binding Builder with payload {} created !!", JSONUtil.toJSON(bind));
+        return bind;
     }
 
     @Bean

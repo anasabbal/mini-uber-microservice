@@ -21,17 +21,17 @@ zuul:
       path: /v1/driver/**
       service-id: driver
     customer:
-      path: /v1/customers
+      path: /v1/customers/**
       service-id: customer
     driver-location:
-      path: /v1/driver-location
+      path: /v1/driver-location/**
       service-id: driver-location
     payment:
-      path: /v1/bank-account
+      path: /v1/bank-account/**
       service-id: bank-account
     wallet:
-      path: /v1/wallet
+      path: /v1/wallet/**
       service-id: wallet
     rating-service:
-      path: /v1/ratings
+      path: /v1/ratings/**
       service-id: rating

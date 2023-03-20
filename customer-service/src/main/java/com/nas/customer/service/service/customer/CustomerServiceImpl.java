@@ -21,6 +21,7 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -40,7 +41,6 @@ public class CustomerServiceImpl implements CustomerService{
     private final RabbitTemplate rabbitTemplate;
     private final CustomerMapper customerMapper;
 
-    @SneakyThrows
     @Override
     public Customer create(CustomerCommand customerCommand) {
         customerCommand.validate();
@@ -88,7 +88,6 @@ public class CustomerServiceImpl implements CustomerService{
     }
     @Override
     public void sendRequestDriver(CustomerRequestDriver requestDriver){
-
         getDriversAvailable().stream().filter(
                         dv -> dv.getId().equals(requestDriver.getDriverId()))
                 .findAny().orElseThrow(

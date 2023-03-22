@@ -9,10 +9,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="api-gateway" />
         <module name="config-server" />
         <module name="rabbitmq-example" />
+        <module name="api-gateway" />
         <module name="car-service" />
+        <module name="nuber-core" />
         <module name="eureka-server" />
         <module name="oauth2-service" />
       </profile>

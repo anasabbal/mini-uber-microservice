@@ -25,6 +25,7 @@
         <module>rating-service</module>
         <module>order-service</module>
         <module>location-service</module>
+        <module>nuber-core</module>
     </modules>
 
     <properties>

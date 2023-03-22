@@ -37,6 +37,8 @@
     <file url="file://$PROJECT_DIR$/location-service/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/notification-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/notification-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nuber-core/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nuber-core/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/oauth2-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/oauth2-service/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/order-service/src/main/java" charset="UTF-8" />

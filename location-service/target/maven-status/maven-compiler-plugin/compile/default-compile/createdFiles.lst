@@ -1,0 +1,11 @@
+com/nas/location/LocationServiceApplication.class
+com/nas/location/models/DistanceMatrixRow.class
+com/nas/location/models/Address.class
+com/nas/location/models/DistanceMatrix.class
+com/nas/location/models/Location.class
+com/nas/location/models/BaseEntity.class
+com/nas/location/models/Duration.class
+com/nas/location/models/OriginAddress.class
+com/nas/location/command/AddressCommand.class
+com/nas/location/models/DistanceMatrixElement.class
+com/nas/location/models/Distance.class

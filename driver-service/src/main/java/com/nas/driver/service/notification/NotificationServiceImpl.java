@@ -29,7 +29,6 @@ public class NotificationServiceImpl implements NotificationService{
     private final RabbitTemplate rabbitTemplate;
 
 
-
     @Override
     public List<NotificationDriver> getNotificationsByDriverId(String driverId) {
         log.info("[+] Begin fetching driver with id {}", driverId);

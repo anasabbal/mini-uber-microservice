@@ -28,3 +28,4 @@
 /.run/
 /.vscode/
 /config-server/target/
+/customer-service/src/main/java/com/nas/customer/service/config/AccessTokenManager.java

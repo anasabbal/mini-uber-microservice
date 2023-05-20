@@ -48,8 +48,8 @@ public class CustomerApiTest {
     @Mock
     private RestTemplate restTemplate;
 
-    @Mock
-    private RabbitTemplate rabbitTemplate;
+    /*@Mock
+    private RabbitTemplate rabbitTemplate;*/
     @Mock
     private CustomerMapper customerMapper;
 
@@ -66,7 +66,7 @@ public class CustomerApiTest {
         customerCommand.setPassword("zadina123");
         customerCommand.setEmail("anas.abbal10@gmail.com");
         customers.add(Customer.create(customerCommand));
-        customerService = new CustomerServiceImpl(customerRepository, restTemplate, rabbitTemplate, customerMapper);
+        customerService = new CustomerServiceImpl(customerRepository, restTemplate, customerMapper);
     }
 
     @Test

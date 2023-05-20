@@ -1,6 +1,7 @@
 package com.nas.customer.service.service.customer;
 
 
+import com.azure.messaging.servicebus.ServiceBusSenderClient;
 import com.nas.core.details.BankAccount;
 import com.nas.core.details.DriverLocationDto;
 import com.nas.core.details.WalletDetails;
@@ -15,16 +16,15 @@ import com.nas.customer.service.model.Driver;
 import com.nas.customer.service.payload.CustomerDetails;
 import com.nas.customer.service.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -38,8 +38,9 @@ public class CustomerServiceImpl implements CustomerService{
 
     private final CustomerRepository customerRepository;
     private final RestTemplate restTemplate;
-    private final RabbitTemplate rabbitTemplate;
+    //private final RabbitTemplate rabbitTemplate;
     private final CustomerMapper customerMapper;
+    //private final JmsTemplate jmsTemplate;
 
     @Override
     public Customer create(CustomerCommand customerCommand) {
@@ -49,7 +50,9 @@ public class CustomerServiceImpl implements CustomerService{
         log.info("[+] Customer with id {} created successfully", JSONUtil.toJSON(customer.getId()));
 
         restTemplate.getForObject(
-                "http://DRIVER-LOCATION:8082/v1/driver-location/" + customer.getId(), String.class, customer.getId()
+                "http://DRIVER-LOCATION:8082/v1/driver-location/" + customer.getId(),
+                String.class,
+                customer.getId()
         );
         return customer;
     }
@@ -59,7 +62,8 @@ public class CustomerServiceImpl implements CustomerService{
     }
     @Override
     public String sendRating(RatingCommand ratingCommand) {
-        final Customer customer = findById(ratingCommand.getDriverId());
+        if(findById(ratingCommand.getDriverId()) == null)
+            throw new RuntimeException("[+] Driver Not found");
         restTemplate.postForEntity(
                 "http://localhost:8000/rating-service/v1/ratings", ratingCommand,
                 RatingCommand.class
@@ -94,17 +98,17 @@ public class CustomerServiceImpl implements CustomerService{
                         () -> new BusinessException(ExceptionPayloadFactory.DRIVER_LOCATION_NOT_FOUND.get())
                 );
         log.info("[+] Begin sending message with payload {}", JSONUtil.toJSON(requestDriver));
-        rabbitTemplate.convertAndSend( "customer.routingkey", requestDriver);
+        //rabbitTemplate.convertAndSend("customer.routingkey", requestDriver);
         log.info("[+] Message with payload {} send Good :)", JSONUtil.toJSON(requestDriver));
     }
-    @RabbitListener(queues = "${spring.rabbitmq.queue}")
+    /*@RabbitListener(queues = "${spring.rabbitmq.queue}")
     public void acceptationResponseFromDriver(ResponseDriver responseDriver){
         log.info("[+] Begin listening to message and get response with payload {}", JSONUtil.toJSON(responseDriver));
         final Customer customer = findById(responseDriver.getCustomerId());
         customer.linkNotification(responseDriver.getDriverId());
         customer.setDriverId(responseDriver.getDriverId());
         customerRepository.save(customer);
-    }
+    }*/
     @Override
     public CustomerDetails findCustomerDetailsById(String customerId) {
         final Customer customer = findById(customerId);

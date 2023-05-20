@@ -12,8 +12,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@EnableRabbit
+//@EnableRabbit
 public class ProducerRabbitMqConfig {
+    /*
 
     @Value("${spring.rabbitmq.host}")
     public String host;
@@ -42,5 +43,5 @@ public class ProducerRabbitMqConfig {
         final RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
         rabbitTemplate.setMessageConverter(jsonMessageConverter());
         return rabbitTemplate;
-    }
+    }*/
 }

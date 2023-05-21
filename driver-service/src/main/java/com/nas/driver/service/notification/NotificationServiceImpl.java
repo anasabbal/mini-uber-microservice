@@ -40,7 +40,7 @@ public class NotificationServiceImpl implements NotificationService{
 
     @Override
     public Driver acceptRequest(final AcceptRequestCustomer acceptRequestCustomer) {
-        log.info("[+] Begin fetching driver with id {}", acceptRequestCustomer.getDriverId());
+        /*log.info("[+] Begin fetching driver with id {}", acceptRequestCustomer.getDriverId());
         final Driver driver = driverRepository.findById(acceptRequestCustomer.getDriverId()).orElseThrow(
                 () -> new BusinessException(ExceptionPayloadFactory.DRIVER_NOT_FOUND.get()));
         log.info("[+] Driver with id {} fetched successfully", acceptRequestCustomer.getDriverId());
@@ -52,7 +52,8 @@ public class NotificationServiceImpl implements NotificationService{
         notificationDrivers.stream().filter(nt -> nt.getId().equals(acceptRequestCustomer.getCustomerId())).forEach(driver::addToDriver);
         log.info("[+] Begin sending acceptation to customers...");
         rabbitTemplate.convertAndSend(acceptRequestCustomer);
-        return driverRepository.save(driver);
+        return driverRepository.save(driver);*/
+        return null;
     }
     @Override
     public Driver cancelRequest(final AcceptRequestCustomer acceptRequestCustomer){

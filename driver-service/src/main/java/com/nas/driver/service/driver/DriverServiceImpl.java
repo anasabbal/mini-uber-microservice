@@ -98,7 +98,7 @@ public class DriverServiceImpl implements DriverService{
         driverRepository.delete(driver);
         restTemplate.delete("http://DRIVER-LOCATION:8082/v1/driver-location/" + driverId, driverId);
     }
-    @Override
+    /*@Override
     @RabbitListener(queues = "${spring.rabbitmq.queue}")
     public void listenToMessage(CustomerRequestDriver payload){
         log.info(String.format("[+] Received message -> %s", JSONUtil.toJSON(payload)));
@@ -106,7 +106,7 @@ public class DriverServiceImpl implements DriverService{
         log.info("[+] Begin creating notification for driver with id {}", driver.getId());
         driver.addToDriver(payload);
         driverRepository.save(driver);
-    }
+    }*/
 
     @Override
     public Page<Driver> findAllByCriteria(Pageable pageable, DriverCriteria driverCriteria) {

@@ -17,7 +17,7 @@ public interface DriverService {
     Page<Driver> getAll(Pageable pageable);
     Driver findById(String driverId);
     Set<Driver> getDriversAvailable();
-    void listenToMessage(CustomerRequestDriver message);
+    /*void listenToMessage(CustomerRequestDriver message);*/
     String sendRating(final RatingCommand ratingCommand);
     void deleteAccount(final String driverId);
     Page<Driver> findAllByCriteria(Pageable pageable, DriverCriteria driverCriteria);

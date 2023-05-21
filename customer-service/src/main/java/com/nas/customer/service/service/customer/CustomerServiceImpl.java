@@ -1,7 +1,6 @@
 package com.nas.customer.service.service.customer;
 
 
-import com.azure.messaging.servicebus.ServiceBusSenderClient;
 import com.nas.core.details.BankAccount;
 import com.nas.core.details.DriverLocationDto;
 import com.nas.core.details.WalletDetails;
@@ -17,14 +16,11 @@ import com.nas.customer.service.payload.CustomerDetails;
 import com.nas.customer.service.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -83,7 +79,7 @@ public class CustomerServiceImpl implements CustomerService{
     @Override
     public Set<Driver> getDriversAvailable() {
         final ResponseEntity<Set<Driver>> objects = restTemplate.exchange(
-                "http://DRIVER:8081/v1/drivers/available", HttpMethod.GET,
+                "https://nuber-microservice-driver-service.azuremicroservices.io/v1/drivers", HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<>() {
                 });

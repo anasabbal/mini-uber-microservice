@@ -2,15 +2,16 @@ server:
   port: 8761
 
 spring:
-  cloud:
-    service-registry:
-      auto-registration:
-        fail-fast: true
-  devtools:
-    livereload:
-      enabled: true
-
+  application:
+    name: eureka-server
 eureka:
+  instance:
+    hostname: localhost
   client:
     fetch-registry: false
     register-with-eureka: false
+    instance-info-replication-interval-seconds: 10
+    service-url:
+      defaultZone: https://nuber-microservice-eureka-server.azuremicroservices.io/eureka
+  server:
+    wait-time-in-ms-when-sync-empty: 0

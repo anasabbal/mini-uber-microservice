@@ -1,10 +1,4 @@
 spring:
-  cloud:
-    discovery:
-      enabled: true
-    service-registry:
-      auto-registration:
-        fail-fast: true
   rabbitmq:
     host: localhost
     password: guest
@@ -14,22 +8,15 @@ spring:
     template:
       routing-key: customer.routingkey
       exchange: amq.direct
-    
-  devtools:
-    livereload:
-      enabled: true
+
   jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: create-drop
     show-sql: true
   datasource:
-    driverClassName: org.postgresql.Driver
-    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/driver}
-    username: postgres
-    password: postgres
+    url: jdbc:postgresql://universe.postgres.database.azure.com:5432/driverdb?sslmode=require
+    username: remotesnail0
+    password: P8rRj5miQVlhOY5rM8uvJg
 
   application:
     name: driver
@@ -37,7 +24,7 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: https://nuber-microservice-eureka-server.azuremicroservices.io/eureka
 
 server:
   port: 8081

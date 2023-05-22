@@ -9,13 +9,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="config-server" />
         <module name="rabbitmq-example" />
+        <module name="api-gateway" />
         <module name="car-service" />
         <module name="nuber-core" />
         <module name="eureka-server" />
         <module name="oauth2-service" />
-        <module name="config-server" />
-        <module name="api-gateway" />
       </profile>
       <profile name="Annotation profile for sport-micro" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -35,8 +35,8 @@
           <entry name="$MAVEN_REPOSITORY$/org/glassfish/jaxb/txw2/3.0.2/txw2-3.0.2.jar" />
           <entry name="$MAVEN_REPOSITORY$/com/sun/istack/istack-commons-runtime/4.0.1/istack-commons-runtime-4.0.1.jar" />
         </processorPath>
-        <module name="carrier-service" />
         <module name="customer-service" />
+        <module name="carrier-service" />
         <module name="driver-service" />
       </profile>
       <profile name="Annotation profile for core-comm" enabled="true">

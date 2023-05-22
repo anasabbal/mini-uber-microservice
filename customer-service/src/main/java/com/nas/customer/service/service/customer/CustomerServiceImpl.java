@@ -1,6 +1,7 @@
 package com.nas.customer.service.service.customer;
 
 
+import com.azure.messaging.servicebus.ServiceBusSenderClient;
 import com.nas.core.details.BankAccount;
 import com.nas.core.details.DriverLocationDto;
 import com.nas.core.details.WalletDetails;
@@ -14,13 +15,17 @@ import com.nas.customer.service.model.Customer;
 import com.nas.customer.service.model.Driver;
 import com.nas.customer.service.payload.CustomerDetails;
 import com.nas.customer.service.repository.CustomerRepository;
+import com.netflix.discovery.converters.Auto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -37,6 +42,7 @@ public class CustomerServiceImpl implements CustomerService{
     //private final RabbitTemplate rabbitTemplate;
     private final CustomerMapper customerMapper;
     //private final JmsTemplate jmsTemplate;
+
 
     @Override
     public Customer create(CustomerCommand customerCommand) {

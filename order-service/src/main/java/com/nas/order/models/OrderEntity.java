@@ -2,7 +2,8 @@ package com.nas.order.models;
 
 
 import com.nas.order.data.UserData;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter

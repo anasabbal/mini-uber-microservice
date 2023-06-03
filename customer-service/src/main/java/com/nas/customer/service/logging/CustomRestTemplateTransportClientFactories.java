@@ -20,6 +20,7 @@ public class CustomRestTemplateTransportClientFactories extends RestTemplateTran
     public TransportClientFactory newTransportClientFactory(final EurekaClientConfig clientConfig,
                                                             final Collection<Void> additionalFilters, final InstanceInfo myInstanceInfo,
                                                             final Optional<SSLContext> sslContext, final Optional<HostnameVerifier> hostnameVerifier) {
-        return new CustomRestTemplateTransportClientFactory();
+        //return new CustomRestTemplateTransportClientFactory();
+        return null;
     }
 }

@@ -4,12 +4,12 @@ package com.nas.driver.model;
 import com.nas.driver.command.AddressCommand;
 import com.nas.driver.command.CustomerRequestDriver;
 import com.nas.driver.command.DriverCommand;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import jakarta.persistence.*;
 import java.util.List;
 import java.util.stream.Collectors;
 

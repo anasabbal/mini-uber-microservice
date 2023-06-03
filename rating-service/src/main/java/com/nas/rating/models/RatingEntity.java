@@ -2,9 +2,9 @@ package com.nas.rating.models;
 
 
 import com.nas.rating.command.RatingCommand;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import lombok.*;
-
-import jakarta.persistence.*;
 
 @Entity
 @Getter

@@ -3,7 +3,7 @@ package com.nas.customer.service.api;
 
 import com.nas.customer.service.command.CustomerCommand;
 import com.nas.customer.service.controller.CustomerController;
-import com.nas.customer.service.dto.mapper.CustomerMapper;
+import com.nas.customer.service.mapper.CustomerMapper;
 import com.nas.customer.service.model.Customer;
 import com.nas.customer.service.repository.CustomerRepository;
 import com.nas.customer.service.service.customer.CustomerService;
@@ -15,7 +15,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.data.domain.Page;

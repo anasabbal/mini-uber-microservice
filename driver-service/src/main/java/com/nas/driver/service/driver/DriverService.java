@@ -1,6 +1,5 @@
 package com.nas.driver.service.driver;
 
-import com.nas.driver.command.CustomerRequestDriver;
 import com.nas.driver.command.DriverCommand;
 import com.nas.driver.command.RatingCommand;
 import com.nas.driver.criteria.DriverCriteria;

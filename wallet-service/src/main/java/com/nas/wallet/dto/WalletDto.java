@@ -1,7 +1,6 @@
 package com.nas.wallet.dto;
 
 
-import com.nas.wallet.enums.Currency;
 import lombok.Getter;
 import lombok.Setter;
 

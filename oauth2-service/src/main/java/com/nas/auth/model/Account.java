@@ -2,12 +2,11 @@ package com.nas.auth.model;
 
 
 import com.nas.auth.command.UserCommand;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import jakarta.persistence.*;
 
 @Entity
 @Table(name = "USERS", uniqueConstraints = {

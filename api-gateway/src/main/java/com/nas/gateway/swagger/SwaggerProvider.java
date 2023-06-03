@@ -2,16 +2,15 @@ package com.nas.gateway.swagger;
 
 import com.nas.core.constants.ResourcePath;
 import lombok.RequiredArgsConstructor;
-import java.util.ArrayList;
-import java.util.List;
-
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.route.RouteDefinitionLocator;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
-
-import lombok.extern.slf4j.Slf4j;
 import springfox.documentation.swagger.web.SwaggerResource;
 import springfox.documentation.swagger.web.SwaggerResourcesProvider;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 

@@ -1,10 +1,8 @@
 package com.nas.customer.service.repository;
 
-import com.nas.core.util.JSONUtil;
 import com.nas.core.util.PatternUtil;
 import com.nas.customer.service.criteria.CustomerCriteria;
 import com.nas.customer.service.model.Customer;
-import static com.nas.customer.service.model.Customer_.*;
 import jakarta.persistence.criteria.Predicate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,8 +11,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.nas.customer.service.model.Customer_.FIRST_NAME;
 
 
 @Repository

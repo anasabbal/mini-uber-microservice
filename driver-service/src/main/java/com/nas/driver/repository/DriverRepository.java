@@ -4,7 +4,6 @@ package com.nas.driver.repository;
 import com.nas.core.util.PatternUtil;
 import com.nas.driver.criteria.DriverCriteria;
 import com.nas.driver.model.Driver;
-import com.nas.driver.model.Driver_;
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +14,9 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
+import static com.nas.driver.model.Driver_.DRIVER_STATUS;
+import static com.nas.driver.model.Driver_.FIRST_NAME;
 
 
 @Repository
@@ -30,11 +32,11 @@ public interface DriverRepository extends JpaRepository<Driver, String>, JpaSpec
 
             if(driverCriteria.firstName() != null){
                 String pattern = PatternUtil.likePattern(driverCriteria.firstName().toUpperCase());
-                predicates.add(builder.like(builder.upper(root.get(Driver_.FIRST_NAME)), pattern));
+                predicates.add(builder.like(builder.upper(root.get(FIRST_NAME)), pattern));
             }
             if(driverCriteria.status() != null){
                 String pattern = PatternUtil.likePattern(String.valueOf(driverCriteria.status()));
-                predicates.add(builder.like(builder.upper(root.get(Driver_.DRIVER_STATUS)), pattern));
+                predicates.add(builder.like(builder.upper(root.get(DRIVER_STATUS)), pattern));
             }
             return builder.and(predicates.toArray(new Predicate[]{}));
         }, pageable);

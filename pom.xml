@@ -16,15 +16,14 @@
         <module>core-comm</module>
         <module>driver-service</module>
         <module>driver-location-service</module>
-        <module>car-service</module>
         <module>config-server</module>
-        <module>carrier-service</module>
         <module>payment-service</module>
         <module>api-gateway</module>
         <module>wallet-service</module>
         <module>rating-service</module>
         <module>order-service</module>
         <module>location-service</module>
+        <module>customer-service-dto</module>
         <module>nuber-core</module>
     </modules>
 

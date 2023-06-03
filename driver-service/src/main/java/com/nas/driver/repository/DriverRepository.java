@@ -4,7 +4,6 @@ package com.nas.driver.repository;
 import com.nas.core.util.PatternUtil;
 import com.nas.driver.criteria.DriverCriteria;
 import com.nas.driver.model.Driver;
-import com.nas.driver.model.DriverStatus_;
 import com.nas.driver.model.Driver_;
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.domain.Page;

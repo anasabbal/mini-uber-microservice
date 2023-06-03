@@ -1,9 +1,5 @@
 package com.nas.customer.service.service;
 
-import com.nas.core.exception.BusinessException;
-import com.nas.core.exception.ExceptionPayload;
-import com.nas.core.exception.ExceptionPayloadFactory;
-import com.nas.core.util.Assert;
 import com.nas.customer.service.command.CustomerCommand;
 import com.nas.customer.service.command.CustomerInfoUpdateCmd;
 import com.nas.customer.service.criteria.CustomerCriteria;
@@ -28,7 +24,7 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 

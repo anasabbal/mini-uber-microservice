@@ -2,9 +2,6 @@ package com.nas.driver.criteria;
 
 
 import com.nas.driver.model.DriverStatus;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 
 
 public record DriverCriteria(String firstName, DriverStatus status) {

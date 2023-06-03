@@ -6,6 +6,7 @@ import com.nas.core.exception.ExceptionPayloadFactory;
 import com.nas.core.util.Assert;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
 import static com.nas.core.util.RegexExpressions.ALPHABETIC_MIN_2_CHARS;
 import static com.nas.core.util.RegexExpressions.EMAIL;
 import static org.junit.jupiter.api.Assertions.*;

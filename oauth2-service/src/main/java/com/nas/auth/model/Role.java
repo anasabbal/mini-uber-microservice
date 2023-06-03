@@ -2,9 +2,8 @@ package com.nas.auth.model;
 
 
 import com.nas.auth.enums.RoleType;
-import lombok.*;
-
 import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
 @Table(name = "ROLES")

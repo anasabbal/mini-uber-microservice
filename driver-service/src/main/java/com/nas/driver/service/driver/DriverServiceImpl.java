@@ -7,21 +7,14 @@ import com.nas.core.details.WalletDetails;
 import com.nas.core.exception.BusinessException;
 import com.nas.core.exception.ExceptionPayloadFactory;
 import com.nas.core.util.JSONUtil;
-import com.nas.driver.command.CustomerRequestDriver;
 import com.nas.driver.command.DriverCommand;
 import com.nas.driver.command.RatingCommand;
 import com.nas.driver.criteria.DriverCriteria;
-import com.nas.driver.dto.mapper.DriverMapper;
 import com.nas.driver.model.Driver;
-import com.nas.driver.model.NotificationDriver;
 import com.nas.driver.payload.DriverDetails;
 import com.nas.driver.repository.DriverRepository;
-import com.nas.driver.repository.NotificationDriverRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +22,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
-import java.net.URI;
 import java.util.Set;
 
 @Service

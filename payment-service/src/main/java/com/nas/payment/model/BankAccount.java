@@ -3,12 +3,11 @@ package com.nas.payment.model;
 
 import com.nas.payment.enums.AccountStatus;
 import com.nas.payment.enums.AccountType;
-import lombok.*;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import lombok.*;
 
 @Entity
 @Getter

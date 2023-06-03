@@ -3,6 +3,7 @@ package com.nas.wallet.service.wallet;
 
 import com.nas.core.exception.BusinessException;
 import com.nas.core.exception.ExceptionPayloadFactory;
+import com.nas.wallet.model.Wallet;
 import com.nas.wallet.repository.WalletRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,7 +11,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import com.nas.wallet.model.Wallet;
 
 @Service
 @RequiredArgsConstructor

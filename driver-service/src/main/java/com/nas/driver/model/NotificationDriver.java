@@ -2,12 +2,11 @@ package com.nas.driver.model;
 
 
 import com.nas.driver.command.CustomerRequestDriver;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import jakarta.persistence.*;
 
 
 @Entity

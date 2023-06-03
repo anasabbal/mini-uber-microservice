@@ -5,7 +5,6 @@ import com.nas.core.exception.BusinessException;
 import com.nas.core.exception.ExceptionPayloadFactory;
 import com.nas.driver.command.AcceptRequestCustomer;
 import com.nas.driver.model.Driver;
-import com.nas.driver.model.DriverStatus;
 import com.nas.driver.model.NotificationDriver;
 import com.nas.driver.repository.DriverRepository;
 import com.nas.driver.repository.NotificationDriverRepository;

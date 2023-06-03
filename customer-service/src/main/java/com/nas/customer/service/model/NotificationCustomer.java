@@ -1,10 +1,9 @@
 package com.nas.customer.service.model;
 
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import lombok.*;
-
-import jakarta.persistence.Entity;
 
 
 @Entity

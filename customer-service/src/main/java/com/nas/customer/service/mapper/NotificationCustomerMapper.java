@@ -1,7 +1,7 @@
-package com.nas.customer.service.dto.mapper;
+package com.nas.customer.service.mapper;
 
 
-import com.nas.customer.service.dto.NotificationCustomerDto;
+import com.customer.service.dto.notification.NotificationCustomerDto;
 import com.nas.customer.service.model.NotificationCustomer;
 import org.mapstruct.Mapper;
 

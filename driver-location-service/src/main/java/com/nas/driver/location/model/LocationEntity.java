@@ -1,13 +1,12 @@
 package com.nas.driver.location.model;
 
 
+import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
-
-import jakarta.persistence.*;
 
 @Getter
 @Setter

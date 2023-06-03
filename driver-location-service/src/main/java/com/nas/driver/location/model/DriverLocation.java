@@ -2,11 +2,11 @@ package com.nas.driver.location.model;
 
 
 import com.nas.driver.location.command.DriverLocationCommand;
-import lombok.*;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
+import lombok.*;
+
 import java.util.HashSet;
 import java.util.Set;
 

@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 
-import static com.nas.core.constants.ResourcePath.*;
+import static com.nas.core.constants.ResourcePath.RATINGS;
+import static com.nas.core.constants.ResourcePath.V1;
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
 @RestController

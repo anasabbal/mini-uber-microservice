@@ -25,6 +25,7 @@
         <module>location-service</module>
         <module>customer-service-dto</module>
         <module>nuber-core</module>
+        <module>driver-service-dto</module>
     </modules>
 
     <properties>

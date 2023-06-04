@@ -25,6 +25,7 @@
         <module>location-service</module>
         <module>customer-service-dto</module>
         <module>nuber-core</module>
+        <module>driver-service-dto</module>
     </modules>
 
     <properties>
@@ -37,6 +38,7 @@
         <mockito.version>3.8.0</mockito.version>
         <org.mapstruct.version>1.5.3.Final</org.mapstruct.version>
         <axon.version>4.7.2</axon.version>
+        <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
     </properties>
 
     <dependencyManagement>
@@ -100,39 +102,6 @@
                         <execution>
                             <goals>
                                 <goal>repackage</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-                <plugin>
-                    <groupId>com.google.cloud.tools</groupId>
-                    <artifactId>jib-maven-plugin</artifactId>
-                    <version>3.1.4</version>
-                    <configuration>
-                        <from>
-                            <image>eclipse-temurin:17@sha256:2b47a8ea946ce1e5365a1562414ed576e378b7b670cadff3fb98ebecf2890cdc</image>
-                            <platforms>
-                                <platform>
-                                    <architecture>arm64</architecture>
-                                    <os>linux</os>
-                                </platform>
-                                <platform>
-                                    <architecture>amd64</architecture>
-                                    <os>linux</os>
-                                </platform>
-                            </platforms>
-                        </from>
-                        <to>
-                            <tags>
-                                <tag>latest</tag>
-                            </tags>
-                        </to>
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <phase>package</phase>
-                            <goals>
-                                <goal>build</goal>
                             </goals>
                         </execution>
                     </executions>

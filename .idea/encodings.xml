@@ -23,12 +23,16 @@
     <file url="file://$PROJECT_DIR$/config-server/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/core-comm/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/core-comm/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/customer-service-dto/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/customer-service-dto/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/customer-service/core-exception/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/customer-service/core-exception/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/customer-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/customer-service/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/driver-location-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/driver-location-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/driver-service-dto/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/driver-service-dto/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/driver-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/driver-service/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/eureka-server/src/main/java" charset="UTF-8" />

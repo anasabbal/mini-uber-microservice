@@ -49,11 +49,11 @@ public class CustomerServiceImpl implements CustomerService{
         final Customer customer = customerRepository.save(Customer.create(customerCommand));
         log.info("[+] Customer with id {} created successfully", JSONUtil.toJSON(customer.getId()));
 
-        restTemplate.getForObject(
+        /*restTemplate.getForObject(
                 "http://DRIVER-LOCATION:8082/v1/driver-location/" + customer.getId(),
                 String.class,
                 customer.getId()
-        );
+        );*/
         return customer;
     }
     @Override

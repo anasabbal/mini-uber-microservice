@@ -14,6 +14,8 @@ import com.nas.customer.service.payload.CustomerDetails;
 import com.nas.customer.service.service.customer.CustomerService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -29,10 +31,19 @@ import static org.springframework.web.servlet.support.ServletUriComponentsBuilde
 @RequestMapping(V1 + CUSTOMERS)
 @RequiredArgsConstructor
 @CrossOrigin
+@Slf4j
 public class CustomerController {
 
     private final CustomerService customerService;
     private final CustomerMapper customerMapper;
+    private final StreamBridge streamBridge;
+
+    @GetMapping("values/{value}")
+    public ResponseEntity<String> values(@PathVariable String value) {
+        log.info("Sending value {} to topic", value);
+        streamBridge.send("values-topic", value);
+        return ResponseEntity.ok("ok");
+    }
 
     @PostMapping
     @ApiOperation("API TO CREATE CUSTOMER WITH PAYLOAD CUSTOMERCOMMAND")

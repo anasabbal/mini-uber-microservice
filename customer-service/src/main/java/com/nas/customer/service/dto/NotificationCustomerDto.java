@@ -1,4 +1,4 @@
-package com.customer.service.dto.notification;
+package com.nas.customer.service.dto;
 
 import lombok.Getter;
 import lombok.Setter;

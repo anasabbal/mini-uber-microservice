@@ -1,6 +1,5 @@
-package com.customer.service.dto.customer;
+package com.nas.customer.service.dto;
 
-import com.customer.service.dto.notification.NotificationCustomerDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,4 +19,3 @@ public class CustomerDto {
     private String password;
     private List<NotificationCustomerDto> notificationCustomers;
 }
-

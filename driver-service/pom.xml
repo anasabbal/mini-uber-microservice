@@ -49,10 +49,6 @@
             <version>${jpamodelgen.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.azure.spring</groupId>
-            <artifactId>spring-cloud-azure-stream-binder-servicebus</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.nas</groupId>
             <artifactId>core-comm</artifactId>
             <version>1.0-SNAPSHOT</version>
@@ -73,21 +69,11 @@
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
         </dependency>
-        <dependency>
-            <groupId>com.azure.spring</groupId>
-            <artifactId>spring-cloud-azure-starter-jdbc-postgresql</artifactId> <!-- For passwordless connection -->
-        </dependency>
         <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-validator -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>8.0.0.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>com.nas</groupId>
-            <artifactId>driver-service-dto</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
 

@@ -1,10 +1,10 @@
 package com.nas.customer.service.payload;
 
 
-import com.customer.service.dto.customer.CustomerDto;
 import com.nas.core.details.BankAccount;
 import com.nas.core.details.DriverLocationDto;
 import com.nas.core.details.WalletDetails;
+import com.nas.customer.service.dto.CustomerDto;
 import lombok.Getter;
 import lombok.Setter;
 

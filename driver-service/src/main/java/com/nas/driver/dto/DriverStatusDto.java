@@ -1,5 +1,4 @@
-package com.driver.service.dto;
-
+package com.nas.driver.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

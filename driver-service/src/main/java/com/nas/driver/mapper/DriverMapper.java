@@ -1,7 +1,7 @@
 package com.nas.driver.mapper;
 
 
-import com.driver.service.dto.DriverDto;
+import com.nas.driver.dto.DriverDto;
 import com.nas.driver.model.Driver;
 import org.mapstruct.Mapper;
 

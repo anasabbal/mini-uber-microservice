@@ -1,9 +1,9 @@
 package com.nas.driver.controller;
 
 
-import com.driver.service.dto.DriverDto;
-import com.driver.service.dto.NotificationDriverDto;
 import com.nas.driver.command.AcceptRequestCustomer;
+import com.nas.driver.dto.DriverDto;
+import com.nas.driver.dto.NotificationDriverDto;
 import com.nas.driver.mapper.DriverMapper;
 import com.nas.driver.mapper.NotificationDriverMapper;
 import com.nas.driver.model.Driver;

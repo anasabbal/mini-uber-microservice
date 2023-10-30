@@ -1,11 +1,11 @@
 package com.nas.driver.controller;
 
 
-import com.driver.service.dto.DriverDto;
 import com.nas.driver.command.AcceptRequestCustomer;
 import com.nas.driver.command.DriverCommand;
 import com.nas.driver.command.RatingCommand;
 import com.nas.driver.criteria.DriverCriteria;
+import com.nas.driver.dto.DriverDto;
 import com.nas.driver.mapper.DriverMapper;
 import com.nas.driver.model.Driver;
 import com.nas.driver.payload.DriverDetails;

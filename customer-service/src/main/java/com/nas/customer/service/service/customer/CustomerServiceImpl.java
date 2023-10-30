@@ -37,10 +37,7 @@ public class CustomerServiceImpl implements CustomerService{
 
     private final CustomerRepository customerRepository;
     private final RestTemplate restTemplate;
-    //private final RabbitTemplate rabbitTemplate;
     private final CustomerMapper customerMapper;
-    //private final JmsTemplate jmsTemplate;
-
 
     @Override
     public Customer create(CustomerCommand customerCommand) {
@@ -48,12 +45,6 @@ public class CustomerServiceImpl implements CustomerService{
         log.info("[+] Begin creating customer with payload {}", JSONUtil.toJSON(customerCommand));
         final Customer customer = customerRepository.save(Customer.create(customerCommand));
         log.info("[+] Customer with id {} created successfully", JSONUtil.toJSON(customer.getId()));
-
-        /*restTemplate.getForObject(
-                "http://DRIVER-LOCATION:8082/v1/driver-location/" + customer.getId(),
-                String.class,
-                customer.getId()
-        );*/
         return customer;
     }
     @Override
@@ -98,17 +89,8 @@ public class CustomerServiceImpl implements CustomerService{
                         () -> new BusinessException(ExceptionPayloadFactory.DRIVER_LOCATION_NOT_FOUND.get())
                 );
         log.info("[+] Begin sending message with payload {}", JSONUtil.toJSON(requestDriver));
-        //rabbitTemplate.convertAndSend("customer.routingkey", requestDriver);
         log.info("[+] Message with payload {} send Good :)", JSONUtil.toJSON(requestDriver));
     }
-    /*@RabbitListener(queues = "${spring.rabbitmq.queue}")
-    public void acceptationResponseFromDriver(ResponseDriver responseDriver){
-        log.info("[+] Begin listening to message and get response with payload {}", JSONUtil.toJSON(responseDriver));
-        final Customer customer = findById(responseDriver.getCustomerId());
-        customer.linkNotification(responseDriver.getDriverId());
-        customer.setDriverId(responseDriver.getDriverId());
-        customerRepository.save(customer);
-    }*/
     @Override
     public CustomerDetails findCustomerDetailsById(String customerId) {
         final Customer customer = findById(customerId);

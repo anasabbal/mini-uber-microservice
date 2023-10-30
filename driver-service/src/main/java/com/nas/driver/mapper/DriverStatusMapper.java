@@ -1,7 +1,7 @@
 package com.nas.driver.mapper;
 
 
-import com.driver.service.dto.DriverStatusDto;
+import com.nas.driver.dto.DriverStatusDto;
 import com.nas.driver.model.DriverStatus;
 import org.mapstruct.Mapper;
 

@@ -1,7 +1,7 @@
 package com.nas.customer.service.mapper;
 
 
-import com.customer.service.dto.customer.CustomerDto;
+import com.nas.customer.service.dto.CustomerDto;
 import com.nas.customer.service.model.Customer;
 import org.mapstruct.Mapper;
 

@@ -23,9 +23,7 @@
         <module>rating-service</module>
         <module>order-service</module>
         <module>location-service</module>
-        <module>customer-service-dto</module>
         <module>nuber-core</module>
-        <module>driver-service-dto</module>
     </modules>
 
     <properties>
@@ -54,13 +52,6 @@
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
                 <version>${spring.cloud-version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.azure.spring</groupId>
-                <artifactId>spring-cloud-azure-dependencies</artifactId>
-                <version>5.1.0</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

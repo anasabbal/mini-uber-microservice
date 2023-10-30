@@ -14,9 +14,9 @@ spring:
       ddl-auto: create-drop
     show-sql: true
   datasource:
-    url: jdbc:postgresql://universe.postgres.database.azure.com:5432/driverdb?sslmode=require
-    username: remotesnail0
-    password: P8rRj5miQVlhOY5rM8uvJg
+    url: jdbc:postgresql://localhost:5432/driver
+    username: postgres
+    password: postgres
 
   application:
     name: driver
@@ -24,7 +24,7 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: https://nuber-microservice-eureka-server.azuremicroservices.io/eureka
+      defaultZone: http://localhost:8761/eureka
 
 server:
   port: 8081

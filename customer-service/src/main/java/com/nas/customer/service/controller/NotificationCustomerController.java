@@ -1,7 +1,7 @@
 package com.nas.customer.service.controller;
 
 
-import com.customer.service.dto.notification.NotificationCustomerDto;
+import com.nas.customer.service.dto.NotificationCustomerDto;
 import com.nas.customer.service.mapper.NotificationCustomerMapper;
 import com.nas.customer.service.model.NotificationCustomer;
 import com.nas.customer.service.service.notification.NotificationCustomerService;

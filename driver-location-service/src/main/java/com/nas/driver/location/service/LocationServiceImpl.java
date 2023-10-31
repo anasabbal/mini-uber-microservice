@@ -22,7 +22,7 @@ import java.net.InetAddress;
 @Slf4j
 public record LocationServiceImpl(
         LocationEntityRepository locationEntityRepository,
-        DatabaseReader databaseReader, GeoIpRepository geoIpRepository) implements LocationService{
+        GeoIpRepository geoIpRepository) implements LocationService{
 
     @Override
     public LocationEntity create() throws IOException, GeoIp2Exception {
@@ -51,7 +51,7 @@ public record LocationServiceImpl(
         );
     }
     private GeoIp getLocation(String ip) throws IOException, GeoIp2Exception {
-        InetAddress inetAddress = InetAddress.getByName(ip);
+        /*InetAddress inetAddress = InetAddress.getByName(ip);
         CityResponse response = databaseReader.city(inetAddress);
 
         String cityName = response.getCity().getName();
@@ -62,6 +62,7 @@ public record LocationServiceImpl(
         log.info("Latitude => {}", latitude);
         String longitude = response.getLocation().getLongitude().toString();
         log.info("Longitude => {}", longitude);
-        return new GeoIp(country, ip, cityName, latitude, longitude);
+        return new GeoIp(country, ip, cityName, latitude, longitude);*/
+        return null;
     }
 }

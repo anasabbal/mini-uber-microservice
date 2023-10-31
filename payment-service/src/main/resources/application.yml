@@ -1,14 +1,14 @@
 spring:
   # config rabbitmq for producer
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
-    queue: bank.customer
-    template:
-      exchange: customer.exchange
-      routing-key: customer.routingkey
+  #rabbitmq:
+  #  host: localhost
+  #  port: 5672
+  #  username: guest
+  #  password: guest
+  #  queue: bank.customer
+  #  template:
+  #    exchange: customer.exchange
+  #    routing-key: customer.routingkey
   devtools:
     livereload:
       enabled: true

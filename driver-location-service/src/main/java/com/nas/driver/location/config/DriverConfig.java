@@ -13,12 +13,12 @@ import java.util.Optional;
 
 @Configuration
 public class DriverConfig {
-    @Bean
+    /*@Bean
     public DatabaseReader databaseReader() throws Exception {
         File database = new File("/Users/anas/IdeaProjects/mini-uber-microservice/driver-location-service/src/main/resources/GeoLite2-City_20221230/GeoLite2-City.mmdb");
         return new DatabaseReader.Builder(database)
                 .build();
-    }
+    }*/
     @Bean
     @LoadBalanced
     public RestTemplate restTemplate(){

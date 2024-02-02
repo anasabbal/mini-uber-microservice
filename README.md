@@ -50,4 +50,5 @@ For detailed instructions on setting up and configuring each microservice, refer
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
+If you would like to contribute to Mini Uber Microservice, please contact the project owner at [anas.abbal10@gmail.com](mailto:anas.abbal10@gmail.com).
 

@@ -2,140 +2,52 @@
 
 # Mini Uber
 ![logo](./img/back.png)
-NUBER is a ride sharing that hires independent contractors as drivers.
 
-# Table of contents
-- [Introduction](#introduction)
-- [Talk for each service](#talk-for-each-service)
-  - [Customer service](#customer-service)
-  - [Driver serivce](#driver-service)
-  - [Driver location service](#)
-  - [Api gateway service](#)
-  - [Config service](#)
-  - [Payment service](#)
-  - [Wallet service](#)
-  - [Rating service](#)
-- [Setup On Mac](#setup-on-mac)
-- [Even Driven](#)
-  - [Rabbit MQ](#)
-- [Docker](#docker)
-  - [Build](#build)
-  - [Run locally](#run-locally)
+Mini Uber Microservice is a microservices-based architecture for a ride-sharing application similar to Uber. It consists of various microservices responsible for different functionalities, such as user authentication, ride management, driver location tracking, payment processing, and more.
 
-### Customers
+## Project Structure
 
-- Customer Details Payload
-```json
-{
-    "customerId": "91d41932-62fb-4a91-9494-e6431f7757b0",
-    "firstName": "Test",
-    "lastName": "Test",
-    "email": "anas.abbal10@gmail.com",
-    "driverLocationDto": {
-        "id": "b831f19b-e42f-4f19-a276-5756b592442e",
-        "deleted": false,
-        "active": true,
-        "driverId": "91d41932-62fb-4a91-9494-e6431f7757b0",
-        "name": "Driver",
-        "available": true,
-        "carId": null,
-        "locationEntities": [
-            {
-                "id": "f05c7f3c-b921-4757-b034-b59c38361671",
-                "active": null,
-                "geoIp": {
-                    "id": "7c72385c-d537-458d-ab06-5272b66313f9",
-                    "ipAddress": "128.101.101.101",
-                    "country": "United States",
-                    "city": "Minneapolis",
-                    "latitude": "44.8769",
-                    "longitude": "-93.2535"
-                }
-            }
-        ]
-    },
-    "bankAccount": {
-        "id": "df2f244b-8063-43e8-8bd9-9326482dcfbd",
-        "userId": "91d41932-62fb-4a91-9494-e6431f7757b0",
-        "type": "SAVINGS_ACCOUNT",
-        "status": "ACTIVE"
-    },
-    "walletDetails": {
-        "id": "2688c99a-bfa9-4344-903e-667860061910",
-        "createdAt": "2023-03-15T19:21:37.120503",
-        "updatedAt": "2023-03-15T19:21:37.120503",
-        "updatedBy": "NAS",
-        "deleted": false,
-        "active": true,
-        "accountId": "df2f244b-8063-43e8-8bd9-9326482dcfbd",
-      "creditCards": [
-        {
-          "id": "ad12862d-3154-4a10-8c33-478631f4c85a",
-          "createdBy": "NAS",
-          "holdName": "Anas",
-          "number": "2000-2000-2000-2000",
-          "expirationDate": "12/24",
-          "cvv": "180"
-        }
-      ],
-      "payments": [
-        {
-          "id": "ad12862d-3154-4a10-8c33-478631f4c85a",
-          "createdAt": "2023-03-15T19:46:49.352771",
-          "createdBy": "NAS",
-          "updatedAt": "2023-03-15T19:46:49.352771",
-          "updatedBy": "NAS",
-          "amount": null,
-          "creditCard": null,
-          "paymentStatus": null,
-          "barCode": null,
-          "paymentType": null
-        }
-      ]
-    }
-}
-```
+The project structure follows a microservices architecture pattern, with each microservice responsible for a specific domain or functionality. Here's an overview of the project structure:
 
-| Method | Url                               | Description                                                                           | Sample Valid Request Body |
-|--------|-----------------------------------|---------------------------------------------------------------------------------------| ------------------------- |
-| POST   | /v1/customers                     | Create custmer                                                                        |[JSON](#usercreate) |
-| GET    | /v1/customers/{customerId}        | Get customer profile by id                                                            |[JSON](#usercreate) |
-| UPDATE | /v1/customers/{customerId}        | Update customer with id                                                               | [JSON](#usercreate)|
-| GET    | /v1/customers/criteria            | Get customers by criteria                                                             | [JSON](#usercreate)|
-| POST   | /v1/customers/send-request        | send request for available driver                                                     | [JSON](#usercreate)|
+- **api-gateway**: Microservice responsible for routing requests to the appropriate backend services.
+- **config-server**: Microservice for managing configuration settings for all other microservices.
+- **core-comm**: Core communication module providing communication utilities for other microservices.
+- **customer-service**: Microservice handling customer-related operations, such as user registration, authentication, and ride requests.
+- **driver-location-service**: Microservice managing real-time tracking of driver locations.
+- **driver-service**: Microservice handling driver-related operations, such as driver registration, availability, and ride assignments.
+- **eureka-server**: Service discovery server for registering and discovering microservices within the architecture.
+- **location-service**: Microservice managing location-related operations, such as geocoding and distance calculations.
+- **oauth2-service**: Microservice responsible for OAuth2-based authentication and authorization.
+- **order-service**: Microservice managing ride orders and ride lifecycle management.
+- **payment-service**: Microservice handling payment processing for completed rides.
+- **rating-service**: Microservice managing rating and review functionalities for both passengers and drivers.
+- **wallet-service**: Microservice managing digital wallets for users and processing wallet transactions.
 
-### Driver
-| Method | Url                    | Description              | Sample Valid Request Body |
-|--------|------------------------|--------------------------| ------------------------- |
-| POST   | /v1/driver             | Create driver            |[JSON](#usercreate) |
-| GET    | /v1/driver/{driverId}  | Get driver profile by id |[JSON](#usercreate) |
-| UPDATE | /v1/driver/{driverId}  | Update driver with id    | [JSON](#usercreate)|
-| GET    | /v1/customers/criteria | Get driver by criteria   | [JSON](#usercreate)|
-| POST   | /v1/driver/accept-request   | accept request from customer    | [JSON](#usercreate)|
+## Technologies Used
 
+- **Java**: Backend development using Java programming language.
+- **Spring Boot**: Framework for building microservices-based applications.
+- **Spring Cloud**: Toolkit for building microservices architectures with Spring Boot.
+- **Docker**: Containerization platform for packaging and deploying microservices.
+- **Terraform**: Infrastructure as code tool for managing cloud resources.
+- **OAuth2**: Authentication and authorization framework for securing microservices.
+- **Netflix Eureka**: Service discovery and registration tool for microservices.
+- **RabbitMQ**: Message broker for asynchronous communication between microservices.
+- **MySQL**: Relational database management system for storing application data.
 
-# Introduction
-# Talk for Each service
-##### Customer Service
-- create account in Nuber
-- update profile
-- get available drivers
-- send request to driver
-- payment
-- find job from Nuber carriers
-- earn money from sending link to another client that create account in Nuber
-- post rating for driver
+## Getting Started
 
-##### Driver Service
-# Setup On Mac
+To run the Mini Uber Microservice project locally, follow these steps:
 
-```
-SSH: git@github.com:anasabbal/mini-uber-microservice.git
-HTTPS: https://github.com/anasabbal/mini-uber-microservice.git
-cd mini-uber-microservice
-mvn clean install compile
-mvn spring-boot:run
-```
-```
-brew install update
-```
+1. Clone the repository: `git clone https://github.com/anasabbal/mini-uber-microservice.git`
+2. Navigate to the project directory: `cd mini-uber-microservice`
+3. Install dependencies: `mvn clean install`
+4. Start each microservice individually using Spring Boot or Docker.
+5. Access the API endpoints of each microservice as needed.
+
+For detailed instructions on setting up and configuring each microservice, refer to the respective README.md files in their directories.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+

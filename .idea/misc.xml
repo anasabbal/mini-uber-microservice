@@ -9,15 +9,18 @@
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/authentication-service/pom.xml" />
         <option value="$PROJECT_DIR$/circuit-breaker-example/pom.xml" />
         <option value="$PROJECT_DIR$/circuit-breaker/pom.xml" />
         <option value="$PROJECT_DIR$/notification-service/pom.xml" />
+        <option value="$PROJECT_DIR$/nuber-core/pom.xml" />
+        <option value="$PROJECT_DIR$/oauth2-service/pom.xml" />
         <option value="$PROJECT_DIR$/shared-configuration/pom.xml" />
         <option value="$PROJECT_DIR$/zull-proxy/pom.xml" />
       </set>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_20" default="true" project-jdk-name="20" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="graalvm-jdk-21" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
   <component name="ProjectType">

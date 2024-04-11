@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: AUTH
+  data:
+    mongodb:
+      uri: mongodb+srv://anasabbal10:anas123@cluster0.hhgfsmp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+      database: auth-service
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+server:
+  port: 8081
+
+token:
+  signing:
+    key: 413F4428472B4B6250655368566D5970337336763979244226452948404D6351

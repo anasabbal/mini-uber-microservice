@@ -9,6 +9,10 @@
     <file url="file://$PROJECT_DIR$/apache-kafka-example/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/api-gateway/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/api-gateway/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/authen-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/authen-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/authentication-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/authentication-service/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/booking-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/booking-service/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/car-service/src/main/java" charset="UTF-8" />

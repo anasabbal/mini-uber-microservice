@@ -1,14 +1,6 @@
 server:
   port: 8761
 
-spring:
-  cloud:
-    service-registry:
-      auto-registration:
-        fail-fast: true
-  devtools:
-    livereload:
-      enabled: true
 
 eureka:
   client:

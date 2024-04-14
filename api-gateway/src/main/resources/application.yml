@@ -6,8 +6,6 @@ spring:
       locator:
         enabled: true
         lowerCaseServiceId: true
-  main:
-    web-application-type: reactive
   application:
     name: api-gateway
 eureka:
@@ -15,23 +13,27 @@ eureka:
     service-url:
       defaultZone: http://localhost:8761/eureka
 
-zuul:
-  routes:
-    driver:
-      path: /v1/driver/**
-      service-id: driver
-    customer:
-      path: /v1/customers/**
-      service-id: customer
-    driver-location:
-      path: /v1/driver-location/**
-      service-id: driver-location
-    payment:
-      path: /v1/bank-account/**
-      service-id: bank-account
-    wallet:
-      path: /v1/wallet/**
-      service-id: wallet
-    rating-service:
-      path: /v1/ratings/**
-      service-id: rating
+token:
+  signing:
+    key: 9a4f2c8d3b7a1e6f45c8a0b3f267d8b1d4e6f3c8a9d2b5f8e3a9c8b5f6v8a3d9
+
+#zuul:
+#  routes:
+#    driver:
+#      path: /v1/driver/**
+#      service-id: driver
+#    customer:
+#      path: /v1/customers/**
+#      service-id: customer
+#    driver-location:
+#      path: /v1/driver-location/**
+#      service-id: driver-location
+#    payment:
+#      path: /v1/bank-account/**
+#      service-id: bank-account
+#    wallet:
+#      path: /v1/wallet/**
+#      service-id: wallet
+#    rating-service:
+#      path: /v1/ratings/**
+#      service-id: rating

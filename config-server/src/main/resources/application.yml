@@ -12,4 +12,5 @@ spring:
       server:
         git:
           uri: https://github.com/anasabbal/config-repo.git
-        default-label: master
+          clone-on-start: true
+          default-label: master

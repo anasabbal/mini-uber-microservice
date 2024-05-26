@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/ride-service" />
+    <file type="web" url="file://$PROJECT_DIR$/user-service" />
+  </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/notification-service/pom.xml" />
+        <option value="$PROJECT_DIR$/user-service/pom.xml" />
+        <option value="$PROJECT_DIR$/ride-service/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
@@ -12,10 +19,15 @@
         <option value="$PROJECT_DIR$/authentication-service/pom.xml" />
         <option value="$PROJECT_DIR$/circuit-breaker-example/pom.xml" />
         <option value="$PROJECT_DIR$/circuit-breaker/pom.xml" />
-        <option value="$PROJECT_DIR$/notification-service/pom.xml" />
+        <option value="$PROJECT_DIR$/driver-location-service/pom.xml" />
+        <option value="$PROJECT_DIR$/location-service/pom.xml" />
         <option value="$PROJECT_DIR$/nuber-core/pom.xml" />
         <option value="$PROJECT_DIR$/oauth2-service/pom.xml" />
+        <option value="$PROJECT_DIR$/order-service/pom.xml" />
+        <option value="$PROJECT_DIR$/payment-service/pom.xml" />
+        <option value="$PROJECT_DIR$/rating-service/pom.xml" />
         <option value="$PROJECT_DIR$/shared-configuration/pom.xml" />
+        <option value="$PROJECT_DIR$/wallet-service/pom.xml" />
         <option value="$PROJECT_DIR$/zull-proxy/pom.xml" />
       </set>
     </option>

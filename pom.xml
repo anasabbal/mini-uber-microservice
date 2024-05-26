@@ -17,6 +17,10 @@
         <module>config-server</module>
         <module>api-gateway</module>
         <module>authen-service</module>
+        <module>notification-service</module>
+        <module>user-service</module>
+        <module>ride-service</module>
+        <module>user-command</module>
     </modules>
 
     <properties>
@@ -65,12 +69,8 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <version>1.18.30</version>
             <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>io.swagger</groupId>
-            <artifactId>swagger-annotations</artifactId>
-            <version>1.6.6</version>
         </dependency>
     </dependencies>
 

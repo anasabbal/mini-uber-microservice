@@ -12,6 +12,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class NotificationCustomer extends BaseEntity{
+
     private String driverId;
 
     @ManyToOne

@@ -1,31 +1,16 @@
-provider "azurerm" {
-  features {}
-}
-
-resource "azurerm-resource-group" "microservice" {
-  name     = "microservice"
-  location = "West Europe"
-}
-
-resource "azurerm_spring_cloud_app" "nuber-microservice" {
-  name                = "nuber-microservice"
-  resource_group_name = azurerm-resource-group.microservice.name
-  service_name        = azurerm_spring_cloud_service.customer-service.name
-
-  identity {
-    type = "SystemAssigned"
+terraform {
+  required_providers {
+    google = {
+      source  = "hashicorp/google"
+      version = "4.51.0"
+    }
   }
 }
 
-resource "azurerm_spring_cloud_service" "customer-service" {
-  name                = "customer-service"
-  resource_group_name = azurerm-resource-group.microservice.name
-  location            = azurerm-resource-group.microservice.location
+provider "google" {
+  project = "intense-slice-423013-h9"
 }
 
-resource "azurerm_spring_cloud_service" "driver-service" {
-  location            = azurerm-resource-group.microservice.location
-  name                = "driver-service"
-  resource_group_name = azurerm-resource-group.microservice.location
+resource "google_compute_network" "vpc_network" {
+  name = "terraform-network"
 }
-

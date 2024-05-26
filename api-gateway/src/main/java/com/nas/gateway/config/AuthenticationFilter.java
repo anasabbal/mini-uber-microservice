@@ -18,12 +18,14 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class AuthenticationFilter implements GatewayFilter {
 
-    private final RouterValidator routerValidator;
     private final TokenHandler tokenHandler;
+    private final RouterValidator routerValidator;
 
 
     @Value("${token.signing.key}")
     private String tokenPrefix;
+
+
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();

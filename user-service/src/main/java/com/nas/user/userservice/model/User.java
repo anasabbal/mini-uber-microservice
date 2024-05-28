@@ -4,18 +4,29 @@ package com.nas.user.userservice.model;
 import com.nas.command.UserRegisterCommand;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Table;
+import lombok.*;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.time.LocalDateTime;
 
 
 @Getter
-@Entity
+@Document
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-public class User extends BaseEntity{
+public class User {
 
+    @Id
+    @GeneratedValue(generator = "uuid2")
+    @Column(name = "ID")
+    @EqualsAndHashCode.Include
+    protected String id;
     @Column(name = "USERNAME")
     private String username;
     @Column(name = "FIRST_NAME")
@@ -26,6 +37,26 @@ public class User extends BaseEntity{
     private String email;
     @Column(name = "PASSWORD")
     private String password;
+
+    private LocalDateTime createdAt;
+
+    @CreatedBy
+    @Column(name = "created_by", updatable = false)
+    private String createdBy;
+
+    @LastModifiedDate
+    @Column(name = "UPDATED_AT")
+    private LocalDateTime updatedAt;
+
+    @LastModifiedBy
+    @Column(name = "updated_by")
+    private String updatedBy;
+
+    @Column(name = "DELETED")
+    protected Boolean deleted = false;
+
+    @Column(name = "ACTIVE")
+    protected Boolean active = true;
 
     public static User create(final UserRegisterCommand command) {
         final User user = new User();

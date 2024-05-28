@@ -22,18 +22,23 @@ public class UserServiceImpl implements UserService{
     private final UserRepository userRepository;
 
     @Override
-    public Mono<ServerResponse> create(UserRegisterCommand request) {
+    public Mono<User> create(UserRegisterCommand request) {
         return Mono.just(request)
                 .doOnNext(UserRegisterCommand::validate) // validate the request
-                .flatMap(req -> {
+                .flatMap(cmd -> {
                     // convert UserRegisterCommand to User
-                    final User user = User.create(request);
+                    User user = User.create(cmd);
                     // save the user and return the response
-                    return ServerResponse.ok().body(userRepository.save(user), User.class);
+                    return userRepository.save(user);
                 })
                 .onErrorResume(ValidationException.class, ex -> {
                     // handle validation error and return a bad request response
-                    return ServerResponse.badRequest().syncBody(ex.getMessage());
+                    return Mono.error(new RuntimeException("Validation error: " + ex.getMessage()));
                 });
+    }
+
+    @Override
+    public Mono<User> retrieve(int userId) {
+        return null;
     }
 }

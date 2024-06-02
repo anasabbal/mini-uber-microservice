@@ -2,7 +2,6 @@ package com.nas.authen.service.repository;
 
 import com.nas.authen.service.model.User;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
-import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;
 
 

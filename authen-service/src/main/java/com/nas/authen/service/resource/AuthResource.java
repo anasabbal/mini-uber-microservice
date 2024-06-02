@@ -2,7 +2,6 @@ package com.nas.authen.service.resource;
 
 
 import com.nas.authen.service.command.RegisterCommand;
-import com.nas.authen.service.model.User;
 import com.nas.authen.service.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

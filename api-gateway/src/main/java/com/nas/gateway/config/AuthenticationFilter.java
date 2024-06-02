@@ -1,5 +1,6 @@
 package com.nas.gateway.config;
 
+import com.nas.gateway.util.JwtUtil;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,12 +19,15 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class AuthenticationFilter implements GatewayFilter {
 
+
     private final RouterValidator routerValidator;
-    private final TokenHandler tokenHandler;
+    private final JwtUtil tokenHandler;
 
 
-    @Value("${token.signing.key}")
+    @Value("${spring.security.jwt.secret}")
     private String tokenPrefix;
+
+
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
@@ -34,7 +38,7 @@ public class AuthenticationFilter implements GatewayFilter {
 
             final String token = this.getAuthHeader(request);
 
-            if (tokenHandler.isInvalid(token))
+            if (tokenHandler.isTokenExpired(token))
                 return this.onError(exchange, "Authorization header is invalid", HttpStatus.UNAUTHORIZED);
 
             this.populateRequestWithHeaders(exchange, token);

@@ -1,10 +1,10 @@
 package com.nas.user.userservice.utils;
 
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validator;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebInputException;
 
-import jakarta.validation.ConstraintViolation;
-import jakarta.validation.Validator;
 import java.util.Set;
 
 @Component

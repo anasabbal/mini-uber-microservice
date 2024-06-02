@@ -3,9 +3,7 @@ package com.nas.user.userservice.model;
 
 import com.nas.command.UserRegisterCommand;
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Table;
 import lombok.*;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.Id;

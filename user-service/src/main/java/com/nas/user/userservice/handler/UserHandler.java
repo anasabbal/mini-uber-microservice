@@ -1,6 +1,7 @@
 package com.nas.user.userservice.handler;
 
 
+import com.nas.command.UserLoginCommand;
 import com.nas.command.UserRegisterCommand;
 import com.nas.user.userservice.model.User;
 import com.nas.user.userservice.service.UserService;
@@ -8,6 +9,7 @@ import com.nas.user.userservice.utils.ValidatorHandler;
 import jakarta.validation.ValidationException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
@@ -25,8 +27,9 @@ public class UserHandler {
     private final UserService userService;
     private final ValidatorHandler validatorHandler;
 
-    public Mono<ServerResponse> createUser(ServerRequest request) {
 
+
+    public Mono<ServerResponse> createUser(ServerRequest request) {
         return request.bodyToMono(UserRegisterCommand.class)
                 .doOnNext(validatorHandler::validate)
                 .flatMap(userService::create)
@@ -34,6 +37,13 @@ public class UserHandler {
                 .doOnError(e -> log.error("Error in saveUser method", e))
                 .flatMap(user -> ServerResponse.created(getToUri(user)).bodyValue(user));
     }
+    public Mono<ServerResponse> loginUser(ServerRequest request) {
+        return request.bodyToMono(UserLoginCommand.class)
+                .flatMap(userService::login) // call login function here
+                .flatMap(foundUser -> ServerResponse.ok().bodyValue("Login Successful"))
+                .switchIfEmpty(ServerResponse.status(401).build());
+    }
+
     private URI getToUri(User userSaved) {
         return UriComponentsBuilder.fromPath(("/{id}"))
                 .buildAndExpand(userSaved.getId()).toUri();

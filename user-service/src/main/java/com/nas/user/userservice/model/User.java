@@ -16,6 +16,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.LocalDateTime;
 
 
+
+@Setter
 @Getter
 @Document
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
